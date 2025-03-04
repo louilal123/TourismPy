@@ -1,27 +1,39 @@
-
 {% extends 'base.html' %}
+
 {% block content %}
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
- 
-    <!-- Welcome Section -->
     <section class="mb-20 text-center max-w-5xl mx-auto pt-20">
-     <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-500 uppercase">DESTINATIONS</h2>
-     <p class="text-xl md:text-2xl mb-6 text-gray-700">Explore the diverse beauty of the Philippines, one of the most sought-after travel destinations in Southeast Asia.</p>
-     <p class="text-lg md:text-xl mb-8 text-gray-700">Whether you're a local traveler or a global explorer, this platform provides valuable insights into:</p>
-     <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 text-lg md:text-xl">
-         <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-             <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-map-marker-alt"></i></span>
-             <p class="font-bold">The best tourist destinations</p>
-         </li>
-         <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-             <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-hotel"></i></span>
-             <p class="font-bold">The most popular hotels</p>
-         </li>
-         <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-             <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-chart-line"></i></span>
-             <p class="font-bold">The latest tourism arrival trends</p>
-         </li>
-     </ul>
- </section>
- </main>
+        <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-500 uppercase">Top 10 Destinations in the Philippines</h2>
+        <p class="text-xl md:text-2xl mb-6 text-gray-700">Explore the most visited places in the country.</p>
+
+        <!-- Highcharts Visualization -->
+        <div id="destinationChart" class="chart-container"></div>
+    </section>
+</main>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Safely parse data from Flask
+        const cities = JSON.parse('{{ cities | tojson | safe }}') || [];
+        const touristCounts = JSON.parse('{{ tourist_count | tojson | safe }}') || [];
+
+        // Debugging output
+        console.log("✅ DEBUG: Cities →", cities);
+        console.log("✅ DEBUG: Tourist Counts →", touristCounts);
+
+        // Render Highcharts
+        Highcharts.chart('destinationChart', {
+            chart: { type: 'column' },
+            title: { text: 'Top 10 Most Visited Cities in the Philippines' },
+            xAxis: { categories: cities, title: { text: 'Cities' } },
+            yAxis: { title: { text: 'Total Tourists' } }, // Modified label
+            series: [{ name: '', data: touristCounts, colorByPoint: true }] // Removed "Arrivals" from name
+        });
+    });
+</script>
+
+ 
 {% endblock %}

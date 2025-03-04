@@ -100,13 +100,54 @@ def load_arrivals():
     }
 
 
+# FUNCTION TO EXTRACT DATA FROM THE Tourist_Destinations_Philippines.csv
+def load_destinations():
+    """ Load and process the top 10 most visited tourist destinations based on arrivals. """
+    destinations_file = os.path.join(DATA_FOLDER, "Tourist_Destinations_Philippines.csv")
 
+    if not os.path.exists(destinations_file):
+        print(f"❌ ERROR: Dataset '{destinations_file}' not found.")
+        return {"cities": [], "tourist_count": []}
 
+    df = pd.read_csv(destinations_file)
+
+    # 🔹 Fix the column name here (replace "City" with "City/Province")
+    required_columns = ["City/Province", "Tourist Arrivals"]
+    for col in required_columns:
+        if col not in df.columns:
+            print(f"❌ ERROR: Missing column '{col}' in dataset!")
+            return {"cities": [], "tourist_count": []}
+
+    # Convert 'Tourist Arrivals' column to numeric (handling any formatting issues)
+    df["Tourist Arrivals"] = pd.to_numeric(df["Tourist Arrivals"], errors="coerce")
+
+    # Remove NaN values from 'Tourist Arrivals'
+    df = df.dropna(subset=["Tourist Arrivals"])
+
+    # Aggregate by 'City/Province' to sum tourist arrivals (some cities appear multiple times)
+    df_grouped = df.groupby("City/Province")["Tourist Arrivals"].sum().reset_index()
+
+    # Sort by total tourist arrivals in descending order and get the top 10
+    df_sorted = df_grouped.sort_values(by="Tourist Arrivals", ascending=False).head(10)
+
+    cities = df_sorted["City/Province"].tolist()
+    tourist_count = df_sorted["Tourist Arrivals"].tolist()
+
+    print("✅ DEBUG: Final Cities →", cities)
+    print("✅ DEBUG: Final Tourist Counts →", tourist_count)
+
+    return {
+        "cities": cities,
+        "tourist_count": tourist_count
+    }
 
 
 # ===========================
 # 🔹 FLASK ROUTES
 # ===========================
+
+
+
 
 @app.route('/')
 def home():
@@ -138,14 +179,17 @@ def arrivals():
         countries=data.get("countries", []),
         tourists_by_country=data.get("tourists_by_country", {})
     )
-
-
-                           
 @app.route('/destinations')
 def destinations():
-    """ Render destinations Page """
-    return render_template("destinations.html")
+    """ Render destinations Page with Data """
+    data = load_destinations()
 
+    return render_template(
+        "destinations.html",
+        cities=data.get("cities", []),  # ✅ Use .get() to avoid KeyError
+        tourist_count=data.get("tourist_count", [])
+    )
+     
 # ===========================
 # 🔹 RUN FLASK APP
 # ===========================

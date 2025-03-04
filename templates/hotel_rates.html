@@ -31,8 +31,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script>
     // Get data from Flask
-    const priceCategoryData = {{ price_ranges | tojson | safe }};
-    console.log("✅ DEBUG: Loaded Price Category Data →", priceCategoryData);  // 🔍 Debugging
+    const priceCategoryData =  JSON.parse('{{ price_ranges | tojson | safe }}');
 
     // Extract price range labels dynamically
     const priceRanges = Object.keys(priceCategoryData);

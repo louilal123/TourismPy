@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .highcharts-figure {
+    width: 80vw ;
+    height: 80vh;
+    margin: auto;
+}
+
+#touristChart {
+    width: 900px !important;
+    height: 600px !important;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+.highcharts-description {
+    margin: 0.3rem 10px;
+}
+
+
+</style>
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 h-full">
+    <section class="mb-20 text-center max-w-5xl mx-auto pt-0">
+        <div class="container mx-auto px-4 py-16">
+            <h1 class="text-4xl font-bold text-center mb-8">Tourist Arrivals & Revenue</h1>
+            <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
+            <div id="touristChart"></div>  <!-- ✅ Chart.js canvas -->
+            </article>
+        </div>
+    </section>
+</main>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+    // Get data from Flask
+    const years = JSON.parse('{{ years | tojson | safe }}');
+    const revenue = JSON.parse('{{ revenue | tojson | safe }}');
+    const touristsByCountry = JSON.parse('{{ tourists_by_country | tojson | safe }}');
+
+    // Define colors for different countries
+    const countryColors = ["#FF5733", "#28B463", "#2E86C1", "#E74C3C", "#9B59B6", "#1F618D"];
+
+    // Generate series data for countries
+    let countrySeries = Object.keys(touristsByCountry).map((country, index) => ({
+        name: country,
+        data: Array(years.length).fill(touristsByCountry[country]), // Keep constant for simplicity
+        color: countryColors[index % countryColors.length]
+    }));
+
+    // Revenue series (PHP Billion)
+    let revenueSeries = {
+        name: "Revenue (PHP Billion)",
+        data: revenue,
+        type: "bar",
+        yAxis: 1,  // Assign revenue to the second Y-axis
+        color: "#F39C12",
+        marker: { enabled: true }
+    };
+
+    // Initialize Highcharts
+    Highcharts.chart('touristChart', {
+        chart: { type: 'line' },
+        title: { text: 'Tourist Arrivals by country & Revenue (PHP Billion)' },
+        xAxis: { categories: years, title: { text: 'Year' } },
+        yAxis: [
+            { title: { text: 'Number of Tourists' }, opposite: false }, // Left axis
+            { title: { text: 'Revenue (PHP Billion)' }, opposite: true } // Right axis
+        ],
+        series: [...countrySeries, revenueSeries]
+    });
+</script>
+
+
+{% endblock %}

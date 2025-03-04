@@ -25,41 +25,51 @@ else:
 # ===========================
 # FUNCTION TO EXTRACT THE DATA FROM THE hotel_rates_Philippines.csv 
 def load_hotel_rates():
-    """ Load and process hotel rates dynamically. """
+    """ Load and process hotel rates for visualization. """
     hotel_file = os.path.join(DATA_FOLDER, "Hotel_Rates_Philippines.csv")
 
     if not os.path.exists(hotel_file):
         print(f"❌ ERROR: Dataset '{hotel_file}' not found.")
-        return {"price_ranges": {}}
+        return {"hotels": [], "categories": {}, "surcharge": {}, "avg_price": []}
 
     df = pd.read_csv(hotel_file)
 
-    required_columns = ["Category", "Price Range (PHP/night)"]
+    required_columns = ["Hotel Name", "Location", "Category", "Price Range (PHP/night)", "Common Amenities", "Peak Season Surcharge (%)"]
     for col in required_columns:
         if col not in df.columns:
             print(f"❌ ERROR: Missing column '{col}' in dataset!")
-            return {"price_ranges": {}}
+            return {"hotels": [], "categories": {}, "surcharge": {}, "avg_price": []}
 
-    # Remove extra spaces and clean price range values
-    df["Price Range (PHP/night)"] = df["Price Range (PHP/night)"].astype(str).str.strip()
+    # Extract hotel names
+    hotel_names = df["Hotel Name"].tolist()
 
-    # Dynamically extract unique price ranges
-    unique_price_ranges = sorted(df["Price Range (PHP/night)"].unique())
+    # Extract peak season surcharge
+    peak_surcharge = df["Peak Season Surcharge (%)"].astype(float).tolist()
 
-    # Initialize dictionary dynamically
-    price_category_counts = {pr: {"Budget": 0, "Mid-Range": 0, "Luxury": 0} for pr in unique_price_ranges}
+    # Extract and calculate the average price range
+    avg_price = []
+    for price_range in df["Price Range (PHP/night)"]:
+        try:
+            prices = list(map(int, price_range.replace("₱", "").replace(",", "").split(" - ")))
+            avg_price.append(sum(prices) / len(prices))  # Compute average
+        except:
+            avg_price.append(0)  # Handle errors gracefully
 
-    # Count hotels per category in each price range
-    for _, row in df.iterrows():
-        category = row["Category"]
-        price_range = row["Price Range (PHP/night)"]
+    # Group by category and count hotels
+    category_counts = df["Category"].value_counts().to_dict()
 
-        if price_range in price_category_counts and category in price_category_counts[price_range]:
-            price_category_counts[price_range][category] += 1
+    # Group by category and calculate average surcharge
+    surcharge_avg = df.groupby("Category")["Peak Season Surcharge (%)"].mean().to_dict()
 
-    print("✅ DEBUG: Hotel Price Ranges Data →", price_category_counts)  # 🔍 Debugging
+    return {
+        "hotels": hotel_names,
+        "categories": category_counts,
+        "surcharge": surcharge_avg,
+        "avg_price": avg_price,
+        "peak_surcharge": peak_surcharge
+    }
 
-    return {"price_ranges": price_category_counts}
+
 
 # FUNCTION TO EXTRACT THE DATA FROM THE Tourist_Arrivals_Philippines.csv 
 def load_arrivals():
@@ -116,12 +126,13 @@ def home():
 @app.route('/hotel_rates')
 def hotel_rates():
     """ Render Hotel Rates Page with Data """
-    data = load_hotel_rates()  # Load the hotel rates dynamically
-
-    return render_template(
-        "hotel_rates.html",
-        price_ranges=data["price_ranges"]  # ✅ Pass the updated data structure
-    )
+    data = load_hotel_rates()
+    return render_template("hotel_rates.html",
+                           hotel_names=data["hotels"],
+                           avg_price=data["avg_price"],
+                           peak_surcharge=data["peak_surcharge"],
+                           categories=data["categories"],
+                           surcharge=data["surcharge"])
 
 
 @app.route('/arrivals')

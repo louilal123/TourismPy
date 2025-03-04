@@ -1,39 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tourism Insights PH: Destination, Arrivals & Hotels - Home</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body class="font-sans text-gray-800 bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md fixed w-full z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="/" class="flex items-center">
-                        <i class="fas fa-map-marked-alt text-2xl text-blue-500 mr-2"></i>
-                        <span class="font-bold text-xl md:text-2xl text-blue-500">Tourism Insights PH</span>
-                    </a>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-gray-700 hover:text-blue-500 transition-colors duration-300 text-lg">Home</a>
-                    <a href="/destinations" class="text-gray-700 hover:text-blue-500 transition-colors duration-300 text-lg">Destinations</a>
-                    <a href="/hotels" class="text-gray-700 hover:text-blue-500 transition-colors duration-300 text-lg">Hotels</a>
-                    <a href="/stats" class="text-gray-700 hover:text-blue-500 transition-colors duration-300 text-lg">Tourism Stats</a>
-                    <a href="/contact" class="text-gray-700 hover:text-blue-500 transition-colors duration-300 text-lg">Contact</a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button class="text-gray-600 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
 
+{% extends 'base.html' %}
+{% block content %}
+  
     <!-- Hero Section with Tailwind-only parallax effect -->
     <header class="pt-16 bg-fixed bg-center bg-no-repeat bg-cover h-screen" style="background-image: url('/static/images/bg.jpg');">
 
@@ -48,194 +16,133 @@
             </div>
         </div>
     </header>
-
+    
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <!-- Welcome Section -->
-        <section class="mb-20 text-center max-w-5xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-500">Welcome to Tourism Insights PH!</h2>
-            <p class="text-xl md:text-2xl mb-6 text-gray-700">Explore the diverse beauty of the Philippines, one of the most sought-after travel destinations in Southeast Asia.</p>
-            <p class="text-lg md:text-xl mb-8 text-gray-700">Whether you're a local traveler or a global explorer, this platform provides valuable insights into:</p>
-            <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 text-lg md:text-xl">
-                <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                    <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-map-marker-alt"></i></span>
-                    <p class="font-bold">The best tourist destinations</p>
-                </li>
-                <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                    <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-hotel"></i></span>
-                    <p class="font-bold">The most popular hotels</p>
-                </li>
-                <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                    <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-chart-line"></i></span>
-                    <p class="font-bold">The latest tourism arrival trends</p>
-                </li>
-            </ul>
-        </section>
+ 
+       <!-- Welcome Section -->
+       <section class="mb-20 text-center max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-500">Welcome to Tourism Insights PH!</h2>
+        <p class="text-xl md:text-2xl mb-6 text-gray-700">Explore the diverse beauty of the Philippines, one of the most sought-after travel destinations in Southeast Asia.</p>
+        <p class="text-lg md:text-xl mb-8 text-gray-700">Whether you're a local traveler or a global explorer, this platform provides valuable insights into:</p>
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 text-lg md:text-xl">
+            <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-map-marker-alt"></i></span>
+                <p class="font-bold">The best tourist destinations</p>
+            </li>
+            <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-hotel"></i></span>
+                <p class="font-bold">The most popular hotels</p>
+            </li>
+            <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-chart-line"></i></span>
+                <p class="font-bold">The latest tourism arrival trends</p>
+            </li>
+        </ul>
+    </section>
 
-        <!-- Mission Section with background -->
-        <section class="py-20 bg-fixed bg-center bg-no-repeat bg-cover my-20" style="background-image: url('/api/placeholder/1920/800');">
-            <div class="bg-black bg-opacity-60 py-16">
-                <div class="max-w-4xl mx-auto text-center px-4">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">Our Mission</h2>
-                    <p class="text-xl md:text-2xl mb-6 text-white">We aim to offer a comprehensive guide to the Philippines' thriving tourism industry.</p>
-                    <p class="text-lg md:text-xl text-white">Our goal is to bring together crucial data on top destinations, hotel accommodations, and tourism statistics that are vital for both travelers and businesses in the tourism sector.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- What You'll Find Here Section -->
-        <section class="mb-20">
-            <h2 class="text-3xl md:text-5xl font-bold mb-12 text-blue-500 text-center">What You'll Find Here:</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
-                    <div class="text-center mb-6">
-                        <span class="text-5xl text-blue-500">🌴</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Destination Insights</h3>
-                    <p class="text-lg md:text-xl text-gray-700">Discover must-visit places in the Philippines, from hidden gems to famous tourist hotspots like Boracay, Palawan, and Cebu.</p>
-                    <div class="mt-6 text-center">
-                        <a href="/destinations" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">Learn more →</a>
-                    </div>
-                </article>
-
-                <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
-                    <div class="text-center mb-6">
-                        <span class="text-5xl text-blue-500">🏨</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Hotel Listings</h3>
-                    <p class="text-lg md:text-xl text-gray-700">Browse through our curated hotel listings across various regions of the Philippines. Whether you're looking for luxurious resorts or budget-friendly stays, we've got you covered.</p>
-                    <div class="mt-6 text-center">
-                        <a href="/hotels" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">View hotels →</a>
-                    </div>
-                </article>
-
-                <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
-                    <div class="text-center mb-6">
-                        <span class="text-5xl text-blue-500">📊</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Tourism Data</h3>
-                    <p class="text-lg md:text-xl text-gray-700">Access up-to-date data on tourism arrivals to the Philippines, including annual statistics, visitor demographics, and trends.</p>
-                    <div class="mt-6 text-center">
-                        <a href="/stats" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">Explore data →</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Call to Action Section -->
-        <section class="text-center mb-20">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-blue-500">Discover the best tourist destinations in the Philippines!</h2>
-            <a href="/destinations" class="inline-block bg-blue-500 hover:bg-blue-600 text-white py-4 px-10 rounded-lg font-bold text-xl transition-colors duration-300">Start Exploring Now</a>
-        </section>
-
-        <!-- Featured Destinations -->
-        <section class="mb-20">
-            <h2 class="text-3xl md:text-5xl font-bold mb-12 text-blue-500 text-center">Featured Destinations</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Destination 1 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src="/api/placeholder/800/600" alt="Boracay" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Boracay</h3>
-                        <p class="text-gray-700 text-lg mb-4">World-famous for its pristine white sand beaches and vibrant nightlife.</p>
-                        <a href="/destinations/boracay" class="inline-block bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
-                    </div>
-                </div>
-                
-                <!-- Destination 2 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src="/api/placeholder/800/600" alt="Palawan" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Palawan</h3>
-                        <p class="text-gray-700 text-lg mb-4">Home to the Underground River and stunning limestone formations of El Nido.</p>
-                        <a href="/destinations/palawan" class="inline-block bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
-                    </div>
-                </div>
-                
-                <!-- Destination 3 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src="/api/placeholder/800/600" alt="Cebu" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Cebu</h3>
-                        <p class="text-gray-700 text-lg mb-4">A perfect blend of urban city life, historical sites, and natural wonders.</p>
-                        <a href="/destinations/cebu" class="inline-block bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
-                    </div>
-                </div>
-                
-                <!-- Destination 4 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src="/api/placeholder/800/600" alt="Siargao" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Siargao</h3>
-                        <p class="text-gray-700 text-lg mb-4">The surfing capital of the Philippines with beautiful lagoons and beaches.</p>
-                        <a href="/destinations/siargao" class="inline-block bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <!-- About Column -->
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">About Us</h3>
-                    <p class="text-gray-300 text-lg">Tourism Insights PH provides comprehensive information about travel destinations in the Philippines to help you plan your perfect vacation.</p>
-                </div>
-                
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">Quick Links</h3>
-                    <nav class="flex flex-col space-y-2 text-lg">
-                        <a href="/destinations" class="text-gray-300 hover:text-white transition-colors duration-300">Destinations</a>
-                        <a href="/hotels" class="text-gray-300 hover:text-white transition-colors duration-300">Hotels</a>
-                        <a href="/stats" class="text-gray-300 hover:text-white transition-colors duration-300">Tourism Stats</a>
-                        <a href="/contact" class="text-gray-300 hover:text-white transition-colors duration-300">Contact Us</a>
-                    </nav>
-                </div>
-                
-                <!-- Contact -->
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">Contact Us</h3>
-                    <p class="text-lg text-gray-300 mb-2"><i class="fas fa-envelope mr-2"></i> info@tourisminsightsph.com</p>
-                    <p class="text-lg text-gray-300 mb-2"><i class="fas fa-phone mr-2"></i> +63 (2) 8888-7777</p>
-                    <div class="flex space-x-4 mt-4">
-                        <a href="#" class="text-white hover:text-blue-400 transition-colors duration-300 text-2xl">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-white hover:text-blue-400 transition-colors duration-300 text-2xl">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-white hover:text-blue-400 transition-colors duration-300 text-2xl">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-white hover:text-blue-400 transition-colors duration-300 text-2xl">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-700 pt-8 text-center">
-                <p class="text-lg">&copy; 2023 Tourism Insights PH. All rights reserved.</p>
+    <!-- Mission Section with background -->
+    <section class="py-20 bg-fixed bg-center bg-no-repeat bg-cover my-20" style="background-image: url('/api/placeholder/1920/800');">
+        <div class="bg-black bg-opacity-60 py-16">
+            <div class="max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">Our Mission</h2>
+                <p class="text-xl md:text-2xl mb-6 text-white">We aim to offer a comprehensive guide to the Philippines' thriving tourism industry.</p>
+                <p class="text-lg md:text-xl text-white">Our goal is to bring together crucial data on top destinations, hotel accommodations, and tourism statistics that are vital for both travelers and businesses in the tourism sector.</p>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        // Simple JavaScript for mobile menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuButton = document.querySelector('button');
-            if (menuButton) {
-                menuButton.addEventListener('click', function() {
-                    alert('Mobile menu would open here');
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+    <!-- What You'll Find Here Section -->
+    <section class="mb-20">
+        <h2 class="text-3xl md:text-5xl font-bold mb-12 text-blue-500 text-center">What You'll Find Here:</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="text-center mb-6">
+                    <span class="text-5xl text-blue-500">🌴</span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Destination Insights</h3>
+                <p class="text-lg md:text-xl text-gray-700">Discover must-visit places in the Philippines, from hidden gems to famous tourist hotspots like Boracay, Palawan, and Cebu.</p>
+                <div class="mt-6 text-center">
+                    <a href="/destinations" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">Learn more →</a>
+                </div>
+            </article>
+
+            <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="text-center mb-6">
+                    <span class="text-5xl text-blue-500">🏨</span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Hotel Listings</h3>
+                <p class="text-lg md:text-xl text-gray-700">Browse through our curated hotel listings across various regions of the Philippines. Whether you're looking for luxurious resorts or budget-friendly stays, we've got you covered.</p>
+                <div class="mt-6 text-center">
+                    <a href="/hotels" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">View hotels →</a>
+                </div>
+            </article>
+
+            <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="text-center mb-6">
+                    <span class="text-5xl text-blue-500">📊</span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Tourism Data</h3>
+                <p class="text-lg md:text-xl text-gray-700">Access up-to-date data on tourism arrivals to the Philippines, including annual statistics, visitor demographics, and trends.</p>
+                <div class="mt-6 text-center">
+                    <a href="/stats" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">Explore data →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="text-center mb-20">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-blue-500">Discover the best tourist destinations in the Philippines!</h2>
+        <a href="/destinations" class="inline-block bg-blue-500 hover:bg-blue-600 text-white py-4 px-10 rounded-lg font-bold text-xl transition-colors duration-300">Start Exploring Now</a>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section class="mb-20">
+        <h2 class="text-3xl md:text-5xl font-bold mb-12 text-blue-500 text-center">Featured Destinations</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Destination 1 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="/api/placeholder/800/600" alt="Boracay" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Boracay</h3>
+                    <p class="text-gray-700 text-lg mb-4">World-famous for its pristine white sand beaches and vibrant nightlife.</p>
+                    <a href="/destinations/boracay" class="inline-block bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
+                </div>
+            </div>
+            
+            <!-- Destination 2 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="/api/placeholder/800/600" alt="Palawan" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Palawan</h3>
+                    <p class="text-gray-700 text-lg mb-4">Home to the Underground River and stunning limestone formations of El Nido.</p>
+                    <a href="/destinations/palawan" class="inline-block bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
+                </div>
+            </div>
+            
+            <!-- Destination 3 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="/api/placeholder/800/600" alt="Cebu" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Cebu</h3>
+                    <p class="text-gray-700 text-lg mb-4">A perfect blend of urban city life, historical sites, and natural wonders.</p>
+                    <a href="/destinations/cebu" class="inline-block bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
+                </div>
+            </div>
+            
+            <!-- Destination 4 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="/api/placeholder/800/600" alt="Siargao" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Siargao</h3>
+                    <p class="text-gray-700 text-lg mb-4">The surfing capital of the Philippines with beautiful lagoons and beaches.</p>
+                    <a href="/destinations/siargao" class="inline-block bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</main>
+{% endblock %}

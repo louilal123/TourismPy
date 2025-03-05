@@ -3,7 +3,7 @@ from flask import Flask, render_template
 import pandas as pd
 import os
 
-# Initialize Flask app
+# Initialize Flask 
 app = Flask(__name__)
 
 # Define the correct path to the dataset

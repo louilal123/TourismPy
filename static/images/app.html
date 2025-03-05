@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourism Insights PH</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+          height: 50vh;
+        }
+        .chart-container {
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tourism Insights PH</h1>
+
+    <!-- Chart 1: Total Visitors Over Time -->
+    <div class="chart-container">
+        <h2>Total Visitors Over Time</h2>
+        <canvas id="totalVisitorsChart"></canvas>
+    </div>
+
+    <!-- Chart 2: Revenue Over Time -->
+    <div class="chart-container">
+        <h2>Revenue Over Time</h2>
+        <canvas id="revenueChart"></canvas>
+    </div>
+
+    <!-- Chart 3: Top Visitor Countries -->
+    <div class="chart-container">
+        <h2>Top Visitor Countries</h2>
+        <canvas id="topCountriesChart"></canvas>
+    </div>
+
+    <!-- Chart 4: Purpose of Visit -->
+    <div class="chart-container">
+        <h2>Purpose of Visit</h2>
+        <canvas id="purposeChart"></canvas>
+    </div>
+
+    <script>
+        // Sample Data
+        const dataset = [
+            { Year: 2020, Region: "Region 2", Foreign: 8000, Domestic: 250000, Total: 303000, Revenue: 11.5, TopCountry: "China", Purpose: "Business" },
+            { Year: 2021, Region: "Region 3", Foreign: 11000, Domestic: 300000, Total: 356000, Revenue: 13, TopCountry: "USA", Purpose: "Others" },
+            { Year: 2022, Region: "Region 4", Foreign: 14000, Domestic: 350000, Total: 409000, Revenue: 14.5, TopCountry: "Japan", Purpose: "Leisure" },
+            { Year: 2023, Region: "Region 5", Foreign: 17000, Domestic: 400000, Total: 462000, Revenue: 16, TopCountry: "Australia", Purpose: "Business" },
+            { Year: 2019, Region: "Region 6", Foreign: 20000, Domestic: 450000, Total: 515000, Revenue: 17.5, TopCountry: "South Korea", Purpose: "Others" },
+            { Year: 2020, Region: "Region 7", Foreign: 23000, Domestic: 500000, Total: 568000, Revenue: 19, TopCountry: "China", Purpose: "Leisure" },
+            { Year: 2021, Region: "Region 8", Foreign: 26000, Domestic: 550000, Total: 621000, Revenue: 20.5, TopCountry: "USA", Purpose: "Business" },
+            { Year: 2022, Region: "Region 9", Foreign: 29000, Domestic: 600000, Total: 674000, Revenue: 22, TopCountry: "Japan", Purpose: "Others" },
+            { Year: 2023, Region: "Region 10", Foreign: 32000, Domestic: 650000, Total: 727000, Revenue: 23.5, TopCountry: "Australia", Purpose: "Leisure" },
+            { Year: 2019, Region: "Region 11", Foreign: 35000, Domestic: 700000, Total: 780000, Revenue: 25, TopCountry: "South Korea", Purpose: "Business" },
+            { Year: 2020, Region: "Region 12", Foreign: 38000, Domestic: 750000, Total: 833000, Revenue: 26.5, TopCountry: "China", Purpose: "Others" },
+            { Year: 2021, Region: "Region 13", Foreign: 41000, Domestic: 800000, Total: 886000, Revenue: 28, TopCountry: "USA", Purpose: "Leisure" },
+            { Year: 2022, Region: "Region 14", Foreign: 44000, Domestic: 850000, Total: 939000, Revenue: 29.5, TopCountry: "Japan", Purpose: "Business" },
+            { Year: 2023, Region: "Region 15", Foreign: 47000, Domestic: 900000, Total: 992000, Revenue: 31, TopCountry: "Australia", Purpose: "Others" }
+        ];
+
+        // Chart 1: Total Visitors Over Time
+        const totalVisitorsCtx = document.getElementById('totalVisitorsChart').getContext('2d');
+        new Chart(totalVisitorsCtx, {
+            type: 'line',
+            data: {
+                labels: dataset.map(d => d.Year),
+                datasets: [{
+                    label: 'Total Visitors',
+                    data: dataset.map(d => d.Total),
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Total Visitors'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Revenue Over Time
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: dataset.map(d => d.Year),
+                datasets: [{
+                    label: 'Revenue (PHP Billion)',
+                    data: dataset.map(d => d.Revenue),
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Revenue (PHP Billion)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Top Visitor Countries
+        const topCountriesCtx = document.getElementById('topCountriesChart').getContext('2d');
+        const topCountriesData = dataset.reduce((acc, d) => {
+            acc[d.TopCountry] = (acc[d.TopCountry] || 0) + 1;
+            return acc;
+        }, {});
+        new Chart(topCountriesCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(topCountriesData),
+                datasets: [{
+                    label: 'Top Visitor Countries',
+                    data: Object.values(topCountriesData),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Regions'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Top Visitor Country'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Purpose of Visit
+        const purposeCtx = document.getElementById('purposeChart').getContext('2d');
+        const purposeData = dataset.reduce((acc, d) => {
+            acc[d.Purpose] = (acc[d.Purpose] || 0) + 1;
+            return acc;
+        }, {});
+        new Chart(purposeCtx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(purposeData),
+                datasets: [{
+                    label: 'Purpose of Visit',
+                    data: Object.values(purposeData),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Purpose of Visit'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .highcharts-figure {
+        min-width: 310px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
+    
+</style>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gray-200">
+    <section class="mb-20 text-center max-w-5xl mx-auto pt-20">
+        <h1 class="text-4xl font-bold text-center mb-8">HOTEL RATES</h1>
+        <article>
+        <!-- Highcharts Chart Container -->
+        <figure class="highcharts-figure">
+            <div id="categoryChart"></div>
+            <p class="highcharts-description">
+                This chart shows the number of hotels per category along with their average peak season surcharge.
+            </p>
+        </figure>
+    </article>
+    </section>
+</main>
+
+<!-- Include Highcharts -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script>
+    // Get data from Flask
+    const priceCategoryData =  JSON.parse('{{ price_ranges | tojson | safe }}');
+
+    // Extract price range labels dynamically
+    const priceRanges = Object.keys(priceCategoryData);
+
+    // Extract data for each category
+    const budgetHotels = priceRanges.map(pr => priceCategoryData[pr]?.Budget || 0);
+    const midRangeHotels = priceRanges.map(pr => priceCategoryData[pr]?.["Mid-Range"] || 0);
+    const luxuryHotels = priceRanges.map(pr => priceCategoryData[pr]?.Luxury || 0);
+
+    console.log("✅ DEBUG: Budget Hotels →", budgetHotels);
+    console.log("✅ DEBUG: Mid-Range Hotels →", midRangeHotels);
+    console.log("✅ DEBUG: Luxury Hotels →", luxuryHotels);
+
+    // Render the Highcharts Grouped Bar Chart
+    Highcharts.chart('categoryChart', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Number of Hotels by Price Range and Category'
+        },
+        xAxis: {
+            categories: priceRanges,
+            title: {
+                text: 'Price Range (PHP/night)'
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Number of Hotels'
+            }
+        },
+        tooltip: {
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                grouping: true
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [
+            {
+                name: 'Budget Hotels',
+                data: budgetHotels,
+                color: 'blue'
+            },
+            {
+                name: 'Mid-Range Hotels',
+                data: midRangeHotels,
+                color: 'yellow'
+            },
+            {
+                name: 'Luxury Hotels',
+                data: luxuryHotels,
+                color: 'red'
+            }
+        ]
+    });
+</script>
+
+
+{% endblock %}

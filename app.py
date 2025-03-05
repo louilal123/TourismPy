@@ -23,6 +23,7 @@ else:
 # ===========================
 # 🔹 DATA LOADING FUNCTION
 # ===========================
+
 # FUNCTION TO EXTRACT THE DATA FROM THE hotel_rates_Philippines.csv 
 def load_hotel_rates():
     """ Load and process hotel rates dynamically. """

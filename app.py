@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import pandas as pd
 import os
 
+#newcomment tewst lang
 # Initialize Flask app
 app = Flask(__name__)
 
@@ -19,10 +20,10 @@ if not os.path.exists(DATA_FILE):
     print(f"❌ ERROR: Dataset '{DATA_FILE}' not found.")
 else:
     print(f"✅ Dataset found: {DATA_FILE}")
-
 # ===========================
 # 🔹 DATA LOADING FUNCTION
 # ===========================
+
 
 # FUNCTION TO EXTRACT THE DATA FROM THE hotel_rates_Philippines.csv 
 def load_hotel_rates():

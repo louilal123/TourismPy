@@ -374,6 +374,7 @@ def home():
 def destinations():
     return render_template_string(destinations_page)
 
+
 @app.route('/stats')
 def stats():
     return render_template_string(stats_page)

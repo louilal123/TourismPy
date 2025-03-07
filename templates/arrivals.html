@@ -12,55 +12,37 @@
     height: 600px !important;
 }
 
-.highcharts-data-table table {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #ebebeb;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-}
-
-.highcharts-data-table caption {
-    padding: 1em 0;
-    font-size: 1.2em;
-    color: #555;
-}
-
-.highcharts-data-table th {
-    font-weight: 600;
-    padding: 0.5em;
-}
-
-.highcharts-data-table td,
-.highcharts-data-table th,
-.highcharts-data-table caption {
-    padding: 0.5em;
-}
-
-.highcharts-data-table thead tr,
-.highcharts-data-table tr:nth-child(even) {
-    background: #f8f8f8;
-}
-
-.highcharts-data-table tr:hover {
-    background: #f1f7ff;
-}
-
 .highcharts-description {
-    margin: 0.3rem 10px;
+    margin: 1rem auto;
+    max-width: 700px;
+    text-align: center;
+    font-size: 1rem;
+    color: #444;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
-
-
 </style>
+
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 h-full">
     <section class="mb-20 text-center max-w-5xl mx-auto pt-0">
         <div class="container mx-auto px-4 py-16">
-            <h1 class="text-4xl font-bold text-center mb-8">Tourist Arrivals & Revenue</h1>
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-500 uppercase">Tourist Arrivals by Country</h2>
+
+        
+
             <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
-            <div id="touristChart"></div>  <!-- ✅ Chart.js canvas -->
+                <div id="touristChart"></div> <!-- ✅ Highcharts container -->
             </article>
+                <!-- 🔹 Informative Description -->
+                <div class="highcharts-description">
+                    <p>
+                        This chart represents the **distribution of international tourists visiting the Philippines.
+                        The data highlights the top countries that contribute to foreign tourist arrivals.
+                        Understanding these trends helps in shaping tourism strategies and improving visitor experiences.
+                    </p>
+                </div>
         </div>
     </section>
 </main>
@@ -68,42 +50,38 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
     // Get data from Flask
-    const years = JSON.parse('{{ years | tojson | safe }}');
-    const revenue = JSON.parse('{{ revenue | tojson | safe }}');
     const touristsByCountry = JSON.parse('{{ tourists_by_country | tojson | safe }}');
 
-    // Define colors for different countries
-    const countryColors = ["#FF5733", "#28B463", "#2E86C1", "#E74C3C", "#9B59B6", "#1F618D"];
-
-    // Generate series data for countries
-    let countrySeries = Object.keys(touristsByCountry).map((country, index) => ({
+    // Convert dictionary to Highcharts pie chart format
+    let pieData = Object.keys(touristsByCountry).map(country => ({
         name: country,
-        data: Array(years.length).fill(touristsByCountry[country]), // Keep constant for simplicity
-        color: countryColors[index % countryColors.length]
+        y: touristsByCountry[country]
     }));
 
-    // Revenue series (PHP Billion)
-    let revenueSeries = {
-        name: "Revenue (PHP Billion)",
-        data: revenue,
-        type: "bar",
-        yAxis: 1,  // Assign revenue to the second Y-axis
-        color: "#F39C12",
-        marker: { enabled: true }
-    };
-
-    // Initialize Highcharts
+    // Initialize Highcharts Pie Chart
     Highcharts.chart('touristChart', {
-        chart: { type: 'line' },
-        title: { text: 'Tourist Arrivals by country & Revenue (PHP Billion)' },
-        xAxis: { categories: years, title: { text: 'Year' } },
-        yAxis: [
-            { title: { text: 'Number of Tourists' }, opposite: false }, // Left axis
-            { title: { text: 'Revenue (PHP Billion)' }, opposite: true } // Right axis
-        ],
-        series: [...countrySeries, revenueSeries]
+        chart: { type: 'pie' },
+        title: { text: 'Tourist Arrivals by Country' },
+        tooltip: { pointFormat: '<b>{point.percentage:.1f}%</b>' },
+        accessibility: {
+            point: { valueSuffix: '%' }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.y} tourists'
+                }
+            }
+        },
+        series: [{
+            name: 'Tourists',
+            colorByPoint: true,
+            data: pieData
+        }]
     });
 </script>
-
 
 {% endblock %}

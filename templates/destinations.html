@@ -20,6 +20,7 @@
         const cities = JSON.parse('{{ cities | tojson | safe }}') || [];
         const touristCounts = JSON.parse('{{ tourist_count | tojson | safe }}') || [];
 
+        
         // Debugging output
         console.log("✅ DEBUG: Cities →", cities);
         console.log("✅ DEBUG: Tourist Counts →", touristCounts);

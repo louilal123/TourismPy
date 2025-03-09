@@ -1,27 +1,18 @@
 {% extends 'base.html' %}
+
 {% block content %}
-
-<style>
-    .highcharts-figure {
-        min-width: 310px;
-        max-width: 800px;
-        margin: 1em auto;
-    }
-    
-</style>
-
-<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <section class="mb-20 text-center max-w-5xl mx-auto pt-20">
-        <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-500 uppercase">HOTEL RATES</h2>
+<main class="main-container">
+    <section class="chart-section">
+        <h2 class="section-title">HOTEL RATES</h2>
         <article>
-        <!-- Highcharts Chart Container -->
-        <figure class="highcharts-figure">
-            <div id="categoryChart"></div>
-            <p class="highcharts-description">
-                This chart shows the number of hotels per category along with their average peak season surcharge.
-            </p>
-        </figure>
-    </article>
+            <!-- Highcharts Chart Container -->
+            <figure class="highcharts-figure">
+                <div id="categoryChart"></div>
+                <p class="highcharts-description">
+                    This chart shows the number of hotels per category .
+                </p>
+            </figure>
+        </article>
     </section>
 </main>
 
@@ -29,9 +20,10 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
 <script>
     // Get data from Flask
-    const priceCategoryData =  JSON.parse('{{ price_ranges | tojson | safe }}');
+    const priceCategoryData = JSON.parse('{{ price_ranges | tojson | safe }}');
 
     // Extract price range labels dynamically
     const priceRanges = Object.keys(priceCategoryData);
@@ -77,24 +69,24 @@
             enabled: false
         },
         series: [
-            {
-                name: 'Budget Hotels',
-                data: budgetHotels,
-                color: 'blue'
-            },
-            {
-                name: 'Mid-Range Hotels',
-                data: midRangeHotels,
-                color: 'yellow'
-            },
-            {
-                name: 'Luxury Hotels',
-                data: luxuryHotels,
-                color: 'red'
-            }
-        ]
+    {
+        name: 'Budget Hotels',
+        data: budgetHotels,
+        color: '#4CAF50' // Green
+    },
+    {
+        name: 'Mid-Range Hotels',
+        data: midRangeHotels,
+        color: '#FF9800' // Orange
+    },
+    {
+        name: 'Luxury Hotels',
+        data: luxuryHotels,
+        color: '#D32F2F' // Dark Red
+    }
+]
+
     });
 </script>
-
 
 {% endblock %}

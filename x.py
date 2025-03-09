@@ -2,7 +2,6 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)  # Fix _name_ to __name__
 
-# CSS Styling (same as before)
 styles = """
 <style>
 body {

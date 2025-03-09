@@ -2,199 +2,116 @@ from flask import Flask, render_template
 import pandas as pd
 import os
 
-#newcomment tewst lang
-# Initialize Flask app
+# ===========================
+# 🔹 PARENT function
+# ===========================
+class DataLoader:
+    """Handles data loading and processing for various datasets."""
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    DATA_FOLDER = os.path.join(BASE_DIR, "templates", "data")
+
+# ===========================
+# 🔹  CLASS methods
+# ===========================
+    @classmethod
+    def load_csv(cls, filename, required_columns):
+        """Generic method to load CSV data and validate required columns."""
+        file_path = os.path.join(cls.DATA_FOLDER, filename)
+        if not os.path.exists(file_path):
+            print(f"❌ ERROR: Dataset '{filename}' not found.")
+            return pd.DataFrame()
+        
+        df = pd.read_csv(file_path)
+        for col in required_columns:
+            if col not in df.columns:
+                print(f"❌ ERROR: Missing column '{col}' in dataset!")
+                return pd.DataFrame()
+        return df
+
+
+    @classmethod
+    def load_arrivals(cls):
+        df = cls.load_csv("Tourist_Arrivals_Philippines.csv", [
+            "Year", "Foreign Tourists", "Domestic Tourists", "Top Visitor Country", "Revenue (PHP Billion)"
+        ])
+        if df.empty: return {"years": [], "revenue": [], "countries": {}, "tourists_by_country": {}}
+
+        df = df.sort_values(by="Year").drop_duplicates(subset="Year")
+        tourists_by_country = df.groupby("Top Visitor Country")["Foreign Tourists"].sum().to_dict()
+        return {
+            "years": df["Year"].tolist(),
+            "revenue": df["Revenue (PHP Billion)"].fillna(0).astype(float).tolist(),
+            "countries": list(tourists_by_country.keys()),
+            "tourists_by_country": tourists_by_country
+        }
+
+    @classmethod
+    def load_destinations(cls):
+        df = cls.load_csv("Tourist_Destinations_Philippines.csv", ["City/Province", "Tourist Arrivals"])
+        if df.empty: return {"cities": [], "tourist_count": []}
+
+        df["Tourist Arrivals"] = pd.to_numeric(df["Tourist Arrivals"], errors="coerce").fillna(0)
+        df_grouped = df.groupby("City/Province")["Tourist Arrivals"].sum().reset_index()
+        df_sorted = df_grouped.sort_values(by="Tourist Arrivals", ascending=False).head(10)
+
+        return {
+            "cities": df_sorted["City/Province"].tolist(),
+            "tourist_count": df_sorted["Tourist Arrivals"].tolist()
+        }
+
+
+    @classmethod
+    def load_occupancy_data(cls):
+        df = cls.load_csv("Hotel_Occupancy_Rates.csv", [
+            "Year", "Occupancy Rate (%)", "Revenue (PHP)"
+        ])
+        if df.empty: 
+            return {"years": [], "occupancy_rates": [], "revenue": []}
+
+        # Group by 'Year' and calculate averages/sums
+        df_grouped = df.groupby("Year", as_index=False).agg({
+            "Occupancy Rate (%)": "mean",
+            "Revenue (PHP)": "sum"
+        })
+
+        return {
+            "years": df_grouped["Year"].astype(str).tolist(),
+            "occupancy_rates": df_grouped["Occupancy Rate (%)"].round(1).tolist(),
+            "revenue": df_grouped["Revenue (PHP)"].astype(int).tolist()
+        }
+
+
+
+# ===========================
+# 🔹 FLASK APP & ROUTES 
+# ===========================
+
 app = Flask(__name__)
-
-# Define the correct path to the dataset
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get absolute path
-DATA_FOLDER = os.path.join(BASE_DIR, "templates", "data")
-DATA_FILE = os.path.join(DATA_FOLDER, "Tourist_Destinations_Philippines.csv")
-
-if not os.path.exists(DATA_FOLDER):
-    os.makedirs(DATA_FOLDER)
-    print("✅ Created missing 'templates/data' directory.")
-
-# Check if dataset exists
-if not os.path.exists(DATA_FILE):
-    print(f"❌ ERROR: Dataset '{DATA_FILE}' not found.")
-else:
-    print(f"✅ Dataset found: {DATA_FILE}")
-# ===========================
-# 🔹 DATA LOADING FUNCTION
-# ===========================
-
-
-# FUNCTION TO EXTRACT THE DATA FROM THE hotel_rates_Philippines.csv 
-def load_hotel_rates():
-    """ Load and process hotel rates dynamically. """
-    hotel_file = os.path.join(DATA_FOLDER, "Hotel_Rates_Philippines.csv")
-
-    if not os.path.exists(hotel_file):
-        print(f"❌ ERROR: Dataset '{hotel_file}' not found.")
-        return {"price_ranges": {}}
-
-    df = pd.read_csv(hotel_file)
-
-    required_columns = ["Category", "Price Range (PHP/night)"]
-    for col in required_columns:
-        if col not in df.columns:
-            print(f"❌ ERROR: Missing column '{col}' in dataset!")
-            return {"price_ranges": {}}
-
-    # Remove extra spaces and clean price range values
-    df["Price Range (PHP/night)"] = df["Price Range (PHP/night)"].astype(str).str.strip()
-
-    # Dynamically extract unique price ranges
-    unique_price_ranges = sorted(df["Price Range (PHP/night)"].unique())
-
-    # Initialize dictionary dynamically
-    price_category_counts = {pr: {"Budget": 0, "Mid-Range": 0, "Luxury": 0} for pr in unique_price_ranges}
-
-    # Count hotels per category in each price range
-    for _, row in df.iterrows():
-        category = row["Category"]
-        price_range = row["Price Range (PHP/night)"]
-
-        if price_range in price_category_counts and category in price_category_counts[price_range]:
-            price_category_counts[price_range][category] += 1
-
-    print("✅ DEBUG: Hotel Price Ranges Data →", price_category_counts)  # 🔍 Debugging
-
-    return {"price_ranges": price_category_counts}
-
-# FUNCTION TO EXTRACT THE DATA FROM THE Tourist_Arrivals_Philippines.csv 
-def load_arrivals():
-    """ Load and process tourist arrival data for visualization. """
-    arrivals_file = os.path.join(DATA_FOLDER, "Tourist_Arrivals_Philippines.csv")
-
-    if not os.path.exists(arrivals_file):
-        print(f"❌ ERROR: Dataset '{arrivals_file}' not found.")
-        return {"years": [], "revenue": [], "countries": {}, "tourists_by_country": {}}
-
-    df = pd.read_csv(arrivals_file)
-
-    # Ensure required columns exist
-    required_columns = ["Year", "Foreign Tourists", "Domestic Tourists", "Top Visitor Country", "Revenue (PHP Billion)"]
-    for col in required_columns:
-        if col not in df.columns:
-            print(f"❌ ERROR: Missing column '{col}' in dataset!")
-            return {"years": [], "revenue": [], "countries": {}, "tourists_by_country": {}}
-
-    # Remove duplicates and sort by year
-    df = df.sort_values(by="Year").drop_duplicates(subset="Year")
-
-    # Extract relevant data
-    years = df["Year"].tolist()
-
-    # Convert revenue to a list of floats, handling NaN values
-    revenue = df["Revenue (PHP Billion)"].fillna(0).astype(float).tolist()  # ✅ Ensures JSON serializability
-
-    # Group by top visitor country and sum tourists
-    tourists_by_country = df.groupby("Top Visitor Country")["Foreign Tourists"].sum().to_dict()
-    countries = list(tourists_by_country.keys())
-
-    return {
-        "years": years,
-        "revenue": revenue,  # ✅ Always a valid list
-        "countries": countries,
-        "tourists_by_country": tourists_by_country
-    }
-
-
-# FUNCTION TO EXTRACT DATA FROM THE Tourist_Destinations_Philippines.csv
-def load_destinations():
-    """ Load and process the top 10 most visited tourist destinations based on arrivals. """
-    destinations_file = os.path.join(DATA_FOLDER, "Tourist_Destinations_Philippines.csv")
-
-    if not os.path.exists(destinations_file):
-        print(f"❌ ERROR: Dataset '{destinations_file}' not found.")
-        return {"cities": [], "tourist_count": []}
-
-    df = pd.read_csv(destinations_file)
-
-    # 🔹 Fix the column name here (replace "City" with "City/Province")
-    required_columns = ["City/Province", "Tourist Arrivals"]
-    for col in required_columns:
-        if col not in df.columns:
-            print(f"❌ ERROR: Missing column '{col}' in dataset!")
-            return {"cities": [], "tourist_count": []}
-
-    # Convert 'Tourist Arrivals' column to numeric (handling any formatting issues)
-    df["Tourist Arrivals"] = pd.to_numeric(df["Tourist Arrivals"], errors="coerce")
-
-    # Remove NaN values from 'Tourist Arrivals'
-    df = df.dropna(subset=["Tourist Arrivals"])
-
-    # Aggregate by 'City/Province' to sum tourist arrivals (some cities appear multiple times)
-    df_grouped = df.groupby("City/Province")["Tourist Arrivals"].sum().reset_index()
-
-    # Sort by total tourist arrivals in descending order and get the top 10
-    df_sorted = df_grouped.sort_values(by="Tourist Arrivals", ascending=False).head(10)
-
-    cities = df_sorted["City/Province"].tolist()
-    tourist_count = df_sorted["Tourist Arrivals"].tolist()
-
-    print("✅ DEBUG: Final Cities →", cities)
-    print("✅ DEBUG: Final Tourist Counts →", tourist_count)
-
-    return {
-        "cities": cities,
-        "tourist_count": tourist_count
-    }
-
-
-# ===========================
-# 🔹 FLASK ROUTES
-# ===========================
-
-
-
 
 @app.route('/')
 def home():
-    """ Render Home Page """
-    return render_template("home.html")
 
-@app.route('/hotel_rates')
-def hotel_rates():
-    """ Render Hotel Rates Page with Data """
-    data = load_hotel_rates()  # Load the hotel rates dynamically
+    # this line is when u want to display the data in the home.html 
+    data = {
+        "destinations": DataLoader.load_destinations(),
+        "arrivals": DataLoader.load_arrivals(),
+        "occupancy": DataLoader.load_occupancy_data()
+    }
+    return render_template("home.html", **data)
 
-    return render_template(
-        "hotel_rates.html",
-        price_ranges=data["price_ranges"]  # ✅ Pass the updated data structure
-    )
-
+@app.route('/destinations')
+def destinations():
+    return render_template("destinations.html", **DataLoader.load_destinations())
 
 @app.route('/arrivals')
 def arrivals():
-    data = load_arrivals()
-    
-    # Ensure revenue is always defined as a list
-    revenue = data.get("revenue", [])
-    
-    return render_template(
-        "arrivals.html",
-        years=data.get("years", []),
-        revenue=revenue,  # ✅ Ensure revenue is not None
-        countries=data.get("countries", []),
-        tourists_by_country=data.get("tourists_by_country", {})
-    )
-@app.route('/destinations')
-def destinations():
-    """ Render destinations Page with Data """
-    data = load_destinations()
+    return render_template("arrivals.html", **DataLoader.load_arrivals())
 
-    return render_template(
-        "destinations.html",
-        cities=data.get("cities", []),  # ✅ Use .get() to avoid KeyError
-        tourist_count=data.get("tourist_count", [])
-    )
-     
-# ===========================
-# 🔹 RUN FLASK APP
-# ===========================
 
-if __name__ == '__main__':
+@app.route('/hotel_occupancy')
+def hotel_occupancy():
+    return render_template("hotel_occupancy.html", occupancy_data=DataLoader.load_occupancy_data())
+
+if __name__ == "__main__":
     app.run(debug=True)

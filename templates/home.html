@@ -1,147 +1,84 @@
-
 {% extends 'base.html' %}
 {% block content %}
-  
-<header class="bg-fixed bg-center bg-no-repeat bg-cover h-screen" style="background-image: url('/static/images/bg1.jpg'); height: 90vh !important;">
-  
-
-    <div class="flex items-center justify-center h-full bg-black bg-opacity-50">
-        <div class="text-center text-white px-4 sm:px-6 lg:px-8">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">Welcome to Tourism Insights PH</h1>
-            <p class="text-xl md:text-3xl mb-8 max-w-3xl mx-auto">Destination, Arrivals & Hotels - Your Complete Philippine Tourism Guide</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="/destinations" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-lg font-semibold text-lg md:text-xl transition-colors duration-300">Explore Destinations</a>
-                <a href="/stats" class="bg-white hover:bg-gray-100 text-blue-500 py-3 px-8 rounded-lg font-semibold text-lg md:text-xl transition-colors duration-300">View Tourism Data</a>
+<section class="hero-section" style="background-image: url('/static/images/bg1.jpg');">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h2 class="hero-title">Welcome to Tourism Insights PH!</h2>
+    <p class="hero-subtitle">Explore the diverse beauty of the Philippines, one of the most sought-after travel destinations in Southeast Asia.</p>
+   <div class="hero-buttons">
+                <a href="/destinations" class="button-primary">Explore Destinations</a>
+                <a href="/hotel_occupancy" class="button-secondary">View Tourism Insights</a>
             </div>
         </div>
     </div>
-</header>
-    
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-       <!-- Welcome Section -->
-       <section class="mb-20 text-center max-w-5xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-500">Welcome to Tourism Insights PH!</h2>
-            <p class="text-xl md:text-2xl mb-6 text-gray-700">Explore the diverse beauty of the Philippines, one of the most sought-after travel destinations in Southeast Asia.</p>
-            <p class="text-lg md:text-xl mb-8 text-gray-700">Whether you're a local traveler or a global explorer, this platform provides valuable insights into:</p>
-            <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 text-lg md:text-xl">
-                <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                    <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-map-marker-alt"></i></span>
-                    <p class="font-bold">The best tourist destinations</p>
-                </li>
-                <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                    <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-hotel"></i></span>
-                    <p class="font-bold">The most popular hotels</p>
-                </li>
-                <li class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                    <span class="text-3xl text-blue-500 mb-4"><i class="fas fa-chart-line"></i></span>
-                    <p class="font-bold">The latest tourism arrival trends</p>
-                </li>
-            </ul>
-        </section>
+</section>
 
-    <!-- Mission Section with background -->
-    <section class="py-20 bg-fixed bg-center bg-no-repeat bg-cover my-20" style="background-image: url('/api/placeholder/1920/800');">
-        <div class="bg-black bg-opacity-60 py-16">
-            <div class="max-w-4xl mx-auto text-center px-4">
-                <h2 class="text-3xl md:text-5xl font-bold mb-8 text-gray-800">Our Mission</h2>
-                <p class="text-xl md:text-2xl mb-6 text-gray-800">We aim to offer a comprehensive guide to the Philippines' thriving tourism industry.</p>
-                <p class="text-lg md:text-xl text-gray-800">Our goal is to bring together crucial data on top destinations, hotel accommodations, and tourism statistics that are vital for both travelers and businesses in the tourism sector.</p>
-            </div>
+<section class="welcome-section">
+    <h2 class="welcome-header"></h2>
+    <h3 class="welcome-title">Welcome to Tourism Insights PH!</h3>
+    <p class="welcome-intro">Discover top destinations, hotels, and tourism data.</p>
+    <p class="welcome-description">
+        Empowering travelers and businesses with the latest tourism insights for informed decision-making.
+    </p>
+
+    <div class="features-grid">
+        <!-- Feature Cards -->
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h4 class="feature-title">Top Destinations</h4>
+            <p>Explore the most visited tourist spots in the Philippines.</p>
         </div>
-    </section>
-
-    <!-- What You'll Find Here Section -->
-    <section class="mb-20">
-        <h2 class="text-3xl md:text-5xl font-bold mb-12 text-blue-500 text-center">What You'll Find Here:</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
-                <div class="text-center mb-6">
-                    <span class="text-5xl text-blue-500">🌴</span>
-                </div>
-                <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Destination Insights</h3>
-                <p class="text-lg md:text-xl text-gray-700">Discover must-visit places in the Philippines, from hidden gems to famous tourist hotspots like Boracay, Palawan, and Cebu.</p>
-                <div class="mt-6 text-center">
-                    <a href="/destinations" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">Learn more →</a>
-                </div>
-            </article>
-
-            <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
-                <div class="text-center mb-6">
-                    <span class="text-5xl text-blue-500">🏨</span>
-                </div>
-                <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Hotel Listings</h3>
-                <p class="text-lg md:text-xl text-gray-700">Browse through our curated hotel listings across various regions of the Philippines. Whether you're looking for luxurious resorts or budget-friendly stays, we've got you covered.</p>
-                <div class="mt-6 text-center">
-                    <a href="/hotels" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">View hotels →</a>
-                </div>
-            </article>
-
-            <article class="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:-translate-y-2">
-                <div class="text-center mb-6">
-                    <span class="text-5xl text-blue-500">📊</span>
-                </div>
-                <h3 class="text-2xl md:text-3xl font-bold mb-4 text-blue-500 text-center">Tourism Data</h3>
-                <p class="text-lg md:text-xl text-gray-700">Access up-to-date data on tourism arrivals to the Philippines, including annual statistics, visitor demographics, and trends.</p>
-                <div class="mt-6 text-center">
-                    <a href="/stats" class="inline-block text-blue-500 hover:text-blue-700 font-bold text-lg">Explore data →</a>
-                </div>
-            </article>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-hotel"></i></div>
+            <h4 class="feature-title">Hotels & Accommodations</h4>
+            <p>Find the best places to stay, from luxury resorts to affordable options.</p>
         </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="text-center mb-20">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-blue-500">Discover the best tourist destinations in the Philippines!</h2>
-        <a href="/destinations" class="inline-block bg-blue-500 hover:bg-blue-600 text-gray-800 py-4 px-10 rounded-lg font-bold text-xl transition-colors duration-300">Start Exploring Now</a>
-    </section>
-
-    <!-- Featured Destinations -->
-    <section class="mb-20">
-        <h2 class="text-3xl md:text-5xl font-bold mb-12 text-blue-500 text-center">Featured Destinations</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Destination 1 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="/api/placeholder/800/600" alt="Boracay" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Boracay</h3>
-                    <p class="text-gray-700 text-lg mb-4">World-famous for its pristine white sand beaches and vibrant nightlife.</p>
-                    <a href="/destinations/boracay" class="inline-block bg-blue-500 text-gray-800 py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
-                </div>
-            </div>
-            
-            <!-- Destination 2 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="/api/placeholder/800/600" alt="Palawan" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Palawan</h3>
-                    <p class="text-gray-700 text-lg mb-4">Home to the Underground River and stunning limestone formations of El Nido.</p>
-                    <a href="/destinations/palawan" class="inline-block bg-blue-500 text-gray-800 py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
-                </div>
-            </div>
-            
-            <!-- Destination 3 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="/api/placeholder/800/600" alt="Cebu" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Cebu</h3>
-                    <p class="text-gray-700 text-lg mb-4">A perfect blend of urban city life, historical sites, and natural wonders.</p>
-                    <a href="/destinations/cebu" class="inline-block bg-blue-500 text-gray-800 py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
-                </div>
-            </div>
-            
-            <!-- Destination 4 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="/api/placeholder/800/600" alt="Siargao" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-2">Siargao</h3>
-                    <p class="text-gray-700 text-lg mb-4">The surfing capital of the Philippines with beautiful lagoons and beaches.</p>
-                    <a href="/destinations/siargao" class="inline-block bg-blue-500 text-gray-800 py-2 px-4 rounded font-semibold hover:bg-blue-600 transition-colors duration-300">Explore</a>
-                </div>
-            </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+            <h4 class="feature-title">Tourism Data</h4>
+            <p>Get insights into tourist arrivals, revenue, and more.</p>
         </div>
-    </section>
-    
-</main>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mission-section">
+    <div class="mission-overlay">
+        <div class="mission-container">
+            <h2 class="mission-title">Our Mission</h2>
+            <p class="mission-text">Empowering travelers, businesses, and researchers with reliable tourism insights.</p>
+            <p class="mission-description">
+                We aim to bridge the gap between tourism data and real-world travel experiences, helping you discover
+                the best of the Philippines with confidence.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="info-section">
+    <div class="info-container">
+        <div class="info-item">
+            <h3>About Us</h3>
+            <p>Tourism Insights PH offers a comprehensive platform for exploring data on Philippine tourism. Our mission is to provide insightful information that empowers businesses, policymakers, and travelers alike.</p>
+        </div>
+
+        <div class="info-item">
+            <h3>What We Do</h3>
+            <p>We specialize in visualizing tourism data, providing insights, and ensuring businesses can make informed decisions based on reliable statistics and trends.</p>
+        </div>
+
+        <div class="info-item">
+            <h3>Why Choose Us?</h3>
+            <p>Our platform combines user-friendly visuals, expert analysis, and reliable data to help businesses, policymakers, and travelers plan effectively.</p>
+        </div>
+
+        <div class="info-item">
+            <h3>Where Are We?</h3>
+            <p>We are based in the Philippines, serving clients across the country with valuable insights into the tourism industry.</p>
+        </div>
+    </div>
+</section>
+
+
 {% endblock %}

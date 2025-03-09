@@ -1,61 +1,40 @@
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-12">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
             <!-- About Column -->
             <div>
-                <h3 class="text-2xl font-bold mb-4">About Us</h3>
-                <p class="text-gray-300 text-lg">Tourism Insights PH provides comprehensive information about travel destinations in the Philippines to help you plan your perfect vacation.</p>
+                <h3 class="footer-title">About Us</h3>
+                <p class="footer-text">Tourism Insights PH provides comprehensive information about .</p>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h3 class="text-2xl font-bold mb-4">Quick Links</h3>
-                <nav class="flex flex-col space-y-2 text-lg">
-                    <a href="/destinations" class="text-gray-300 hover:text-white transition-colors duration-300">Destinations</a>
-                    <a href="/hotels" class="text-gray-300 hover:text-white transition-colors duration-300">Hotels</a>
-                    <a href="/stats" class="text-gray-300 hover:text-white transition-colors duration-300">Tourism Stats</a>
-                    <a href="/contact" class="text-gray-300 hover:text-white transition-colors duration-300">Contact Us</a>
+                <h3 class="footer-title">Quick Links</h3>
+                <nav class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/destinations">Destinations</a>
+                    <a href="/hotel_occupancy">Hotels</a>
+                    <a href="arrivals">Arrivals</a>
                 </nav>
             </div>
 
-            
             <!-- Contact -->
             <div>
-                <h3 class="text-2xl font-bold mb-4">Contact Us</h3>
-                <p class="text-lg text-gray-300 mb-2"><i class="fas fa-envelope mr-2"></i> info@tourisminsightsph.com</p>
-                <p class="text-lg text-gray-300 mb-2"><i class="fas fa-phone mr-2"></i> +63 (2) 8888-7777</p>
-                <div class="flex space-x-4 mt-4">
-                    <a href="#" class="text-white hover:text-blue-400 transition-colors duration-300 text-2xl">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-blue-400 transition-colors duration-300 text-2xl">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-blue-400 transition-colors duration-300 text-2xl">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-blue-400 transition-colors duration-300 text-2xl">
-                        <i class="fab fa-youtube"></i>
-                    </a>
+                <h3 class="footer-title">Contact Us</h3>
+                <p class="footer-text"><i class="fas fa-envelope"></i> info@tourisminsightsph.com</p>
+                <p class="footer-text"><i class="fas fa-phone"></i> +63 (2) 8888-7777</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
 
-        <div class="border-t border-gray-700 pt-8 text-center">
-            <p class="text-lg">&copy; 2023 Tourism Insights PH. All rights reserved.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Tourism Insights PH. All rights reserved.</p>
         </div>
     </div>
 </footer>
-
-<script>
-    // Simple JavaScript for mobile menu toggle
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuButton = document.querySelector('button');
-        if (menuButton) {
-            menuButton.addEventListener('click', function() {
-                alert('Mobile menu would open here');
-            });
-        }
-    });
-</script>

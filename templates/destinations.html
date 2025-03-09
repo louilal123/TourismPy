@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <section class="mb-20 text-center max-w-5xl mx-auto pt-20">
-        <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-500 uppercase">Top 10 Destinations in the Philippines</h2>
-        <p class="text-xl md:text-2xl mb-6 text-gray-700">Explore the most visited places in the country.</p>
+<main class="main-container">
+    <section class="chart-section">
+        <h2 class="section-title">Top 10 Destinations in the Philippines</h2>
+        <p class="section-description">Explore the most visited places in the country.</p>
 
         <!-- Highcharts Visualization -->
         <div id="destinationChart" class="chart-container"></div>
@@ -20,7 +20,6 @@
         const cities = JSON.parse('{{ cities | tojson | safe }}') || [];
         const touristCounts = JSON.parse('{{ tourist_count | tojson | safe }}') || [];
 
-        
         // Debugging output
         console.log("✅ DEBUG: Cities →", cities);
         console.log("✅ DEBUG: Tourist Counts →", touristCounts);
@@ -30,11 +29,10 @@
             chart: { type: 'column' },
             title: { text: 'Top 10 Most Visited Cities in the Philippines' },
             xAxis: { categories: cities, title: { text: 'Cities' } },
-            yAxis: { title: { text: 'Total Tourists' } }, // Modified label
-            series: [{ name: '', data: touristCounts, colorByPoint: true }] // Removed "Arrivals" from name
+            yAxis: { title: { text: 'Total Tourists' } }, 
+            series: [{ name: '', data: touristCounts, colorByPoint: true }]
         });
     });
 </script>
 
- 
 {% endblock %}

@@ -1,301 +1,321 @@
-Tourist Spot,City/Province,Region,Tourist Arrivals,Domestic Tourists,International Tourists
-Tourist Spot 1,Bukidnon,Northern Mindanao,809322,322311,487011
-Tourist Spot 2,Bacolod,Western Visayas,4483880,3866645,617235
-Tourist Spot 3,Zambales,Central Luzon,821890,720956,100934
-Tourist Spot 4,Baguio,CAR,595551,340363,255188
-Tourist Spot 5,Palawan,MIMAROPA,713170,372694,340476
-Tourist Spot 6,Palawan,MIMAROPA,4185227,2746570,1438657
-Tourist Spot 7,Batangas,CALABARZON,1206457,966049,240408
-Tourist Spot 8,Rizal,CALABARZON,1587223,744089,843134
-Tourist Spot 9,Rizal,CALABARZON,4520769,1488385,3032384
-Tourist Spot 10,Ilocos Sur,Ilocos Region,2206672,757069,1449603
-Tourist Spot 11,Cebu City,Central Visayas,1636851,1036179,600672
-Tourist Spot 12,Basilan,BARMM,4832281,358884,4473397
-Tourist Spot 13,Benguet,CAR,947407,738826,208581
-Tourist Spot 14,Manila,NCR,3441523,1312881,2128642
-Tourist Spot 15,Cebu City,Central Visayas,1046427,806192,240235
-Tourist Spot 16,Zambales,Central Luzon,4230297,1162785,3067512
-Tourist Spot 17,Zambales,Central Luzon,1187305,782945,404360
-Tourist Spot 18,Ilocos Sur,Ilocos Region,4492356,3623410,868946
-Tourist Spot 19,Albay,Bicol Region,4896118,853240,4042878
-Tourist Spot 20,Bacolod,Western Visayas,3686469,982656,2703813
-Tourist Spot 21,Batangas,CALABARZON,4574113,1708654,2865450
-Tourist Spot 22,Basilan,BARMM,1651877,1002360,649517
-Tourist Spot 23,Batangas,CALABARZON,4363456,1768716,2594740
-Tourist Spot 24,Ifugao,CAR,2692167,1811458,880709
-Tourist Spot 25,Benguet,CAR,4721504,1516688,3204816
-Tourist Spot 26,Zambales,Central Luzon,4861356,3219880,1641476
-Tourist Spot 27,Siargao,Caraga,1677671,339981,1337690
-Tourist Spot 28,Pangasinan,Ilocos Region,2460111,2172593,287518
-Tourist Spot 29,Manila,NCR,2258044,942860,1315184
-Tourist Spot 30,Ilocos Sur,Ilocos Region,1740869,1393996,346873
-Tourist Spot 31,Cebu City,Central Visayas,3665617,2037322,1628295
-Tourist Spot 32,Batangas,CALABARZON,4714147,1466556,3247591
-Tourist Spot 33,Palawan,MIMAROPA,851181,616195,234986
-Tourist Spot 34,Bohol,Central Visayas,4667903,2290450,2377453
-Tourist Spot 35,Ifugao,CAR,3070990,852056,2218934
-Tourist Spot 36,Rizal,CALABARZON,1843851,1338265,505586
-Tourist Spot 37,Pangasinan,Ilocos Region,2987151,331917,2655234
-Tourist Spot 38,Davao,Davao Region,3523635,1535006,1988629
-Tourist Spot 39,Siquijor,Central Visayas,1781212,1258537,522675
-Tourist Spot 40,Ilocos Sur,Ilocos Region,4125482,2635568,1489914
-Tourist Spot 41,Ilocos Sur,Ilocos Region,1831350,330550,1500800
-Tourist Spot 42,Camiguin,Northern Mindanao,1531790,679247,852543
-Tourist Spot 43,Siargao,Caraga,1508506,1086111,422395
-Tourist Spot 44,Ifugao,CAR,4870678,4426679,443999
-Tourist Spot 45,Basilan,BARMM,698328,343704,354624
-Tourist Spot 46,Benguet,CAR,1661932,1028920,633012
-Tourist Spot 47,Pangasinan,Ilocos Region,2030138,1046761,983377
-Tourist Spot 48,Aklan,Western Visayas,3403732,1454056,1949676
-Tourist Spot 49,Zambales,Central Luzon,4765190,1709500,3055690
-Tourist Spot 50,Benguet,CAR,4241457,1600844,2640613
-Tourist Spot 51,Bacolod,Western Visayas,2470944,451411,2019533
-Tourist Spot 52,Baguio,CAR,735714,568306,167408
-Tourist Spot 53,Rizal,CALABARZON,2109604,344932,1764672
-Tourist Spot 54,South Cotabato,SOCCSKSARGEN,1158483,613579,544904
-Tourist Spot 55,Camiguin,Northern Mindanao,1252245,723128,529117
-Tourist Spot 56,Siquijor,Central Visayas,2071744,574493,1497251
-Tourist Spot 57,Siquijor,Central Visayas,4782998,894969,3888029
-Tourist Spot 58,Batangas,CALABARZON,2361046,441183,1919863
-Tourist Spot 59,Baguio,CAR,4126752,2386202,1740550
-Tourist Spot 60,Camiguin,Northern Mindanao,2695892,551084,2144808
-Tourist Spot 61,South Cotabato,SOCCSKSARGEN,3515763,1577419,1938344
-Tourist Spot 62,Camiguin,Northern Mindanao,2204257,306326,1897931
-Tourist Spot 63,Siquijor,Central Visayas,598564,336702,261862
-Tourist Spot 64,Manila,NCR,3357013,2373750,983263
-Tourist Spot 65,South Cotabato,SOCCSKSARGEN,4326998,3093829,1233169
-Tourist Spot 66,Davao,Davao Region,4881104,422198,4458906
-Tourist Spot 67,South Cotabato,SOCCSKSARGEN,1585939,1418377,167562
-Tourist Spot 68,Pangasinan,Ilocos Region,593932,469859,124073
-Tourist Spot 69,Bukidnon,Northern Mindanao,2871395,1660487,1210908
-Tourist Spot 70,Siquijor,Central Visayas,2465116,1073595,1391521
-Tourist Spot 71,Bukidnon,Northern Mindanao,4966072,782940,4183132
-Tourist Spot 72,Albay,Bicol Region,3437416,3032463,404953
-Tourist Spot 73,Baguio,CAR,1051049,486017,565032
-Tourist Spot 74,Bacolod,Western Visayas,3819568,2348961,1470607
-Tourist Spot 75,Siquijor,Central Visayas,4031793,1814331,2217462
-Tourist Spot 76,Zambales,Central Luzon,1049560,867120,182440
-Tourist Spot 77,Basilan,BARMM,1832811,460732,1372079
-Tourist Spot 78,Aklan,Western Visayas,3661581,3338911,322670
-Tourist Spot 79,Pangasinan,Ilocos Region,4769818,4317342,452476
-Tourist Spot 80,Ilocos Sur,Ilocos Region,773944,509544,264400
-Tourist Spot 81,Manila,NCR,3811667,1774088,2037579
-Tourist Spot 82,Aklan,Western Visayas,3934810,398397,3536413
-Tourist Spot 83,Rizal,CALABARZON,4134020,3482802,651218
-Tourist Spot 84,Ilocos Sur,Ilocos Region,2378235,1655626,722609
-Tourist Spot 85,Rizal,CALABARZON,4897161,412585,4484576
-Tourist Spot 86,Camiguin,Northern Mindanao,1275665,698966,576699
-Tourist Spot 87,Pangasinan,Ilocos Region,3544979,2045856,1499123
-Tourist Spot 88,Davao,Davao Region,2404867,2084899,319968
-Tourist Spot 89,Zambales,Central Luzon,4874580,1730149,3144431
-Tourist Spot 90,Manila,NCR,2730224,420161,2310063
-Tourist Spot 91,Ilocos Sur,Ilocos Region,4218896,3339690,879206
-Tourist Spot 92,Aklan,Western Visayas,2753380,591749,2161631
-Tourist Spot 93,Palawan,MIMAROPA,1905720,916570,989150
-Tourist Spot 94,Camiguin,Northern Mindanao,4502864,3778895,723969
-Tourist Spot 95,Ilocos Sur,Ilocos Region,783600,643397,140203
-Tourist Spot 96,Davao Oriental,Davao Region,1771582,1255603,515979
-Tourist Spot 97,Surigao del Sur,Caraga,2500522,1656554,843968
-Tourist Spot 98,Baguio,CAR,1271685,932697,338988
-Tourist Spot 99,Davao Oriental,Davao Region,4321971,1183785,3138186
-Tourist Spot 100,Davao,Davao Region,2562202,405136,2157066
-Tourist Spot 101,Davao Oriental,Davao Region,3723691,809230,2914461
-Tourist Spot 102,Albay,Bicol Region,2906388,1277025,1629363
-Tourist Spot 103,Ilocos Sur,Ilocos Region,1791104,815407,975697
-Tourist Spot 104,Ifugao,CAR,2390700,962509,1428191
-Tourist Spot 105,Bacolod,Western Visayas,1330625,653494,677131
-Tourist Spot 106,Ifugao,CAR,4984190,617422,4366768
-Tourist Spot 107,Albay,Bicol Region,3702237,1253288,2448949
-Tourist Spot 108,Basilan,BARMM,4469138,424492,4044646
-Tourist Spot 109,Rizal,CALABARZON,1060514,641628,418886
-Tourist Spot 110,Zambales,Central Luzon,1262289,1013860,248429
-Tourist Spot 111,Manila,NCR,605982,398063,207919
-Tourist Spot 112,Rizal,CALABARZON,3816693,2131771,1684922
-Tourist Spot 113,Bacolod,Western Visayas,896644,374160,522484
-Tourist Spot 114,Davao Oriental,Davao Region,3107185,2871543,235642
-Tourist Spot 115,Pangasinan,Ilocos Region,2373795,1740659,633136
-Tourist Spot 116,Rizal,CALABARZON,3301975,2931247,370728
-Tourist Spot 117,Davao,Davao Region,1748925,1262734,486191
-Tourist Spot 118,Cebu City,Central Visayas,4931816,4396180,535636
-Tourist Spot 119,Aklan,Western Visayas,2263477,669579,1593898
-Tourist Spot 120,Manila,NCR,1213324,657564,555760
-Tourist Spot 121,Albay,Bicol Region,4927741,863829,4063912
-Tourist Spot 122,Bukidnon,Northern Mindanao,2693505,1269794,1423711
-Tourist Spot 123,Palawan,MIMAROPA,2510412,2397464,112948
-Tourist Spot 124,Ifugao,CAR,2678305,329207,2349098
-Tourist Spot 125,Camiguin,Northern Mindanao,3027939,2007133,1020806
-Tourist Spot 126,Siargao,Caraga,4693173,2781355,1911818
-Tourist Spot 127,Bacolod,Western Visayas,1634095,1416816,217279
-Tourist Spot 128,Zambales,Central Luzon,2829711,1786941,1042770
-Tourist Spot 129,Albay,Bicol Region,4515853,421434,4094419
-Tourist Spot 130,Pangasinan,Ilocos Region,3781762,1712064,2069698
-Tourist Spot 131,Manila,NCR,4183928,3644177,539751
-Tourist Spot 132,Pangasinan,Ilocos Region,1467607,1256373,211234
-Tourist Spot 133,Cebu City,Central Visayas,4141264,2773311,1367953
-Tourist Spot 134,Basilan,BARMM,1099407,678913,420494
-Tourist Spot 135,Bacolod,Western Visayas,2054679,393051,1661628
-Tourist Spot 136,Ifugao,CAR,4407442,4223566,183876
-Tourist Spot 137,Albay,Bicol Region,3288005,3115454,172551
-Tourist Spot 138,Samar,Eastern Visayas,745150,394661,350489
-Tourist Spot 139,Rizal,CALABARZON,4957622,654675,4302947
-Tourist Spot 140,Bohol,Central Visayas,2318289,2085632,232657
-Tourist Spot 141,Bohol,Central Visayas,2233577,1347636,885941
-Tourist Spot 142,Samar,Eastern Visayas,867603,756906,110697
-Tourist Spot 143,South Cotabato,SOCCSKSARGEN,2197740,2080903,116837
-Tourist Spot 144,Davao,Davao Region,2105123,748555,1356568
-Tourist Spot 145,Basilan,BARMM,3503056,1215646,2287410
-Tourist Spot 146,Palawan,MIMAROPA,1050146,517206,532940
-Tourist Spot 147,Samar,Eastern Visayas,2061926,734749,1327177
-Tourist Spot 148,Manila,NCR,1844452,1648886,195566
-Tourist Spot 149,Camiguin,Northern Mindanao,3683778,1488166,2195612
-Tourist Spot 150,Siargao,Caraga,3021437,2075995,945442
-Tourist Spot 151,Davao Oriental,Davao Region,822276,453329,368947
-Tourist Spot 152,Batangas,CALABARZON,1185943,507670,678273
-Tourist Spot 153,Samar,Eastern Visayas,3489410,1878199,1611211
-Tourist Spot 154,Rizal,CALABARZON,1786834,348156,1438678
-Tourist Spot 155,Manila,NCR,723050,553766,169284
-Tourist Spot 156,Samar,Eastern Visayas,2840750,499609,2341141
-Tourist Spot 157,Baguio,CAR,2534708,1522402,1012306
-Tourist Spot 158,Palawan,MIMAROPA,4320334,2563112,1757222
-Tourist Spot 159,Davao,Davao Region,1022405,654975,367430
-Tourist Spot 160,Davao,Davao Region,3649149,2507591,1141558
-Tourist Spot 161,Bohol,Central Visayas,1521539,665241,856298
-Tourist Spot 162,Samar,Eastern Visayas,2333864,2230658,103206
-Tourist Spot 163,Cebu City,Central Visayas,2820568,846050,1974518
-Tourist Spot 164,Baguio,CAR,1112567,887568,224999
-Tourist Spot 165,Bohol,Central Visayas,4571075,3821231,749844
-Tourist Spot 166,Surigao del Sur,Caraga,3924944,1723382,2201562
-Tourist Spot 167,Surigao del Sur,Caraga,4646144,4237209,408935
-Tourist Spot 168,Cebu City,Central Visayas,4265521,420583,3844938
-Tourist Spot 169,Siquijor,Central Visayas,3326912,1363468,1963444
-Tourist Spot 170,Pangasinan,Ilocos Region,1090535,733620,356915
-Tourist Spot 171,Basilan,BARMM,4189574,2961101,1228473
-Tourist Spot 172,Bohol,Central Visayas,1586746,581967,1004779
-Tourist Spot 173,Palawan,MIMAROPA,3396707,2697712,698995
-Tourist Spot 174,Siquijor,Central Visayas,2807964,1526188,1281776
-Tourist Spot 175,Basilan,BARMM,3489842,1315936,2173906
-Tourist Spot 176,Ilocos Sur,Ilocos Region,921187,525119,396068
-Tourist Spot 177,South Cotabato,SOCCSKSARGEN,3731542,2182885,1548657
-Tourist Spot 178,Bukidnon,Northern Mindanao,1606283,1493429,112854
-Tourist Spot 179,Zambales,Central Luzon,2025016,1697971,327045
-Tourist Spot 180,Baguio,CAR,4679262,3644128,1035134
-Tourist Spot 181,Ilocos Sur,Ilocos Region,4430909,3885977,544932
-Tourist Spot 182,Siquijor,Central Visayas,4053640,2388794,1664846
-Tourist Spot 183,Manila,NCR,4230968,1816083,2414885
-Tourist Spot 184,Benguet,CAR,4620200,2603894,2016306
-Tourist Spot 185,Baguio,CAR,4634703,4177868,456835
-Tourist Spot 186,Benguet,CAR,2906846,355521,2551325
-Tourist Spot 187,Bohol,Central Visayas,4550952,360006,4190946
-Tourist Spot 188,Bohol,Central Visayas,1280885,453232,827653
-Tourist Spot 189,Samar,Eastern Visayas,1079182,507812,571370
-Tourist Spot 190,Bacolod,Western Visayas,2416107,1174517,1241590
-Tourist Spot 191,Pangasinan,Ilocos Region,1298911,774224,524687
-Tourist Spot 192,Zambales,Central Luzon,2769900,1692372,1077528
-Tourist Spot 193,Samar,Eastern Visayas,2303628,848970,1454658
-Tourist Spot 194,Siquijor,Central Visayas,3307853,1116143,2191710
-Tourist Spot 195,Camiguin,Northern Mindanao,3721424,2306221,1415203
-Tourist Spot 196,South Cotabato,SOCCSKSARGEN,3946353,2379650,1566703
-Tourist Spot 197,South Cotabato,SOCCSKSARGEN,3308751,2792113,516638
-Tourist Spot 198,Cebu City,Central Visayas,4692187,4293157,399030
-Tourist Spot 199,Zambales,Central Luzon,2213567,1269514,944053
-Tourist Spot 200,Davao,Davao Region,3701983,3331364,370619
-Tourist Spot 201,Manila,NCR,3518869,1833166,1685703
-Tourist Spot 202,Surigao del Sur,Caraga,2451622,559343,1892279
-Tourist Spot 203,Siargao,Caraga,4292602,3181206,1111396
-Tourist Spot 204,Basilan,BARMM,3928689,2511797,1416892
-Tourist Spot 205,Davao,Davao Region,3853140,3361751,491389
-Tourist Spot 206,Ilocos Sur,Ilocos Region,4615055,4101988,513067
-Tourist Spot 207,Samar,Eastern Visayas,859969,682023,177946
-Tourist Spot 208,Cebu City,Central Visayas,4780099,842336,3937763
-Tourist Spot 209,Baguio,CAR,4492236,4118356,373880
-Tourist Spot 210,Davao,Davao Region,994243,353940,640303
-Tourist Spot 211,Bacolod,Western Visayas,4431217,4300144,131073
-Tourist Spot 212,Zambales,Central Luzon,4301033,2570614,1730419
-Tourist Spot 213,Davao,Davao Region,4337377,1406088,2931289
-Tourist Spot 214,South Cotabato,SOCCSKSARGEN,2590210,1639468,950742
-Tourist Spot 215,Rizal,CALABARZON,4750326,717392,4032934
-Tourist Spot 216,Zambales,Central Luzon,4681527,4467389,214138
-Tourist Spot 217,Bukidnon,Northern Mindanao,1704887,327348,1377539
-Tourist Spot 218,Rizal,CALABARZON,3187725,2781302,406423
-Tourist Spot 219,Baguio,CAR,3248691,796434,2452257
-Tourist Spot 220,Cebu City,Central Visayas,4953936,410232,4543704
-Tourist Spot 221,Batangas,CALABARZON,4172597,1321073,2851524
-Tourist Spot 222,Surigao del Sur,Caraga,769674,452533,317141
-Tourist Spot 223,Baguio,CAR,3849991,410537,3439454
-Tourist Spot 224,Cebu City,Central Visayas,4045193,2904567,1140626
-Tourist Spot 225,Basilan,BARMM,759850,401418,358432
-Tourist Spot 226,Camiguin,Northern Mindanao,3354424,2815884,538540
-Tourist Spot 227,Siquijor,Central Visayas,2698779,917019,1781760
-Tourist Spot 228,Siquijor,Central Visayas,2919156,1820089,1099067
-Tourist Spot 229,Camiguin,Northern Mindanao,3276021,2669383,606638
-Tourist Spot 230,Cebu City,Central Visayas,4853887,3921152,932735
-Tourist Spot 231,Bukidnon,Northern Mindanao,1054317,515306,539011
-Tourist Spot 232,Bohol,Central Visayas,4922221,3952099,970122
-Tourist Spot 233,Baguio,CAR,2968186,2269689,698497
-Tourist Spot 234,Albay,Bicol Region,1790448,1490328,300120
-Tourist Spot 235,Ilocos Sur,Ilocos Region,3733129,1189691,2543438
-Tourist Spot 236,Palawan,MIMAROPA,2650297,1913194,737103
-Tourist Spot 237,Manila,NCR,1218615,993122,225493
-Tourist Spot 238,Pangasinan,Ilocos Region,4923117,1097657,3825460
-Tourist Spot 239,Benguet,CAR,3760888,494879,3266009
-Tourist Spot 240,Albay,Bicol Region,4737432,2481626,2255806
-Tourist Spot 241,Cebu City,Central Visayas,3401596,1816858,1584738
-Tourist Spot 242,Cebu City,Central Visayas,4933592,2395365,2538227
-Tourist Spot 243,Samar,Eastern Visayas,2453562,406959,2046603
-Tourist Spot 244,Bacolod,Western Visayas,2985808,2182018,803790
-Tourist Spot 245,Rizal,CALABARZON,2412727,1894515,518212
-Tourist Spot 246,Rizal,CALABARZON,4080655,3881625,199030
-Tourist Spot 247,Bacolod,Western Visayas,1554330,709151,845179
-Tourist Spot 248,Ilocos Sur,Ilocos Region,758162,358042,400120
-Tourist Spot 249,Rizal,CALABARZON,3586194,2301591,1284603
-Tourist Spot 250,Cebu City,Central Visayas,1721364,973577,747787
-Tourist Spot 251,Pangasinan,Ilocos Region,2390209,1623157,767052
-Tourist Spot 252,Palawan,MIMAROPA,954612,667379,287233
-Tourist Spot 253,Bohol,Central Visayas,3587291,1726697,1860594
-Tourist Spot 254,Davao,Davao Region,1746129,1360767,385362
-Tourist Spot 255,Ifugao,CAR,1167727,536007,631720
-Tourist Spot 256,Bacolod,Western Visayas,1331338,800997,530341
-Tourist Spot 257,Basilan,BARMM,3234196,1188248,2045948
-Tourist Spot 258,Aklan,Western Visayas,807687,512989,294698
-Tourist Spot 259,Camiguin,Northern Mindanao,2356354,991330,1365024
-Tourist Spot 260,South Cotabato,SOCCSKSARGEN,2798488,937605,1860883
-Tourist Spot 261,Siquijor,Central Visayas,3226407,436769,2789638
-Tourist Spot 262,Siquijor,Central Visayas,2339072,1572356,766716
-Tourist Spot 263,Albay,Bicol Region,1282807,563204,719603
-Tourist Spot 264,Samar,Eastern Visayas,2050719,1396877,653842
-Tourist Spot 265,Baguio,CAR,4395379,1519808,2875571
-Tourist Spot 266,Batangas,CALABARZON,1472840,1165373,307467
-Tourist Spot 267,Palawan,MIMAROPA,1357827,407176,950651
-Tourist Spot 268,Aklan,Western Visayas,3033939,1613133,1420806
-Tourist Spot 269,Manila,NCR,4193794,2251493,1942301
-Tourist Spot 270,Basilan,BARMM,1529966,763346,766620
-Tourist Spot 271,Ifugao,CAR,1581870,392085,1189785
-Tourist Spot 272,Davao,Davao Region,535310,313458,221852
-Tourist Spot 273,Bacolod,Western Visayas,1975935,358669,1617266
-Tourist Spot 274,Aklan,Western Visayas,2984831,2677720,307111
-Tourist Spot 275,Davao,Davao Region,1628014,1226306,401708
-Tourist Spot 276,Surigao del Sur,Caraga,3286360,1726822,1559538
-Tourist Spot 277,Benguet,CAR,1417642,335121,1082521
-Tourist Spot 278,Ilocos Sur,Ilocos Region,548872,348458,200414
-Tourist Spot 279,Pangasinan,Ilocos Region,3783862,2065987,1717875
-Tourist Spot 280,South Cotabato,SOCCSKSARGEN,949335,631369,317966
-Tourist Spot 281,Aklan,Western Visayas,3694337,761420,2932917
-Tourist Spot 282,Benguet,CAR,3404220,732341,2671879
-Tourist Spot 283,Bohol,Central Visayas,4404786,1792803,2611983
-Tourist Spot 284,Siargao,Caraga,3315053,2152913,1162140
-Tourist Spot 285,Siargao,Caraga,1278355,1138126,140229
-Tourist Spot 286,Baguio,CAR,1454493,761774,692719
-Tourist Spot 287,Bukidnon,Northern Mindanao,4126428,712995,3413433
-Tourist Spot 288,Ilocos Sur,Ilocos Region,4445056,3249774,1195282
-Tourist Spot 289,South Cotabato,SOCCSKSARGEN,3345042,700473,2644569
-Tourist Spot 290,Davao Oriental,Davao Region,827295,460547,366748
-Tourist Spot 291,Bacolod,Western Visayas,4810900,2358375,2452525
-Tourist Spot 292,Pangasinan,Ilocos Region,3474141,2894885,579256
-Tourist Spot 293,Bukidnon,Northern Mindanao,2007768,1413334,594434
-Tourist Spot 294,Bacolod,Western Visayas,3469168,1558822,1910346
-Tourist Spot 295,Albay,Bicol Region,1445502,1212986,232516
-Tourist Spot 296,Surigao del Sur,Caraga,1640820,1210313,430507
-Tourist Spot 297,Pangasinan,Ilocos Region,4785333,705083,4080250
-Tourist Spot 298,Ifugao,CAR,1776251,846215,930036
-Tourist Spot 299,Davao,Davao Region,1970116,1837999,132117
-Tourist Spot 300,Surigao del Sur,Caraga,1132414,564776,567638
+Tourist Spot,City/Province,Region,Year,Tourist Arrivals,Domestic Tourists,International Tourists
+Tourist Spot 62,Bacolod,Western Visayas,2016,2150224,1334113,816111
+Tourist Spot 82,Baguio,CAR,2023,4922058,3927465,994593
+Tourist Spot 1,Cebu City,Central Visayas,2018,1000174,773762,226412
+Tourist Spot 72,Bacolod,Western Visayas,2023,4954835,3924146,1030689
+Tourist Spot 91,Zambales,Central Luzon,2019,3375133,2439716,935417
+Tourist Spot 83,Legazpi City,Bicol Region,2024,2971144,2091310,879834
+Tourist Spot 12,Rizal,CALABARZON,2015,3046218,1913752,1132466
+Tourist Spot 33,Batangas,CALABARZON,2020,2185011,1733489,451522
+Tourist Spot 17,Davao City,Davao Region,2022,190226,132534,57692
+Tourist Spot 22,Bukidnon,Northern Mindanao,2016,2227272,1408383,818889
+Tourist Spot 43,Bukidnon,Northern Mindanao,2020,1373833,1018723,355110
+Tourist Spot 87,Cebu City,Central Visayas,2015,1550724,1009251,541473
+Tourist Spot 57,Batangas,CALABARZON,2020,3633779,2846678,787101
+Tourist Spot 43,Palawan,MIMAROPA,2016,911586,617199,294387
+Tourist Spot 38,Rizal,CALABARZON,2018,73159,50987,22172
+Tourist Spot 41,Bacolod,Western Visayas,2021,2349443,1693106,656337
+Tourist Spot 86,Davao City,Davao Region,2018,2778798,1678371,1100427
+Tourist Spot 95,Cebu City,Central Visayas,2022,1057709,834653,223056
+Tourist Spot 66,Baguio,CAR,2019,2671691,1955915,715776
+Tourist Spot 60,Legazpi City,Bicol Region,2022,4487752,3177681,1310071
+Tourist Spot 83,Legazpi City,Bicol Region,2019,2944601,2166306,778295
+Tourist Spot 74,Ilocos Sur,Ilocos Region,2016,1989938,1376750,613188
+Tourist Spot 50,General Santos,SOCCSKSARGEN,2023,3083430,1916313,1167117
+Tourist Spot 5,Bukidnon,Northern Mindanao,2024,4433720,3034966,1398754
+Tourist Spot 49,Batangas,CALABARZON,2021,3593321,2226102,1367219
+Tourist Spot 18,Rizal,CALABARZON,2023,4098285,3049535,1048750
+Tourist Spot 90,Legazpi City,Bicol Region,2017,3548675,2375090,1173585
+Tourist Spot 43,Bacolod,Western Visayas,2017,174527,129402,45125
+Tourist Spot 8,Baguio,CAR,2023,3999746,3178488,821258
+Tourist Spot 73,Zambales,Central Luzon,2019,1124589,712080,412509
+Tourist Spot 71,Baguio,CAR,2024,230620,175568,55052
+Tourist Spot 16,Davao City,Davao Region,2017,2454375,1951168,503207
+Tourist Spot 39,Davao City,Davao Region,2021,3502686,2751177,751509
+Tourist Spot 3,Bukidnon,Northern Mindanao,2016,2628170,1713457,914713
+Tourist Spot 83,Zambales,Central Luzon,2020,3008627,2068921,939706
+Tourist Spot 96,Cebu City,Central Visayas,2024,371518,276986,94532
+Tourist Spot 61,Cebu City,Central Visayas,2020,3075886,2358720,717166
+Tourist Spot 20,Zambales,Central Luzon,2019,1466453,1139832,326621
+Tourist Spot 91,Ilocos Sur,Ilocos Region,2020,3063475,1995376,1068099
+Tourist Spot 7,Cebu City,Central Visayas,2019,1510247,1007639,502608
+Tourist Spot 95,Baguio,CAR,2016,3527662,2787292,740370
+Tourist Spot 59,Tacloban,Eastern Visayas,2022,4303723,3017381,1286342
+Tourist Spot 64,Bukidnon,Northern Mindanao,2019,4674357,3669620,1004737
+Tourist Spot 89,Bacolod,Western Visayas,2023,3119014,2482517,636497
+Tourist Spot 99,Batangas,CALABARZON,2021,706314,502171,204143
+Tourist Spot 48,Bukidnon,Northern Mindanao,2024,3283059,2161235,1121824
+Tourist Spot 20,Batangas,CALABARZON,2023,4022136,2460337,1561799
+Tourist Spot 89,Legazpi City,Bicol Region,2019,4547081,2956041,1591040
+Tourist Spot 69,General Santos,SOCCSKSARGEN,2015,1328678,1024667,304011
+Tourist Spot 59,Zambales,Central Luzon,2023,3335935,2123689,1212246
+Tourist Spot 20,Baguio,CAR,2021,1263677,959174,304503
+Tourist Spot 93,Cebu City,Central Visayas,2020,3370441,2090213,1280228
+Tourist Spot 28,Bacolod,Western Visayas,2021,497515,313269,184246
+Tourist Spot 30,Davao City,Davao Region,2019,2820330,2223834,596496
+Tourist Spot 87,Legazpi City,Bicol Region,2024,4600597,3316894,1283703
+Tourist Spot 58,Rizal,CALABARZON,2022,1065930,792568,273362
+Tourist Spot 8,Legazpi City,Bicol Region,2020,3502911,2478502,1024409
+Tourist Spot 14,Baguio,CAR,2017,1621812,1127254,494558
+Tourist Spot 52,Bukidnon,Northern Mindanao,2016,3849911,2506017,1343894
+Tourist Spot 25,Tacloban,Eastern Visayas,2023,4405364,2756117,1649247
+Tourist Spot 1,Ilocos Sur,Ilocos Region,2018,3203337,2046742,1156595
+Tourist Spot 95,Davao City,Davao Region,2023,3947398,2572723,1374675
+Tourist Spot 95,Davao City,Davao Region,2018,3368809,2125506,1243303
+Tourist Spot 28,Tacloban,Eastern Visayas,2020,4531891,3483143,1048748
+Tourist Spot 56,Rizal,CALABARZON,2022,3006226,2296201,710025
+Tourist Spot 48,Ilocos Sur,Ilocos Region,2022,3500830,2379665,1121165
+Tourist Spot 50,Zambales,Central Luzon,2016,3012082,2185803,826279
+Tourist Spot 66,Baguio,CAR,2021,844177,651204,192973
+Tourist Spot 22,Batangas,CALABARZON,2017,4476956,2732576,1744380
+Tourist Spot 73,General Santos,SOCCSKSARGEN,2021,3898542,3095073,803469
+Tourist Spot 18,Batangas,CALABARZON,2021,211253,131639,79614
+Tourist Spot 71,General Santos,SOCCSKSARGEN,2015,1381873,910413,471460
+Tourist Spot 99,Bacolod,Western Visayas,2017,3149588,2180571,969017
+Tourist Spot 21,Ilocos Sur,Ilocos Region,2015,803561,624180,179381
+Tourist Spot 88,Legazpi City,Bicol Region,2022,427803,291194,136609
+Tourist Spot 55,Ilocos Sur,Ilocos Region,2018,784822,549281,235541
+Tourist Spot 25,Bukidnon,Northern Mindanao,2022,4119454,2945328,1174126
+Tourist Spot 89,Legazpi City,Bicol Region,2018,3019341,2217577,801764
+Tourist Spot 16,Bacolod,Western Visayas,2015,1422973,965305,457668
+Tourist Spot 40,Batangas,CALABARZON,2017,2909404,2152944,756460
+Tourist Spot 27,Ilocos Sur,Ilocos Region,2023,403969,296368,107601
+Tourist Spot 46,Legazpi City,Bicol Region,2015,2753940,1714223,1039717
+Tourist Spot 38,Davao City,Davao Region,2018,3068197,2160581,907616
+Tourist Spot 74,Rizal,CALABARZON,2022,3493722,2454206,1039516
+Tourist Spot 90,Bukidnon,Northern Mindanao,2023,4717890,3159142,1558748
+Tourist Spot 8,Legazpi City,Bicol Region,2015,4601352,3669634,931718
+Tourist Spot 35,Tacloban,Eastern Visayas,2024,4972207,3240216,1731991
+Tourist Spot 65,Batangas,CALABARZON,2023,3265593,2463671,801922
+Tourist Spot 52,Bacolod,Western Visayas,2021,1563608,1197678,365930
+Tourist Spot 18,Zambales,Central Luzon,2018,4683044,3342343,1340701
+Tourist Spot 58,Zambales,Central Luzon,2017,1342703,806412,536291
+Tourist Spot 23,Palawan,MIMAROPA,2020,3858332,2378879,1479453
+Tourist Spot 93,Bacolod,Western Visayas,2019,4348305,2684693,1663612
+Tourist Spot 9,Tacloban,Eastern Visayas,2023,2164415,1671141,493274
+Tourist Spot 66,Rizal,CALABARZON,2018,4097125,2470881,1626244
+Tourist Spot 48,Legazpi City,Bicol Region,2018,3350596,2186370,1164226
+Tourist Spot 92,General Santos,SOCCSKSARGEN,2022,4521958,3181043,1340915
+Tourist Spot 85,Batangas,CALABARZON,2019,1492208,992663,499545
+Tourist Spot 32,Baguio,CAR,2018,1261907,872967,388940
+Tourist Spot 26,Zambales,Central Luzon,2024,4432851,3449250,983601
+Tourist Spot 48,Ilocos Sur,Ilocos Region,2016,2745814,1676152,1069662
+Tourist Spot 2,Cebu City,Central Visayas,2018,2325425,1816104,509321
+Tourist Spot 29,Baguio,CAR,2020,360445,240843,119602
+Tourist Spot 40,Palawan,MIMAROPA,2016,4585178,3160459,1424719
+Tourist Spot 78,Bacolod,Western Visayas,2023,976726,743253,233473
+Tourist Spot 7,Davao City,Davao Region,2021,2002548,1489605,512943
+Tourist Spot 44,Bukidnon,Northern Mindanao,2023,1072616,760502,312114
+Tourist Spot 57,Ilocos Sur,Ilocos Region,2017,1654477,1168423,486054
+Tourist Spot 4,Tacloban,Eastern Visayas,2023,4087597,2881358,1206239
+Tourist Spot 16,Palawan,MIMAROPA,2021,4569185,3438883,1130302
+Tourist Spot 43,Palawan,MIMAROPA,2019,1440450,931549,508901
+Tourist Spot 40,Ilocos Sur,Ilocos Region,2024,1364333,845944,518389
+Tourist Spot 44,Davao City,Davao Region,2020,216638,172388,44250
+Tourist Spot 29,Baguio,CAR,2017,3229119,2362737,866382
+Tourist Spot 29,Davao City,Davao Region,2015,3159774,2232415,927359
+Tourist Spot 39,Bacolod,Western Visayas,2021,2052486,1556970,495516
+Tourist Spot 97,General Santos,SOCCSKSARGEN,2017,4968383,3811294,1157089
+Tourist Spot 74,Zambales,Central Luzon,2020,2040042,1522185,517857
+Tourist Spot 25,Batangas,CALABARZON,2017,2479146,1687149,791997
+Tourist Spot 71,Palawan,MIMAROPA,2020,1834722,1112881,721841
+Tourist Spot 63,Ilocos Sur,Ilocos Region,2016,3221901,1991158,1230743
+Tourist Spot 47,Davao City,Davao Region,2022,3307848,2338525,969323
+Tourist Spot 78,Davao City,Davao Region,2021,4216727,2896459,1320268
+Tourist Spot 40,Bacolod,Western Visayas,2017,2992951,2237592,755359
+Tourist Spot 8,Zambales,Central Luzon,2015,4248008,3252341,995667
+Tourist Spot 41,Ilocos Sur,Ilocos Region,2023,4287031,2706822,1580209
+Tourist Spot 30,Tacloban,Eastern Visayas,2022,4204552,3004894,1199658
+Tourist Spot 66,Bukidnon,Northern Mindanao,2017,2115295,1312842,802453
+Tourist Spot 79,Davao City,Davao Region,2023,4263245,2558380,1704865
+Tourist Spot 12,Legazpi City,Bicol Region,2017,3431159,2493495,937664
+Tourist Spot 29,Tacloban,Eastern Visayas,2018,1235131,895305,339826
+Tourist Spot 57,Batangas,CALABARZON,2019,1617323,1287523,329800
+Tourist Spot 12,Baguio,CAR,2020,2606611,1841401,765210
+Tourist Spot 17,General Santos,SOCCSKSARGEN,2018,4752781,3522115,1230666
+Tourist Spot 81,Ilocos Sur,Ilocos Region,2020,3271894,2572129,699765
+Tourist Spot 32,Batangas,CALABARZON,2024,1500238,1023464,476774
+Tourist Spot 28,Ilocos Sur,Ilocos Region,2015,2753845,1741832,1012013
+Tourist Spot 80,Batangas,CALABARZON,2018,1959293,1236637,722656
+Tourist Spot 4,General Santos,SOCCSKSARGEN,2016,294817,206988,87829
+Tourist Spot 54,General Santos,SOCCSKSARGEN,2019,177283,126006,51277
+Tourist Spot 30,Palawan,MIMAROPA,2023,4261798,2694630,1567168
+Tourist Spot 34,Bacolod,Western Visayas,2022,484947,292388,192559
+Tourist Spot 56,Davao City,Davao Region,2019,4350558,3143778,1206780
+Tourist Spot 77,Zambales,Central Luzon,2016,2157429,1418436,738993
+Tourist Spot 48,Davao City,Davao Region,2019,1261563,809589,451974
+Tourist Spot 34,Bacolod,Western Visayas,2024,3296618,2521248,775370
+Tourist Spot 57,Batangas,CALABARZON,2019,637880,479853,158027
+Tourist Spot 97,Batangas,CALABARZON,2018,4913959,3604421,1309538
+Tourist Spot 85,Ilocos Sur,Ilocos Region,2018,2005584,1327684,677900
+Tourist Spot 17,Tacloban,Eastern Visayas,2021,955197,693127,262070
+Tourist Spot 29,Rizal,CALABARZON,2015,4443256,2748928,1694328
+Tourist Spot 41,Baguio,CAR,2023,2135439,1597785,537654
+Tourist Spot 9,Tacloban,Eastern Visayas,2021,3464219,2186213,1278006
+Tourist Spot 86,Batangas,CALABARZON,2018,4945331,3545218,1400113
+Tourist Spot 60,Rizal,CALABARZON,2020,3895118,2902552,992566
+Tourist Spot 48,Zambales,Central Luzon,2019,1713814,1154822,558992
+Tourist Spot 48,Ilocos Sur,Ilocos Region,2023,4621595,3234802,1386793
+Tourist Spot 97,Davao City,Davao Region,2020,898167,664560,233607
+Tourist Spot 20,Rizal,CALABARZON,2019,4784117,3078057,1706060
+Tourist Spot 38,Baguio,CAR,2019,390879,248527,142352
+Tourist Spot 22,Rizal,CALABARZON,2021,1186798,828387,358411
+Tourist Spot 40,Tacloban,Eastern Visayas,2024,3759293,2764208,995085
+Tourist Spot 84,Bukidnon,Northern Mindanao,2019,2658655,1666823,991832
+Tourist Spot 76,Davao City,Davao Region,2024,1299301,815872,483429
+Tourist Spot 78,Davao City,Davao Region,2021,2714729,1741641,973088
+Tourist Spot 45,Legazpi City,Bicol Region,2016,918011,685720,232291
+Tourist Spot 41,Legazpi City,Bicol Region,2024,1449317,924580,524737
+Tourist Spot 75,Bacolod,Western Visayas,2016,2396499,1582991,813508
+Tourist Spot 10,Rizal,CALABARZON,2022,326697,240447,86250
+Tourist Spot 41,Batangas,CALABARZON,2017,1594304,1250425,343879
+Tourist Spot 98,Baguio,CAR,2023,4016976,3036302,980674
+Tourist Spot 9,Legazpi City,Bicol Region,2024,4471182,3289939,1181243
+Tourist Spot 96,Baguio,CAR,2016,3330891,2004320,1326571
+Tourist Spot 99,General Santos,SOCCSKSARGEN,2016,4976187,3127007,1849180
+Tourist Spot 8,Baguio,CAR,2016,2477720,1595601,882119
+Tourist Spot 95,Bukidnon,Northern Mindanao,2018,2630944,2079624,551320
+Tourist Spot 89,Zambales,Central Luzon,2017,2433080,1520110,912970
+Tourist Spot 60,Batangas,CALABARZON,2022,1020526,629704,390822
+Tourist Spot 7,Tacloban,Eastern Visayas,2024,418862,263575,155287
+Tourist Spot 100,Zambales,Central Luzon,2019,1275817,835384,440433
+Tourist Spot 90,Baguio,CAR,2018,4035522,3154269,881253
+Tourist Spot 64,General Santos,SOCCSKSARGEN,2020,4326732,3327562,999170
+Tourist Spot 52,Ilocos Sur,Ilocos Region,2024,1822755,1167488,655267
+Tourist Spot 81,Baguio,CAR,2022,2132286,1492956,639330
+Tourist Spot 94,Baguio,CAR,2015,475473,290258,185215
+Tourist Spot 35,Legazpi City,Bicol Region,2021,1926048,1272486,653562
+Tourist Spot 19,General Santos,SOCCSKSARGEN,2018,4591328,3625963,965365
+Tourist Spot 73,Bacolod,Western Visayas,2020,4938332,3608369,1329963
+Tourist Spot 8,Tacloban,Eastern Visayas,2021,1210723,879205,331518
+Tourist Spot 28,Bacolod,Western Visayas,2019,2448058,1612611,835447
+Tourist Spot 39,Rizal,CALABARZON,2022,733218,479067,254151
+Tourist Spot 32,Rizal,CALABARZON,2015,1547413,1151358,396055
+Tourist Spot 10,Cebu City,Central Visayas,2018,1918959,1333419,585540
+Tourist Spot 40,Cebu City,Central Visayas,2015,3582772,2787593,795179
+Tourist Spot 67,Ilocos Sur,Ilocos Region,2018,1455750,946105,509645
+Tourist Spot 66,Ilocos Sur,Ilocos Region,2020,255203,153742,101461
+Tourist Spot 8,Legazpi City,Bicol Region,2024,2876415,1873112,1003303
+Tourist Spot 99,General Santos,SOCCSKSARGEN,2020,2669748,1850358,819390
+Tourist Spot 75,Baguio,CAR,2019,339240,229559,109681
+Tourist Spot 71,Cebu City,Central Visayas,2020,4330117,3411824,918293
+Tourist Spot 34,Rizal,CALABARZON,2019,281744,209819,71925
+Tourist Spot 66,Tacloban,Eastern Visayas,2023,3385333,2131478,1253855
+Tourist Spot 11,Davao City,Davao Region,2019,2840874,1963990,876884
+Tourist Spot 77,Zambales,Central Luzon,2015,1276613,955487,321126
+Tourist Spot 94,Baguio,CAR,2019,4517128,3506990,1010138
+Tourist Spot 9,Ilocos Sur,Ilocos Region,2019,1867478,1427937,439541
+Tourist Spot 3,Tacloban,Eastern Visayas,2015,3931970,3118205,813765
+Tourist Spot 58,Bukidnon,Northern Mindanao,2024,3548962,2747896,801066
+Tourist Spot 53,Bacolod,Western Visayas,2016,1908203,1239305,668898
+Tourist Spot 70,Bacolod,Western Visayas,2021,3368795,2562127,806668
+Tourist Spot 40,Davao City,Davao Region,2023,2980621,2216484,764137
+Tourist Spot 24,General Santos,SOCCSKSARGEN,2015,3472023,2747393,724630
+Tourist Spot 18,Bukidnon,Northern Mindanao,2024,317629,191236,126393
+Tourist Spot 26,Batangas,CALABARZON,2015,4626432,3579746,1046686
+Tourist Spot 3,Cebu City,Central Visayas,2016,4019391,3154737,864654
+Tourist Spot 71,Davao City,Davao Region,2020,1628976,1082351,546625
+Tourist Spot 28,Zambales,Central Luzon,2018,3301054,2055292,1245762
+Tourist Spot 77,Batangas,CALABARZON,2018,1006786,800232,206554
+Tourist Spot 88,Baguio,CAR,2020,4408794,3449204,959590
+Tourist Spot 89,Zambales,Central Luzon,2018,354542,229359,125183
+Tourist Spot 13,Rizal,CALABARZON,2022,149029,94172,54857
+Tourist Spot 70,Rizal,CALABARZON,2024,2694974,1978033,716941
+Tourist Spot 46,Davao City,Davao Region,2020,4214712,2765052,1449660
+Tourist Spot 35,Cebu City,Central Visayas,2017,2076147,1520600,555547
+Tourist Spot 74,Rizal,CALABARZON,2024,2518158,1899435,618723
+Tourist Spot 6,Batangas,CALABARZON,2022,3028739,2388753,639986
+Tourist Spot 37,Batangas,CALABARZON,2018,4404730,2990218,1414512
+Tourist Spot 37,General Santos,SOCCSKSARGEN,2022,4141141,2593966,1547175
+Tourist Spot 42,Legazpi City,Bicol Region,2020,2504649,1909661,594988
+Tourist Spot 5,Ilocos Sur,Ilocos Region,2017,4032350,3064663,967687
+Tourist Spot 90,General Santos,SOCCSKSARGEN,2019,807954,534765,273189
+Tourist Spot 74,Cebu City,Central Visayas,2023,4676079,2907395,1768684
+Tourist Spot 85,Tacloban,Eastern Visayas,2022,871195,624159,247036
+Tourist Spot 48,Rizal,CALABARZON,2015,355710,255013,100697
+Tourist Spot 22,Davao City,Davao Region,2024,1143592,821769,321823
+Tourist Spot 51,Bacolod,Western Visayas,2020,2345406,1469849,875557
+Tourist Spot 31,General Santos,SOCCSKSARGEN,2017,731115,578310,152805
+Tourist Spot 42,Bukidnon,Northern Mindanao,2020,3223020,2532311,690709
+Tourist Spot 4,Zambales,Central Luzon,2020,3771440,2562922,1208518
+Tourist Spot 71,Bacolod,Western Visayas,2020,3138284,2149475,988809
+Tourist Spot 17,Baguio,CAR,2020,2167208,1725905,441303
+Tourist Spot 94,Baguio,CAR,2021,2941863,2088320,853543
+Tourist Spot 64,Cebu City,Central Visayas,2016,3397060,2521405,875655
+Tourist Spot 36,Batangas,CALABARZON,2019,3832102,2517519,1314583
+Tourist Spot 70,Rizal,CALABARZON,2023,4903266,3780017,1123249
+Tourist Spot 66,Zambales,Central Luzon,2023,2808711,2187205,621506
+Tourist Spot 70,Bukidnon,Northern Mindanao,2022,2627263,1668155,959108
+Tourist Spot 75,Cebu City,Central Visayas,2020,167262,117437,49825
+Tourist Spot 35,Bukidnon,Northern Mindanao,2015,1442422,903731,538691
+Tourist Spot 34,Palawan,MIMAROPA,2023,1023723,627299,396424
+Tourist Spot 62,Zambales,Central Luzon,2015,1010979,806690,204289
+Tourist Spot 70,Zambales,Central Luzon,2018,3936558,2590572,1345986
+Tourist Spot 41,Rizal,CALABARZON,2020,4429431,3108657,1320774
+Tourist Spot 32,Rizal,CALABARZON,2022,1787376,1072634,714742
+Tourist Spot 82,Batangas,CALABARZON,2023,4992195,3389284,1602911
+Tourist Spot 18,Davao City,Davao Region,2019,1172028,719236,452792
+Tourist Spot 78,Bacolod,Western Visayas,2021,792177,608672,183505
+Tourist Spot 5,Zambales,Central Luzon,2018,3721597,2314841,1406756
+Tourist Spot 89,Bukidnon,Northern Mindanao,2015,473971,375580,98391
+Tourist Spot 37,Legazpi City,Bicol Region,2022,1702903,1234733,468170
+Tourist Spot 69,Ilocos Sur,Ilocos Region,2015,352334,233778,118556
+Tourist Spot 56,Rizal,CALABARZON,2017,2544364,1753767,790597
+Tourist Spot 84,Cebu City,Central Visayas,2018,4641082,3113082,1528000
+Tourist Spot 52,Rizal,CALABARZON,2023,176440,129741,46699
+Tourist Spot 28,Palawan,MIMAROPA,2022,1549151,1167900,381251
+Tourist Spot 8,Rizal,CALABARZON,2022,4721738,3589165,1132573
+Tourist Spot 28,Ilocos Sur,Ilocos Region,2019,4638359,3075967,1562392
+Tourist Spot 62,Batangas,CALABARZON,2024,1317907,795616,522291
+Tourist Spot 27,Tacloban,Eastern Visayas,2018,4021946,2983224,1038722
+Tourist Spot 75,Palawan,MIMAROPA,2019,716375,509830,206545
+Tourist Spot 60,Baguio,CAR,2023,775687,528321,247366
+Tourist Spot 12,General Santos,SOCCSKSARGEN,2020,2160942,1479892,681050
+Tourist Spot 40,Baguio,CAR,2016,3885961,2487924,1398037
+Tourist Spot 89,Tacloban,Eastern Visayas,2017,4666478,3561929,1104549
+Tourist Spot 68,Rizal,CALABARZON,2018,3106291,1867617,1238674
+Tourist Spot 4,Ilocos Sur,Ilocos Region,2020,116827,89011,27816
+Tourist Spot 66,Davao City,Davao Region,2021,3183172,2532388,650784
+Tourist Spot 37,Palawan,MIMAROPA,2024,1471691,937075,534616
+Tourist Spot 91,Batangas,CALABARZON,2020,3079563,2447372,632191
+Tourist Spot 7,Cebu City,Central Visayas,2015,306146,243381,62765
+Tourist Spot 73,Tacloban,Eastern Visayas,2016,4554004,3060129,1493875
+Tourist Spot 81,Bacolod,Western Visayas,2024,3711286,2402213,1309073
+Tourist Spot 62,Zambales,Central Luzon,2016,3990419,2757319,1233100
+Tourist Spot 1,Tacloban,Eastern Visayas,2018,1199373,844935,354438
+Tourist Spot 63,Davao City,Davao Region,2023,3650383,2789269,861114
+Tourist Spot 28,Bukidnon,Northern Mindanao,2021,1453660,975314,478346
+Tourist Spot 85,Legazpi City,Bicol Region,2015,1368518,1065276,303242
+Tourist Spot 21,Rizal,CALABARZON,2018,2865459,2171512,693947
+Tourist Spot 82,Legazpi City,Bicol Region,2018,347826,211843,135983
+Tourist Spot 45,Davao City,Davao Region,2021,3516083,2533898,982185
+Tourist Spot 96,Bacolod,Western Visayas,2023,3220171,2366589,853582
+Tourist Spot 99,Ilocos Sur,Ilocos Region,2018,3508136,2166352,1341784
+Tourist Spot 5,Rizal,CALABARZON,2021,2364163,1868962,495201
+Tourist Spot 55,Tacloban,Eastern Visayas,2018,2345723,1647096,698627
+Tourist Spot 48,Legazpi City,Bicol Region,2022,1919959,1212071,707888
+Tourist Spot 19,Baguio,CAR,2015,2794146,1903153,890993
+Tourist Spot 48,General Santos,SOCCSKSARGEN,2021,3522021,2449833,1072188
+Tourist Spot 61,Rizal,CALABARZON,2022,1327470,844079,483391
+Tourist Spot 44,Rizal,CALABARZON,2020,2605283,2067276,538007
+Tourist Spot 52,Batangas,CALABARZON,2022,1399921,893874,506047
+Tourist Spot 13,Ilocos Sur,Ilocos Region,2024,4494721,3518709,976012
+Tourist Spot 28,Rizal,CALABARZON,2023,56795,41653,15142
+Tourist Spot 63,Rizal,CALABARZON,2022,1222960,854668,368292
+Tourist Spot 57,Zambales,Central Luzon,2016,1337651,914334,423317
+Tourist Spot 92,Davao City,Davao Region,2021,3851938,2658569,1193369
+Tourist Spot 63,Bacolod,Western Visayas,2018,1300600,1038298,262302
+Tourist Spot 44,Batangas,CALABARZON,2024,1020777,707683,313094
+Tourist Spot 3,General Santos,SOCCSKSARGEN,2024,2112778,1469394,643384
+Tourist Spot 18,Batangas,CALABARZON,2022,1134794,836681,298113
+Tourist Spot 56,Zambales,Central Luzon,2019,3810723,2516623,1294100
+Tourist Spot 6,Legazpi City,Bicol Region,2022,1286506,899958,386548
+Tourist Spot 20,Batangas,CALABARZON,2021,1088119,759407,328712
+Tourist Spot 5,Tacloban,Eastern Visayas,2019,1819079,1357801,461278
+Tourist Spot 10,Davao City,Davao Region,2020,2336482,1484596,851886
+Tourist Spot 54,Davao City,Davao Region,2016,2830858,2232574,598284
+Tourist Spot 86,Baguio,CAR,2020,2772934,1738787,1034147
+Tourist Spot 11,General Santos,SOCCSKSARGEN,2016,1793110,1148590,644520
+Tourist Spot 87,Rizal,CALABARZON,2024,619981,488717,131264
+Tourist Spot 57,Rizal,CALABARZON,2018,1843857,1168479,675378
+Tourist Spot 86,General Santos,SOCCSKSARGEN,2021,999153,710571,288582

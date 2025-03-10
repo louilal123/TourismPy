@@ -5,11 +5,30 @@
     <section class="chart-section">
         <h2 class="section-title">Top 10 Destinations in the Philippines</h2>
         <p class="section-description">Explore the most visited places in the country.</p>
+        
+      <!-- Region Filter -->
+      <div class="filter-container">
+        <form method="GET" action="/destinations">
+            <label for="yearFilter">Filter By:</label>
+            <select name="year" id="yearFilter" onchange="this.form.submit()">
+               
+                {% for year in years %}
+                    <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>
+                        {{ year }}
+                    </option>
+                {% endfor %}
+            </select>
+            
+        </form>
+    </div>
+    
+
 
         <!-- Highcharts Visualization -->
         <div id="destinationChart" class="chart-container"></div>
     </section>
 </main>
+
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>

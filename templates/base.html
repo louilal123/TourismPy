@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tourism Insights PH: Destination, Arrivals & Hotels - Home</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+ 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 
     <!-- logo here -->
@@ -20,13 +20,16 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="../static/js/search.js"></script>
+
 
     {% block extra_head %}{% endblock %}
 </head>
 
 <body>
    
-  {% include 'navbar.html' %}
+
+    {% include 'navbar.html' %}
 
    {% block content %}
    
@@ -34,7 +37,33 @@
 
     {% include 'footer.html' %}
 
-    {% block scripts %}{% endblock %}
+    {% block scripts %}
+    <script>
+       // Mobile Menu Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    
+    menuToggle.addEventListener('click', function() {
+        // Toggle mobile menu visibility
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('active');
+        
+        // Toggle icons
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+        
+        // Update aria-expanded state
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', !isExpanded);
+    });
+});
+        </script>
+        
+    {% endblock %}
+    
 </body>
 
 </html>

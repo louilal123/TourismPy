@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+
+from flask import Flask, render_template,  request
 import pandas as pd
 import os
 
@@ -47,9 +48,17 @@ class DataLoader:
         }
 
     @classmethod
-    def load_destinations(cls):
-        df = cls.load_csv("Tourist_Destinations_Philippines.csv", ["City/Province", "Tourist Arrivals"])
-        if df.empty: return {"cities": [], "tourist_count": []}
+    def load_destinations(cls, selected_year=None):
+        df = cls.load_csv("Tourist_Destinations_Philippines.csv", ["City/Province", "Tourist Arrivals", "Year"])
+        if df.empty:
+            return {"cities": [], "tourist_count": [], "years": []}
+
+        # Extract unique years for the dropdown
+        years = sorted(df["Year"].dropna().unique().tolist())
+
+        # Filter data only if a valid year is selected
+        if selected_year and selected_year != "All Time":
+            df = df[df["Year"] == int(selected_year)]
 
         df["Tourist Arrivals"] = pd.to_numeric(df["Tourist Arrivals"], errors="coerce").fillna(0)
         df_grouped = df.groupby("City/Province")["Tourist Arrivals"].sum().reset_index()
@@ -57,7 +66,8 @@ class DataLoader:
 
         return {
             "cities": df_sorted["City/Province"].tolist(),
-            "tourist_count": df_sorted["Tourist Arrivals"].tolist()
+            "tourist_count": df_sorted["Tourist Arrivals"].tolist(),
+            "years": ["All Time"] + years  # Add 'All Time' as the default option
         }
 
 
@@ -102,16 +112,23 @@ def home():
 
 @app.route('/destinations')
 def destinations():
-    return render_template("destinations.html", **DataLoader.load_destinations())
+    selected_year = request.args.get('year', "All Time")  # Default to 'All Time'
+    return render_template("destinations.html", **DataLoader.load_destinations(selected_year), selected_year=selected_year)
 
 @app.route('/arrivals')
 def arrivals():
     return render_template("arrivals.html", **DataLoader.load_arrivals())
 
 
+
 @app.route('/hotel_occupancy')
 def hotel_occupancy():
     return render_template("hotel_occupancy.html", occupancy_data=DataLoader.load_occupancy_data())
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
 
 if __name__ == "__main__":
     app.run(debug=True)

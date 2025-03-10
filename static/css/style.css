@@ -27,7 +27,7 @@ nav.main-navigation {
 }
 
 nav.main-navigation .container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 0 1rem;
 }
@@ -60,12 +60,12 @@ nav.main-navigation .logo-section img {
 nav.main-navigation .logo-section span {
     font-weight: bold;
     font-size: 1.5rem;
-    color: #2563eb; /* Tailwind's blue-700 */
+    color: #2257c9; /* Tailwind's blue-700 */
     transition: color 0.3s;
 }
 
 nav.main-navigation .logo-section a:hover span {
-    color: #2563eb; /* Tailwind's blue-600 */
+    color: #2257c9; /* Tailwind's blue-600 */
 }
 
 nav.main-navigation .desktop-menu {
@@ -91,7 +91,7 @@ nav.main-navigation .desktop-menu {
     }
     
     nav.main-navigation .desktop-menu a:hover span {
-        color: #2563eb; /* Tailwind's blue-600 */
+        color: #2257c9; /* Tailwind's blue-600 */
     }
     
     nav.main-navigation .desktop-menu a span.underline {
@@ -100,7 +100,7 @@ nav.main-navigation .desktop-menu {
         left: 0;
         width: 0;
         height: 0.125rem;
-        background-color: #2563eb; /* Tailwind's blue-600 */
+        background-color: #2257c9; /* Tailwind's blue-600 */
         transition: width 0.3s;
     }
     
@@ -134,21 +134,58 @@ nav.main-navigation .mobile-menu-toggle {
         display: none;
     }
 }
-
-nav.main-navigation .mobile-menu-toggle button {
-    background: none;
-    border: none;
-    cursor: pointer;
+/* Mobile Menu Styling */
+nav.main-navigation .mobile-menu {
+    background-color: var(--primary-color);
+    position: absolute;
+    top: 5rem; /* Aligns with navbar height */
+    left: 0;
+    width: 100%;
+    display: none; /* Hidden by default */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 40;
 }
 
-nav.main-navigation .mobile-menu-toggle svg {
-    height: 1.5rem;
-    width: 1.5rem;
+nav.main-navigation .mobile-menu.active {
+    display: block;
 }
+
+nav.main-navigation .mobile-menu a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary-dark);
+}
+
+nav.main-navigation .mobile-menu a:hover,
+nav.main-navigation .mobile-menu a.active {
+    background-color: var(--primary-dark);
+    font-weight: bold;
+}
+
+/* Toggle Button Icon Change */
+nav.main-navigation .mobile-menu-toggle .menu-icon,
+nav.main-navigation .mobile-menu-toggle .close-icon {
+    display: block;
+}
+
+nav.main-navigation .mobile-menu-toggle .close-icon {
+    display: none; /* Hidden by default */
+}
+
+nav.main-navigation .mobile-menu-toggle.active .menu-icon {
+    display: none;
+}
+
+nav.main-navigation .mobile-menu-toggle.active .close-icon {
+    display: block;
+}
+
 
 /* Active navigation state */
 nav.main-navigation .desktop-menu a.active span {
-    color: #2563eb; /* Tailwind's blue-600 */
+    color: #2257c9; /* Tailwind's blue-600 */
 }
 
 nav.main-navigation .desktop-menu a.active span.underline {
@@ -376,7 +413,7 @@ nav.main-navigation .desktop-menu a.active span.underline {
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
     padding: 3rem 1rem;
     border-radius: 8px;
-    max-width: 1100px;
+    max-width: 1500px;
     margin: 0 auto;
 }
 
@@ -431,7 +468,7 @@ nav.main-navigation .desktop-menu a.active span.underline {
 }
 
 .info-container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -494,7 +531,7 @@ nav.main-navigation .desktop-menu a.active span.underline {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 0 1rem;
 }
@@ -539,12 +576,14 @@ nav.main-navigation .desktop-menu a.active span.underline {
     gap: 0.75rem;
     font-size: 1.125rem;
     align-items: center;
+    text-align: center;
 }
 
 .footer-links a {
     color: #ffffff; /* White links on gradient background */
     text-decoration: none;
     transition: color 0.3s ease-in-out;
+    text-align: center;
 }
 
 .footer-links a:hover {
@@ -614,7 +653,7 @@ STYLES FOR ALL THE  PAGES
 ======================================================*/
 /* Main Container */
 .main-container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 4rem 1rem;
     height: 100vh;
@@ -623,7 +662,7 @@ STYLES FOR ALL THE  PAGES
 /* Section */
 .chart-section {
     text-align: center;
-    max-width: 900px;
+    max-width: 1500px;
     margin: 0 auto;
     padding-top: 5rem;
 }
@@ -655,7 +694,6 @@ STYLES FOR ALL THE  PAGES
         font-size: 1.5rem;
     }
 }
-
 /* Chart Container */
 .chart-container {
     width: 100%;
@@ -664,3 +702,135 @@ STYLES FOR ALL THE  PAGES
 }
 
 
+.hidden {
+    display: none;
+}
+/* Mobile Menu Styling */
+.mobile-menu {
+   
+    position: absolute;
+    top: 60px; /* Adjust as needed */
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.mobile-nav-item {
+    display: block;
+    padding: 12px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid #00a8c8;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+    background-color: #00a8c8;
+    font-weight: 600;
+}
+
+
+/* SEARCHBAR */
+/* Desktop Search Bar */
+.desktop-search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 1.5rem;
+}
+
+.desktop-search-input {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    width: 200px;
+    outline: none;
+}
+
+.desktop-search-btn {
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+.desktop-search-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* Mobile Search Bar */
+.mobile-search-form {
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+   
+}
+
+.mobile-search-input {
+    flex-grow: 1;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 1rem 1rem;
+    outline: none;
+}
+
+.mobile-search-btn {
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+.mobile-search-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* Hide Mobile Search on Desktop */
+@media (min-width: 768px) {
+    .mobile-search-form {
+        display: none;
+    }
+}
+
+/* Hide Desktop Search on Mobile */
+@media (max-width: 767px) {
+    .desktop-search-form {
+        display: none;
+    }
+}
+
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-container form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds spacing between label and dropdown */
+}
+
+#yearFilter {
+    padding: 10px 15px;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    width: 200px; /* Increase size */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#yearFilter:focus {
+    border-color: var(--primary-dark);
+    outline: none;
+}

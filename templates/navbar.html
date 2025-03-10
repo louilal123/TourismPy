@@ -1,5 +1,3 @@
-
-
 <!-- Main Navigation -->
 <nav class="main-navigation" aria-label="Main Navigation">
     <div class="container">
@@ -15,7 +13,7 @@
                     <span class="brand-name">Tourism Insights PH</span>
                 </a>
             </div>
-        
+
             <!-- Desktop Navigation -->
             <div 
                 class="desktop-menu" 
@@ -57,32 +55,59 @@
                     <span class="nav-text">Arrivals</span>
                     <span class="underline"></span>
                 </a>
+
+              <!-- Desktop Search Form -->
+<form action="/search" method="GET" class="desktop-search-form">
+    <input 
+        type="text" 
+        name="query" 
+        placeholder="Search..." 
+        aria-label="Search for content"
+        required
+        class="desktop-search-input"
+    >
+    <button type="submit" class="desktop-search-btn" aria-label="Submit Search">
+        <span class="fas fa-magnifying-glass"></span>
+    </button>
+</form>
             </div>
             
             <!-- Mobile Menu Toggle -->
             <div class="mobile-menu-toggle">
                 <button 
+                    id="menu-toggle"
                     aria-label="Toggle Mobile Menu" 
                     aria-expanded="false" 
                     aria-controls="mobile-menu"
                 >
-                    <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path 
-                            stroke-linecap="round" 
-                            stroke-linejoin="round" 
-                            stroke-width="2" 
-                            d="M4 6h16M4 12h16M4 18h16"
-                        />
-                    </svg>
+                    <span id="menu-icon" class="fas fa-bars"></span>
+                    <span id="close-icon" class="fas fa-times hidden"></span>
                 </button>
+                
+            
+            </div>
+
+            <!-- Mobile Menu for Small Screens -->
+            <div id="mobile-menu" class="mobile-menu hidden">
+                    <!-- Mobile Search Form -->
+                    <form action="/search" method="GET" class="mobile-search-form">
+                        <input 
+                            type="text" 
+                            name="query" 
+                            placeholder="Search..." 
+                            aria-label="Search for content"
+                            required
+                            class="mobile-search-input"
+                        >
+                        <button type="submit" class="desktop-search-btn" aria-label="Submit Search">
+                            <span class="fas fa-magnifying-glass"></span>
+                        </button>
+                    </form>
+                <a href="/" class="mobile-nav-item {% if request.path == '/' %}active{% endif %}">Home</a>
+                <a href="/destinations" class="mobile-nav-item {% if request.path == '/destinations' %}active{% endif %}">Destinations</a>
+                <a href="/hotel_occupancy" class="mobile-nav-item {% if request.path == '/hotel_occupancy' %}active{% endif %}">Hotel Occupancy Rates</a>
+                <a href="/arrivals" class="mobile-nav-item {% if request.path == '/arrivals' %}active{% endif %}">Arrivals</a>
             </div>
         </div>
-        
     </div>
 </nav>

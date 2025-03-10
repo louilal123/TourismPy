@@ -1,9 +1,9 @@
 :root {
     --primary-color: #2c63bb; /* Equivalent to Tailwind's blue-500 */
     --primary-dark: #2257c9; /* Equivalent to Tailwind's blue-600 */
-    --secondary-color: #f3f4f6; /* Equivalent to Tailwind's gray-100 */
+    --secondary-color: #ffffff; /* Equivalent to Tailwind's gray-100 */
     --text-color: #1f2937; /* Equivalent to Tailwind's gray-800 */
-    --background-color: #ffffff;
+    --background-color: #e3e4e6;
     --font-family: 'Inter', sans-serif;
 }
 
@@ -528,6 +528,7 @@ nav.main-navigation .desktop-menu a.active span.underline {
     color: #ffffff; /* White text on the gradient background */
     padding: 4rem 0; /* Adjusted for better spacing */
     position: relative;
+    margin-top: 50px !important;
 }
 
 .container {
@@ -840,3 +841,7 @@ STYLES FOR ALL THE  PAGES
 
 
 /* chrtt  */
+#touristChart, #destinationChart, #occupancyChart{
+    height: 70vh !important;
+    padding-bottom: 200px;
+}

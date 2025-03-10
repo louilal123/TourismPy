@@ -5,7 +5,38 @@
     <section class="chart-section">
         <div class="chart-wrapper">
             <h2 class="section-title">Tourist Arrivals by Country</h2>
-<br><br><br>
+<!-- Region Filter -->
+<div class="filter-container" style="
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;">
+    
+    <form method="GET" action="{{ url_for('arrivals') }}" style="
+        display: flex;
+        align-items: center;
+        gap: 10px;">
+        
+        <label for="region">Select Region:</label>
+        <select name="region" id="region" onchange="this.form.submit()" style="
+            padding: 10px 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            width: 200px;
+            font-size: 16px;
+            cursor: pointer;">
+            
+            {% for region in regions %}
+                <option value="{{ region }}" {% if region == selected_region %} selected {% endif %}>
+                    {{ region }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+
             <article class="chart-card">
                 <div id="touristChart"></div> <!-- ✅ Highcharts container -->
             </article>
@@ -19,7 +50,9 @@
                 </p>
             </div>
         </div>
+       
     </section>
+    <br><br><br>  <br><br><br>  <br><br><br>  <br><br><br>
 </main>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>

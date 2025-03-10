@@ -1,20 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+
+
+</style>
+
 <main class="main-container">
     <section class="chart-section">
-        <h2 class="section-title">HOTEL OCCUPANCY RATES (2015-2024)</h2>
-        <article>
-            <br><br><br> <br><br>
-            <figure class="highcharts-figure">
-                <div id="occupancyChart"></div>
-                <p class="highcharts-description">
-                    This chart shows hotel occupancy rates and revenue trends over the past decade.
-                </p>
-            </figure>
-        </article>
+        <h2 class="section-title">HOTEL OCCUPANCY RATES </h2>
+        <p class="section-description">Explore hotel occupancy trends across regions.</p>
+        
+       <!-- Region Filter -->
+<!-- Region Filter -->
+<div class="filter-container" style="
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;">
+    
+    <form method="GET" action="{{ url_for('hotel_occupancy') }}" style="
+        display: flex;
+        align-items: center;
+        gap: 10px;">
+        
+        <label for="region">Select Region:</label>
+        <select name="region" id="region" onchange="this.form.submit()" style="
+            padding: 10px 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            width: 200px;
+            font-size: 16px;
+            cursor: pointer;">
+            {% for region in occupancy_data.regions %}
+                <option value="{{ region }}" {% if region == selected_region %} selected {% endif %}>
+                    {{ region }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+    
+
+
+        <!-- Highcharts Visualization -->
+        <div id="occupancyChart" class="chart-container"></div>
+        <p class="section-description">Explore hotel occupancy trends across regions.</p>
+
     </section>
 </main>
+
 
 <!-- Include Highcharts -->
 <script src="https://code.highcharts.com/highcharts.js"></script>

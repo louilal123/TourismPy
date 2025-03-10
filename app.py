@@ -30,22 +30,31 @@ class DataLoader:
                 return pd.DataFrame()
         return df
 
-
     @classmethod
-    def load_arrivals(cls):
+    def load_arrivals(cls, selected_region=None):
         df = cls.load_csv("Tourist_Arrivals_Philippines.csv", [
-            "Year", "Foreign Tourists", "Domestic Tourists", "Top Visitor Country", "Revenue (PHP Billion)"
+            "Year", "Region", "Foreign Tourists", "Domestic Tourists", "Total Visitors", 
+            "Revenue (PHP Billion)", "Top Visitor Country", "Purpose of Visit"
         ])
-        if df.empty: return {"years": [], "revenue": [], "countries": {}, "tourists_by_country": {}}
+        if df.empty:
+            return {"years": [], "regions": [], "tourists_by_country": {}}
 
-        df = df.sort_values(by="Year").drop_duplicates(subset="Year")
+        # Extract unique regions and sort based on the numeric part of 'Region X ascending'
+        regions = sorted(df["Region"].dropna().unique().tolist(), 
+                        key=lambda x: int(x.split()[-1]) if x.split()[-1].isdigit() else float('inf'))
+
+        # Filter data by selected region if provided
+        if selected_region and selected_region != "All Regions":
+            df = df[df["Region"] == selected_region]
+
         tourists_by_country = df.groupby("Top Visitor Country")["Foreign Tourists"].sum().to_dict()
+
         return {
             "years": df["Year"].tolist(),
-            "revenue": df["Revenue (PHP Billion)"].fillna(0).astype(float).tolist(),
-            "countries": list(tourists_by_country.keys()),
+            "regions": ["All Regions"] + regions,  # Add 'All Regions' as the default option
             "tourists_by_country": tourists_by_country
         }
+
 
     @classmethod
     def load_destinations(cls, selected_year=None):
@@ -56,9 +65,12 @@ class DataLoader:
         # Extract unique years for the dropdown
         years = sorted(df["Year"].dropna().unique().tolist())
 
+        # Convert year data to string to ensure consistent comparison
+        df["Year"] = df["Year"].astype(str)
+
         # Filter data only if a valid year is selected
         if selected_year and selected_year != "All Time":
-            df = df[df["Year"] == int(selected_year)]
+            df = df[df["Year"] == selected_year]
 
         df["Tourist Arrivals"] = pd.to_numeric(df["Tourist Arrivals"], errors="coerce").fillna(0)
         df_grouped = df.groupby("City/Province")["Tourist Arrivals"].sum().reset_index()
@@ -71,22 +83,31 @@ class DataLoader:
         }
 
 
+
     @classmethod
-    def load_occupancy_data(cls):
+    def load_occupancy_data(cls, selected_region=None):
         df = cls.load_csv("Hotel_Occupancy_Rates.csv", [
-            "Year", "Occupancy Rate (%)", "Revenue (PHP)"
+            "Year", "Month", "Region", "Occupancy Rate (%)", "Revenue (PHP)"
         ])
         if df.empty: 
-            return {"years": [], "occupancy_rates": [], "revenue": []}
+            return {"years": [], "regions": [], "occupancy_rates": [], "revenue": []}
 
-        # Group by 'Year' and calculate averages/sums
+        # Extract unique regions for the dropdown
+        regions = sorted(df["Region"].dropna().unique().tolist())
+
+        # Filter data by region if selected
+        if selected_region and selected_region != "All Time":
+            df = df[df["Region"] == selected_region]
+
+        # Group by Year instead of Month for the x-axis
         df_grouped = df.groupby("Year", as_index=False).agg({
             "Occupancy Rate (%)": "mean",
             "Revenue (PHP)": "sum"
         })
 
         return {
-            "years": df_grouped["Year"].astype(str).tolist(),
+            "years": df_grouped["Year"].astype(str).tolist(),  # Ensure years are strings for Highcharts
+            "regions": ["All Time"] + regions,
             "occupancy_rates": df_grouped["Occupancy Rate (%)"].round(1).tolist(),
             "revenue": df_grouped["Revenue (PHP)"].astype(int).tolist()
         }
@@ -113,17 +134,44 @@ def home():
 @app.route('/destinations')
 def destinations():
     selected_year = request.args.get('year', "All Time")  # Default to 'All Time'
-    return render_template("destinations.html", **DataLoader.load_destinations(selected_year), selected_year=selected_year)
+
+    # Load destination data with selected year
+    data = DataLoader.load_destinations(selected_year)
+
+    # Ensure selected_year is treated as a string for consistency
+    if selected_year != "All Time" and selected_year not in map(str, data["years"]):
+        return render_template("404.html"), 404  # Redirect invalid year to 404 page
+
+    return render_template("destinations.html", **data, selected_year=selected_year)
 
 @app.route('/arrivals')
 def arrivals():
-    return render_template("arrivals.html", **DataLoader.load_arrivals())
+    selected_region = request.args.get('region', "All Regions")
 
+    # Load data and get valid regions
+    data = DataLoader.load_arrivals(selected_region)
+    valid_regions = data.get("regions", [])  # Assuming 'regions' is part of the data
+
+    # Error handling for invalid regions
+    if selected_region != "All Regions" and selected_region not in valid_regions:
+        return render_template("404.html"), 404  # Invalid region -> 404
+
+    return render_template("arrivals.html", **data, selected_region=selected_region)
 
 
 @app.route('/hotel_occupancy')
 def hotel_occupancy():
-    return render_template("hotel_occupancy.html", occupancy_data=DataLoader.load_occupancy_data())
+    selected_region = request.args.get('region', "All Time")
+
+    # Load data and get valid regions
+    data = DataLoader.load_occupancy_data(selected_region)
+    valid_regions = data.get("regions", [])  # Assuming 'regions' is part of the data
+
+    # Error handling for invalid regions
+    if selected_region != "All Time" and selected_region not in valid_regions:
+        return render_template("404.html"), 404  # Invalid region -> 404
+
+    return render_template("hotel_occupancy.html", occupancy_data=data, selected_region=selected_region)
 
 @app.errorhandler(404)
 def page_not_found(e):

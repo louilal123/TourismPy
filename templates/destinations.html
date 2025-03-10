@@ -8,19 +8,20 @@
         
       <!-- Region Filter -->
       <div class="filter-container">
-        <form method="GET" action="/destinations">
+        <form method="GET" action="{{ url_for('destinations') }}">
             <label for="yearFilter">Filter By:</label>
             <select name="year" id="yearFilter" onchange="this.form.submit()">
-               
                 {% for year in years %}
-                    <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>
+                    <option value="{{ year }}" {% if year|string == selected_year|string %}selected{% endif %}>
                         {{ year }}
                     </option>
                 {% endfor %}
             </select>
-            
         </form>
     </div>
+
+ 
+    
     
 
 

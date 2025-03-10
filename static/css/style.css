@@ -324,7 +324,7 @@ nav.main-navigation .desktop-menu a.active span.underline {
 .welcome-section {
     margin-bottom: 5rem;
     text-align: center;
-    max-width: 64rem; /* 5xl in Tailwind */
+    max-width: 1500px; /* 5xl in Tailwind */
     margin-left: auto;
     margin-right: auto;
 }
@@ -746,14 +746,17 @@ STYLES FOR ALL THE  PAGES
     padding: 0.5rem 1rem;
     width: 200px;
     outline: none;
+    font-size: 1.2rem;
 }
+
+
 
 .desktop-search-btn {
     background: var(--primary-color);
     color: #ffffff;
     border: none;
     border-radius: 5px;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.5rem;
     margin-left: 0.5rem;
     cursor: pointer;
 }
@@ -834,3 +837,6 @@ STYLES FOR ALL THE  PAGES
     border-color: var(--primary-dark);
     outline: none;
 }
+
+
+/* chrtt  */

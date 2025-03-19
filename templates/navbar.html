@@ -72,20 +72,31 @@
 </form>
             </div>
             
-            <!-- Mobile Menu Toggle -->
-            <div class="mobile-menu-toggle">
-                <button 
-                    id="menu-toggle"
-                    aria-label="Toggle Mobile Menu" 
-                    aria-expanded="false" 
-                    aria-controls="mobile-menu"
-                >
-                    <span id="menu-icon" class="fas fa-bars"></span>
-                    <span id="close-icon" class="fas fa-times hidden"></span>
-                </button>
-                
-            
-            </div>
+        <!-- Mobile Menu Toggle -->
+<div class="mobile-menu-toggle">
+    <button 
+        id="menu-toggle"
+        aria-label="Toggle Mobile Menu" 
+        aria-expanded="false" 
+        aria-controls="mobile-menu"
+        style="
+            background-color: #2257c9; 
+            color: #fff; 
+            border: none; 
+            border-radius: 8px; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease;
+        "
+        onmouseover="this.style.backgroundColor='#2257c9'"
+        onmouseout="this.style.backgroundColor='#2257c9'"
+    >
+        <span id="menu-icon" class="fas fa-bars"></span>
+        <span id="close-icon" class="fas fa-times hidden"></span>
+    </button>
+</div>
+
 
             <!-- Mobile Menu for Small Screens -->
             <div id="mobile-menu" class="mobile-menu hidden">

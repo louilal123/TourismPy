@@ -15,6 +15,37 @@ body {
     padding: 0;
 }
 
+.double-header {
+    background-color: #2257c9; 
+    color: #ffffff; 
+    padding: 0.5rem 1rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    font-size: 0.875rem;
+}
+
+.double-header .right-section a {
+    color: #ffffff;
+    font-size: 1.2rem; /* Icon size */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.double-header .right-section a:hover {
+    color: #f1c40f; /* Gold accent for hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .double-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
+
 /* Main Navigation */
 nav.main-navigation {
     background-color: white;

@@ -1425,10 +1425,13 @@ STYLES FOR ALL THE  PAGES
 .mobile-menu {
    
     position: absolute;
-    top: 60px; /* Adjust as needed */
+    top: 50px; /* Adjust as needed */
     left: 0;
     width: 100%;
     padding: 10px 0;
+    justify-content: center;
+    text-align: center;
+    
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 100;
 }
@@ -1438,13 +1441,13 @@ STYLES FOR ALL THE  PAGES
     padding: 12px 20px;
     color: #ffffff;
     text-decoration: none;
-    border-bottom: 1px solid #00a8c8;
+   
 }
 
 .mobile-nav-item:hover,
 .mobile-nav-item.active {
-    background-color: #00a8c8;
-    font-weight: 600;
+    background-color:var(--primary-color)
+;    font-weight: 600;
 }
 
 

@@ -23,101 +23,36 @@
     <script src="../static/js/search.js"></script>
 
     <script src="../static/js/icons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     {% block extra_head %}{% endblock %}
 </head>
-<style>
-    
-.filter-container1 {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
 
-.filter-container form {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Adds spacing between label and dropdown */
-}
-
-#yearFilter {
-    padding: 10px 15px;
-    border: 2px solid var(--primary-color);
-    border-radius: 8px;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    width: 200px; /* Increase size */
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#yearFilter:focus {
-    border-color: var(--primary-dark);
-    outline: none;
-}
-
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #FFF; /* Matches your theme */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.loader {
-    color: #2c63bb;
-    position: relative;
-    font-size: 11px;
-    background: #FFF;
-    animation: escaleY 1s infinite ease-in-out;
-    width: 1em;
-    height: 4em;
-    animation-delay: -0.16s;
-}
-
-.loader:before,
-.loader:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 2em;
-    background: #2c63bb;
-    width: 1em;
-    height: 4em;
-    animation: escaleY 1s infinite ease-in-out;
-}
-
-.loader:before {
-    left: -2em;
-    animation-delay: -0.32s;
-}
-
-@keyframes escaleY {
-    0%, 80%, 100% {
-        box-shadow: 0 0;
-        height: 4em;
-    }
-    40% {
-        box-shadow: 0 -2em;
-        height: 5em;
-    }
-}
-
-.hidden {
-    display: none;
-}
-
-</style>
 
 <body>
    
-    <div id="preloader">
-        <span class="loader"></span>
+     <!-- Loading Screen -->
+<!-- Loading Screen -->
+<div class="loading-screen">
+    <div class="loading-content">
+      <h1 class="loading-title">Tourism Insights PH</h1>
+      <div class="loading-bar">
+       <h6> <span>Loading..</span></h6>
+        <div class="loading-progress"></div>
+      </div>
     </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="floating-circle circle1"></div>
+    <div class="floating-circle circle2"></div>
+    <div class="floating-circle circle3"></div>
+    
+
     {% include 'navbar.html' %}
 
    {% block content %}
@@ -127,6 +62,65 @@
     {% include 'footer.html' %}
 
     {% block scripts %}
+    <script>
+        // Loading Screen Animation
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const loadingScreen = document.querySelector('.loading-screen');
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 500);
+      }, 2500);
+    });
+
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+    
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      
+      setTimeout(() => {
+        cursorFollower.style.left = e.clientX + 'px';
+        cursorFollower.style.top = e.clientY + 'px';
+      }, 100);
+    });
+
+    document.addEventListener('mousedown', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(0.7)';
+      cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.7)';
+    });
+
+    document.addEventListener('mouseup', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+
+    // Button hover effects
+    const buttons = document.querySelectorAll('a');
+    
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        cursorFollower.style.transform = 'translate(-50%, -50%) scale(3)';
+        cursorFollower.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorFollower.style.backgroundColor = 'white';
+      });
+    });
+
+    // Parallax Effect
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      document.querySelector('.hero-section').style.backgroundPositionY = scrollY * 0.5 + 'px';
+    });
+    </script>
     <script>
        // Mobile Menu Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {

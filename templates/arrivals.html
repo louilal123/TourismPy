@@ -37,24 +37,21 @@
 </div>
 
 
-            <article class="chart-card">
-                <div id="touristChart"></div> <!-- ✅ Highcharts container -->
-            </article>
+<article class="chart-card">
+    <div id="touristChart" style="background: transparent; padding: 10px;"></div>  <!-- ✅ Ensure full transparency -->
+    <p>
+        This chart represents the <strong>distribution of international tourists</strong> visiting the Philippines.
+        The data highlights the top countries that contribute to foreign tourist arrivals.
+        Understanding these trends helps in shaping tourism strategies and improving visitor experiences.
+    </p>
+</article>
 
-            <!-- 🔹 Informative Description -->
-            <div class="highcharts-description">
-                <p>
-                    This chart represents the <strong>distribution of international tourists</strong> visiting the Philippines.
-                    The data highlights the top countries that contribute to foreign tourist arrivals.
-                    Understanding these trends helps in shaping tourism strategies and improving visitor experiences.
-                </p>
-            </div>
+
         </div>
        
     </section>
-    <br><br><br>  <br><br><br>  <br><br><br>  <br><br><br>
+  
 </main>
-
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
     // Get data from Flask
@@ -70,22 +67,33 @@
     Highcharts.chart('touristChart', {
         chart: { type: 'pie' },
         title: { text: 'Tourist Arrivals by Country' },
-        tooltip: { pointFormat: '<b>{point.percentage:.1f}%</b>' },
+        tooltip: { 
+            pointFormat: '<b>{point.y} tourists</b> ({point.percentage:.1f}%)' 
+        },
         accessibility: {
             point: { valueSuffix: '%' }
         },
-        options3d: {
-            enabled: true,
-            alpha: 45,
-            beta: 0
+        legend: {
+            enabled: true, 
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
         },
         plotOptions: {
             pie: {
                 allowPointSelect: true,
                 cursor: 'pointer',
+                showInLegend: true,  // ✅ Enable color-coded legend
                 dataLabels: {
                     enabled: true,
-                    format: '<b>{point.name}</b>: {point.y} tourists'
+                    format: '<b>{point.name}</b><br>{point.percentage:.1f}%',  // ✅ Show only percentage inside
+                    distance: -30,  // ✅ Move text inside slices
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        color: '#fff',
+                        textOutline: '0px contrast'  // ✅ Improve readability
+                    }
                 }
             }
         },

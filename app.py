@@ -36,81 +36,91 @@ class DataLoader:
             "Year", "Region", "Foreign Tourists", "Domestic Tourists", "Total Visitors", 
             "Revenue (PHP Billion)", "Top Visitor Country", "Purpose of Visit"
         ])
+        
         if df.empty:
             return {"years": [], "regions": [], "tourists_by_country": {}}
 
-        # Extract unique regions and sort based on the numeric part of 'Region X ascending'
+        # Extract and sort unique regions
         regions = sorted(df["Region"].dropna().unique().tolist(), 
                         key=lambda x: int(x.split()[-1]) if x.split()[-1].isdigit() else float('inf'))
 
-        # Filter data by selected region if provided
+        # Filter by selected region
         if selected_region and selected_region != "All Regions":
             df = df[df["Region"] == selected_region]
 
-        tourists_by_country = df.groupby("Top Visitor Country")["Foreign Tourists"].sum().to_dict()
+        # Ensure 'Top Visitor Country' and 'Foreign Tourists' columns have valid data
+        df = df.dropna(subset=["Top Visitor Country", "Foreign Tourists"])
+        df["Foreign Tourists"] = pd.to_numeric(df["Foreign Tourists"], errors="coerce").fillna(0)
+
+        # Aggregate correctly
+        tourists_by_country = df.groupby("Top Visitor Country", as_index=False)["Foreign Tourists"].sum()
+        tourists_by_country = tourists_by_country.sort_values(by="Foreign Tourists", ascending=False)
+        
+        # Convert to dictionary format expected by Highcharts
+        tourists_by_country_dict = dict(zip(tourists_by_country["Top Visitor Country"], tourists_by_country["Foreign Tourists"]))
 
         return {
-            "years": df["Year"].tolist(),
-            "regions": ["All Regions"] + regions,  # Add 'All Regions' as the default option
-            "tourists_by_country": tourists_by_country
+            "years": df["Year"].unique().tolist(),
+            "regions": ["All Regions"] + regions,
+            "tourists_by_country": tourists_by_country_dict
         }
 
 
     @classmethod
     def load_destinations(cls, selected_year=None):
-        df = cls.load_csv("Tourist_Destinations_Philippines.csv", ["City/Province", "Tourist Arrivals", "Year"])
-        if df.empty:
-            return {"cities": [], "tourist_count": [], "years": []}
+            df = cls.load_csv("Tourist_Destinations_Philippines.csv", ["City/Province", "Tourist Arrivals", "Year"])
+            if df.empty:
+                return {"cities": [], "tourist_count": [], "years": []}
 
-        # Extract unique years for the dropdown
-        years = sorted(df["Year"].dropna().unique().tolist())
+            # Extract unique years for the dropdown
+            years = sorted(df["Year"].dropna().unique().tolist())
 
-        # Convert year data to string to ensure consistent comparison
-        df["Year"] = df["Year"].astype(str)
+            # Convert year data to string to ensure consistent comparison
+            df["Year"] = df["Year"].astype(str)
 
-        # Filter data only if a valid year is selected
-        if selected_year and selected_year != "All Time":
-            df = df[df["Year"] == selected_year]
+            # Filter data only if a valid year is selected
+            if selected_year and selected_year != "All Time":
+                df = df[df["Year"] == selected_year]
 
-        df["Tourist Arrivals"] = pd.to_numeric(df["Tourist Arrivals"], errors="coerce").fillna(0)
-        df_grouped = df.groupby("City/Province")["Tourist Arrivals"].sum().reset_index()
-        df_sorted = df_grouped.sort_values(by="Tourist Arrivals", ascending=False).head(10)
+            df["Tourist Arrivals"] = pd.to_numeric(df["Tourist Arrivals"], errors="coerce").fillna(0)
+            df_grouped = df.groupby("City/Province")["Tourist Arrivals"].sum().reset_index()
+            df_sorted = df_grouped.sort_values(by="Tourist Arrivals", ascending=False).head(10)
 
-        return {
-            "cities": df_sorted["City/Province"].tolist(),
-            "tourist_count": df_sorted["Tourist Arrivals"].tolist(),
-            "years": ["All Time"] + years  # Add 'All Time' as the default option
-        }
+            return {
+                "cities": df_sorted["City/Province"].tolist(),
+                "tourist_count": df_sorted["Tourist Arrivals"].tolist(),
+                "years": ["All Time"] + years  # Add 'All Time' as the default option
+            }
 
 
 
     @classmethod
     def load_occupancy_data(cls, selected_region=None):
-        df = cls.load_csv("Hotel_Occupancy_Rates.csv", [
-            "Year", "Month", "Region", "Occupancy Rate (%)", "Revenue (PHP)"
-        ])
-        if df.empty: 
-            return {"years": [], "regions": [], "occupancy_rates": [], "revenue": []}
+            df = cls.load_csv("Hotel_Occupancy_Rates.csv", [
+                "Year", "Month", "Region", "Occupancy Rate (%)", "Revenue (PHP)"
+            ])
+            if df.empty: 
+                return {"years": [], "regions": [], "occupancy_rates": [], "revenue": []}
 
-        # Extract unique regions for the dropdown
-        regions = sorted(df["Region"].dropna().unique().tolist())
+            # Extract unique regions for the dropdown
+            regions = sorted(df["Region"].dropna().unique().tolist())
 
-        # Filter data by region if selected
-        if selected_region and selected_region != "All Time":
-            df = df[df["Region"] == selected_region]
+            # Filter data by region if selected
+            if selected_region and selected_region != "All ":
+                df = df[df["Region"] == selected_region]
 
-        # Group by Year instead of Month for the x-axis
-        df_grouped = df.groupby("Year", as_index=False).agg({
-            "Occupancy Rate (%)": "mean",
-            "Revenue (PHP)": "sum"
-        })
+            # Group by Year instead of Month for the x-axis
+            df_grouped = df.groupby("Year", as_index=False).agg({
+                "Occupancy Rate (%)": "mean",
+                "Revenue (PHP)": "sum"
+            })
 
-        return {
-            "years": df_grouped["Year"].astype(str).tolist(),  # Ensure years are strings for Highcharts
-            "regions": ["All Time"] + regions,
-            "occupancy_rates": df_grouped["Occupancy Rate (%)"].round(1).tolist(),
-            "revenue": df_grouped["Revenue (PHP)"].astype(int).tolist()
-        }
+            return {
+                "years": df_grouped["Year"].astype(str).tolist(),  # Ensure years are strings for Highcharts
+                "regions": ["All "] + regions,
+                "occupancy_rates": df_grouped["Occupancy Rate (%)"].round(1).tolist(),
+                "revenue": df_grouped["Revenue (PHP)"].astype(int).tolist()
+            }
 
 
 
@@ -161,14 +171,14 @@ def arrivals():
 
 @app.route('/hotel_occupancy')
 def hotel_occupancy():
-    selected_region = request.args.get('region', "All Time")
+    selected_region = request.args.get('region', "All ")
 
     # Load data and get valid regions
     data = DataLoader.load_occupancy_data(selected_region)
     valid_regions = data.get("regions", [])  # Assuming 'regions' is part of the data
 
     # Error handling for invalid regions
-    if selected_region != "All Time" and selected_region not in valid_regions:
+    if selected_region != "All " and selected_region not in valid_regions:
         return render_template("404.html"), 404  # Invalid region -> 404
 
     return render_template("hotel_occupancy.html", occupancy_data=data, selected_region=selected_region)

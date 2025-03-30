@@ -1,0 +1,42 @@
+Region/Province,Estimate ('000),Standard Error ('000),Coefficient of Variation (%)
+REGION IX (ZAMBOANGA PENINSULA),2560.764,124.874,4.88
+Zamboanga del Norte,712.916,68.654,9.63
+Zamboanga del Sur,716.433,75.036,10.47
+Zamboanga City,597.909,55.86,9.34
+Zamboanga Sibugay,448.112,43.996,9.82
+Isabela City,85.394,13.917,16.3
+REGION X (NORTHERN MINDANAO),3451.565,149.466,4.33
+Bukidnon,1031.113,100.576,9.75
+Camiguin,62.696,10.341,16.49
+Lanao del Norte,493.28,51.209,10.38
+Iligan City,239.506,22.057,9.21
+Misamis Occidental,436.131,42.581,9.76
+Misamis Oriental,669.596,70.9,10.59
+Cagayan De Oro City,519.243,46.571,8.97
+REGION XI (DAVAO REGION),3644.718,176.683,4.85
+Davao del Norte,727.724,77.012,10.58
+Davao Sur,485.825,48.112,9.9
+Davao City,1274.0,133.218,10.46
+Davao Oriental,398.044,41.452,10.41
+Davao de Oro,529.963,54.348,10.26
+Davao Occidental,229.163,23.498,10.25
+REGION XII (SOCCSKSARGEN),3298.415,148.901,4.51
+Cotabato,1013.285,103.905,10.25
+Cotabato City,201.752,26.107,12.94
+South Cotabato,687.205,66.735,9.71
+General Santos City,439.761,38.608,8.78
+Sultan Kudarat,569.605,58.005,10.18
+Sarangani,386.807,37.213,9.62
+REGION XIII (CARAGA),1835.913,79.41,4.33
+Agusan Norte,259.992,24.441,9.4
+Butuan City,239.768,20.196,8.42
+Agusan del Sur,471.597,46.714,9.91
+Surigao del Norte,361.377,36.208,10.02
+Surigao del Sur,414.492,40.53,9.78
+Dinagat Islands,88.686,12.839,14.48
+BARMM (ARMM),2557.058,139.353,5.45
+Basilan,230.201,24.824,10.78
+Lanao del Sur,701.458,77.357,11.03
+Maguindanao,810.558,86.27,10.64
+Sulu,559.446,64.192,11.47
+Tawi-Tawi,255.395,35.436,13.87

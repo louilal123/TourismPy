@@ -1,100 +1,388 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="floating-circle circle1"></div>
-    <div class="floating-circle circle2"></div>
-    <div class="floating-circle circle3"></div>
+
+<main>
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center px-6 md:px-24 pt-24 relative" id="home">
     
-    <div class="hero-overlay">
-      <div class="hero-content">
-        <h2 class="hero-title">Welcome to Tourism Insights PH!</h2>
-        <p class="hero-subtitle">
-          Explore the diverse beauty of the Philippines, one of the most sought-after travel destinations in Southeast Asia.
-        </p>
-        <div class="hero-buttons">
-          <a href="/destinations" class="button-primary">Explore Now</a>
-          <a href="#learnmore" class="button-secondary">Learn More</a>
+      <div class="absolute inset-0 z-0">
+          <div style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDUwMCI+CiAgPHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMGEwYTBhIi8+CiAgPGNpcmNsZSBjeD0iNzUwIiBjeT0iMjUwIiByPSIyMDAiIGZpbGw9IiMxYTFhMWEiLz4KICA8cGF0aCBkPSJNNTAwIDI1MEw2NTAgMTUwTDgwMCAzNTBMOTUwIDI1MCIgc3Ryb2tlPSIjRkYzRTNFIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KICA8Y2lyY2xlIGN4PSI4MDAiIGN5PSIzNTAiIHI9IjQiIGZpbGw9IiNGRjNFM0UiLz4KICA8Y2lyY2xlIGN4PSI5NTAiIGN5PSIyNTAiIHI9IjQiIGZpbGw9IiNGRjNFM0UiLz4KPC9zdmc+');" class="w-full h-full bg-no-repeat bg-cover bg-center"></div>
         </div>
+      
+       <!-- Animated bubbles -->
+       <div class="absolute inset-0 z-0 overflow-hidden">
+          <div class="bubble bubble-1"></div>
+          <div class="bubble bubble-2"></div>
+          <div class="bubble bubble-3"></div>
+          <div class="bubble bubble-4"></div>
+          <div class="bubble bubble-5"></div>
+          <div class="bubble bubble-6"></div>
+          <div class="bubble bubble-7"></div>
+          <div class="bubble bubble-8"></div>
+          <div class="bubble bubble-9"></div>
       </div>
-    </div>
+      <!-- Content remains the same -->
+      <div class="relative z-10">
+          <div class="overflow-hidden">
+              <h1 class="text-5xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none mb-2 reveal">
+                  <span class="block">CHILD LABOR:</span>
+                  <span class="block text-accent">DATA ANALYTICS</span>
+              </h1>
+          </div>
+          
+          <p class="text-muted max-w-lg my-8 reveal" style="transition-delay: 0.2s;">
+              Exploring the PHILIPPINES · child labor crisis through data analytics, visualizing patterns and trends from 2020 to 2022 that shape our understanding of this critical issue.
+          </p>
+          
+          <div class="flex gap-6 mt-4 reveal" style="transition-delay: 0.3s;">
+              <div id="data" 
+              class="hover-target magnetic-hover border border-accent/20 px-6 py-3 text-accent hover:bg-accent hover:text-dark
+               transition-colors">
+                 <a href="#data"> Explore Data</a>
+              </div>
+              <div class="text-muted self-center hover-target magnetic-hover">
+                  Scroll to discover
+              </div>
+          </div>
+      </div>
   </section>
+   
+        
+       <!-- Scrolling Text -->
+<div class="py-8 border-y border-light/10 overflow-hidden">
+  <div class="scroll-container">
+      <div class="scroll-text text-7xl md:text-9xl font-bold text-light/5">
+          DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION · 
+          DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION
+      </div>
+      <div class="scroll-text">
+          DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION · 
+          DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION
+      </div>
+  </div>
+</div>
 
-
-  <section class="welcome-section"id="learnmore" >
-    <div class="container">
-      <div class="welcome-content">
-        <h1>Welcome to Tourism Insights PH!</h1>
-        <p class="tagline">Discover top destinations, hotel occupation rate , and tourism data accross the country.</p>
-        <p class="description">Empowering travelers and businesses with the latest tourism insights for informed decision-making.</p>
+         
+    <!-- Data Visualization -->
+    <section id="analytics" class="py-16 px-6 md:px-16   h-[100vh] pt-5" >
+      <h2 class="text-3xl md:text-5xl  mb-16 reveal">Data <span class="text-accent">Analytics</span></h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+          <!-- chart 1 -->
+          <div class="reveal1">
+              <div class="relative h-[500px] border border-light/10 p-4">
+                  <canvas id="trendChart" class="w-full h-full"></canvas>
+              </div>
+              <p class="text-muted mt-4 text-center">PHILIPPINES · trend of child labor cases (2020-2022)</p>
+          </div>
+  
+          <!-- What We Do -->
+          <div class="reveal1">
+              <div class="relative h-[500px] border border-light/10 p-4">
+                  <canvas id="sectoralChart"></canvas>
+              </div>
+              <p class="text-muted mt-4 text-center">PHILIPPINES · trend of child labor Across All Regions in the Philippines(Luzon, Visayas, Mindanao) (2020-2022)</p>
+          </div>
+  
+          <!-- Our Mission -->
+          <div class="reveal1">
+              <div class="relative h-[500px] border border-light/10 p-4">
+                  <canvas id="barChart" class="w-full h-full"></canvas>
+              </div>
+              <p class="text-muted mt-4 text-center">PHILIPPINES · trend of child labor cases (2020-2022)</p>
+          </div>
+  
+         
       </div>
       
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-map-marked-alt"></i>
-          </div>
-          <h3>Top Destinations</h3>
-          <p>Explore the most visited tourist spots in the Philippines.</p>
-        </div>
+     
+  </section>
+                                                                                                                                                      <!-- Key Statistics -->
+                                                                                                                                                      <section    class="min-h-screen py-24 px-6 md:px-24 hidden" >
+                                                                                                                                                          <h2 class="text-3xl md:text-5xl font-bold mb-12 reveal">Key Statistics <span class="text-accent">2020-2022</span></h2> <div class="grid grid-cols-1 md:grid-cols-3 gap-12"></div>                  <div class="reveal" style="transition-delay: 0.1s;"></div>
+                                                                                                                                                              <div class="text-accent text-5xl md:text-7xl font-bold" id="counter-1"></div> <div class="text-muted mt-2"></div> </div>  <div class="reveal" style="transition-delay: 0.2s;"></div>  <div class="text-accent text-5xl md:text-7xl font-bold" id="counter-2"></div>  <div class="text-muted mt-2"></div>
+                                                                                                                                                            </div> <div class="reveal" style="transition-delay: 0.3s;"> <div class="text-accent text-5xl md:text-7xl font-bold" id="counter-3">0</div>
+                                                                                                                                                            <div class="text-muted mt-2"></div>
+                                                                                                                                                        </div> </div>
+                                                                                                                                                                                          
+                                                                                                                        </section>
         
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-plane-arrival"></i>
+          <!-- Trend Analysis -->
+          <section id="data" class="py-24 px-6 md:px-24" >
+              <h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">Overview <span class="text-accent">Analysis</span></h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                  <div class="reveal">
+                      <div class="relative h-[300px] border border-light/10 p-4">
+                        
+<img src="../static/svg/bar.svg" alt="Child Carrying Sack" class="w-full w-[100vw] h-full">
+                      </div>
+                      <p class="text-muted mt-4">PHILIPPINES · trend of child labor cases (2020-2022)</p>
+                       </div>
+                  
+                  <div class="space-y-8 reveal" style="transition-delay: 0.2s;">
+                      <div>
+                          <h3 class="text-xl font-semibold mb-3">Key Findings</h3>
+                          <ul class="text-muted space-y-3">
+                              <li>● 8.4% increase in child labor during pandemic</li>
+                              <li>● Agriculture sector accounts for 70% of cases</li>
+                              <li>● Gender gap narrowing compared to previous years</li>
+                              <li>● Direct correlation with school closures (2020-2021)</li>
+                          </ul>
+                      </div>
+                      
+                      <div class="border-l-2 border-accent pl-4">
+                          <p class="text-light italic">
+                              "Data reveals a concerning reversal of progress made in previous decades, 
+                              with economic pressures from the pandemic being a significant driver."
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          
+          <!-- Impact Factors -->
+          <section class="py-24 px-6 md:px-24 bg-light/5">
+              <h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">Impact <span class="text-accent">Factors</span></h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div class="p-6 border border-light/10 hover:border-accent transition-colors reveal" style="transition-delay: 0.1s;">
+                      <h3 class="text-2xl font-semibold mb-4">Economic Pressure</h3>
+                      <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                      <p class="text-muted">
+                          Data shows 67% of families cite economic necessity as the primary reason children enter labor markets.
+                          Pandemic-related income losses intensified this trend in 2020-2021.
+                      </p>
+                  </div>
+                  
+                  <div class="p-6 border border-light/10 hover:border-accent transition-colors reveal" style="transition-delay: 0.2s;">
+                      <h3 class="text-2xl font-semibold mb-4">Education Access</h3>
+                      <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                      <p class="text-muted">
+                          91% correlation between school closures and increased child labor rates.
+                          Remote learning accessibility showed significant impact on preventing children from entering labor.
+                      </p>
+                  </div>
+                  
+                  <div class="p-6 border border-light/10 hover:border-accent transition-colors reveal" style="transition-delay: 0.3s;">
+                      <h3 class="text-2xl font-semibold mb-4">Policy Enforcement</h3>
+                      <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                      <p class="text-muted">
+                          Countries with strong enforcement mechanisms saw 43% lower rates of increase in child labor during the pandemic period.
+                          Digital monitoring tools showed promise in improving detection.
+                      </p>
+                  </div>
+              </div>
+          </section>
+  
+        <!-- About Us Section -->
+        <section id="about" class="py-24 px-6 md:px-24 bg-light/5">
+          <h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">
+              Who We  <span class="text-accent">Are</span>
+          </h2>
+      
+          <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+              <!-- Who We Are -->
+              <div class="p-6 border border-light/10 hover:border-accent transition-colors reveal" style="transition-delay: 0.1s;">
+                  <h3 class="text-2xl font-semibold mb-4">About Us</h3>
+                  <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                  <p class="text-muted">
+                      We are a dedicated team committed to uncovering the realities of child labor through data analytics and research.
+                  </p>
+              </div>
+      
+              <!-- What We Do -->
+              <div class="p-6 border border-light/10 hover:border-accent transition-colors reveal" style="transition-delay: 0.2s;">
+                  <h3 class="text-2xl font-semibold mb-4">What We Do</h3>
+                  <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                  <p class="text-muted">
+                      We collect, analyze, and visualize child labor statistics to raise awareness and support advocacy efforts worldwide.
+                  </p>
+              </div>
+      
+              <!-- Our Mission -->
+              <div class="p-6 border border-light/10 hover:border-accent transition-colors reveal" style="transition-delay: 0.3s;">
+                  <h3 class="text-2xl font-semibold mb-4">Our Mission</h3>
+                  <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                  <p class="text-muted">
+                      To provide accurate and insightful data that empowers organizations and policymakers in the fight against child labor.
+                  </p>
+              </div>
+      
+             
           </div>
-          <h3>Tourist Arrivals</h3>
-          <p>Find out about the Tourist arrivals in the last decade.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-chart-line"></i>
+      </section>
+      
+  
+          
+          <!-- Call to Action -->
+          <section class="min-h-screen flex flex-col justify-center items-center py-24 px-6 md:px-24 text-center">
+              <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter reveal">
+                  <span class="block">BEHIND THE</span>
+                  <span class="block text-accent">NUMBERS</span>
+              </h2>
+              
+              <p class="text-muted max-w-2xl mx-auto my-12 reveal" style="transition-delay: 0.2s;">
+                  This data represents millions of children whose childhood, education, and future opportunities 
+                  are compromised. The analytics presented here aim to inform better policy-making and targeted interventions.
+              </p>
+              
+              <div class="hover-target magnetic-hover border border-accent/20 px-8 py-4 text-accent hover:bg-accent hover:text-dark transition-colors reveal" style="transition-delay: 0.3s;">
+                  Download Full Report
+              </div>
+          </section>
+  
+          <!-- Contact Section -->
+  <section id="contact" class="py-16 px-6 md:px-24 bg-light/5">
+      <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-3xl font-bold text-gray-900">Get in Touch</h2>
+          <p class="text-muted text-sm mt-2">Reach out for any inquiries or collaborations.</p>
+  
+          <!-- Contact Details -->
+          <div class="mt-6 space-y-4">
+              <p class="text-lg text-gray-700">
+                  📧 Email: <a href="mailto:info@childlaboranalytics.com" class="text-accent hover:underline">
+                      info@childlaboranalytics.com
+                  </a>
+              </p>
+              <p class="text-lg text-gray-700">
+                  📞 Phone: <a href="tel:+1234567890" class="text-accent hover:underline">
+                      +1 (234) 567-890
+                  </a>
+              </p>
           </div>
-          <h3>Tourism Data</h3>
-          <p>Get insights into tourist arrivals, revenue, and more.</p>
-        </div>
+  
+          <!-- Social Media Links -->
+          <div class="mt-6 flex justify-center space-x-6">
+              <a href="#" class="text-gray-700 hover:text-accent text-2xl"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="text-gray-700 hover:text-accent text-2xl"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="text-gray-700 hover:text-accent text-2xl"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="text-gray-700 hover:text-accent text-2xl"><i class="fab fa-linkedin"></i></a>
+          </div>
       </div>
-    </div>
   </section>
 
-<!-- Mission Section -->
-<section class="mission-section">
-    <div class="mission-overlay">
-        <div class="mission-container">
-            <h2 class="mission-title">Our Mission</h2>
-            <p class="mission-text">Empowering travelers, businesses, and researchers with reliable tourism insights.</p>
-            <p class="mission-description">
-                We aim to bridge the gap between tourism data and real-world travel experiences, helping you discover
-                the best of the Philippines with confidence.
-            </p>
-        </div>
-    </div>
-</section>
-<!-- Features Section -->
-<section class="info-section">
-    <div class="info-container">
-        <div class="info-item">
-            <h3>About Us</h3>
-            <p>Tourism Insights PH offers a comprehensive platform for exploring data on Philippine tourism. Our mission is to provide insightful information that empowers businesses, policymakers, and travelers alike.</p>
-        </div>
 
-        <div class="info-item">
-            <h3>What We Do</h3>
-            <p>We specialize in visualizing tourism data, providing insights, and ensuring businesses can make informed decisions based on reliable statistics and trends.</p>
-        </div>
+  <script>
+     function initCharts() {
+            // Trend Chart
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            const trendChart = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan 2020', 'Jul 2020', 'Jan 2021', 'Jul 2021', 'Jan 2022', 'Jul 2022'],
+                    datasets: [{
+                        label: 'Child Labor Cases (Millions)',
+                        data: [152, 156, 161, 163, 159, 160],
+                        borderColor: '#FF3E3E',
+                        backgroundColor: 'rgba(255, 62, 62, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#888888'
+                            },
+                            min: 145
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#888888'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Sectoral Chart
+            const sectoralCtx = document.getElementById('sectoralChart').getContext('2d');
+            const sectoralChart = new Chart(sectoralCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Agriculture', 'Services', 'Industry', 'Domestic Work'],
+                    datasets: [{
+                        data: [70, 15, 10, 5],
+                        backgroundColor: [
+                            '#FF3E3E',
+                            '#FF7A7A',
+                            '#FFAEAE',
+                            '#FFD1D1'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#888888',
+                                padding: 20
+                            }
+                        }
+                    },
+                    cutout: '70%',
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true
+                    }
+                }
+            });
+            
 
-        <div class="info-item">
-            <h3>Why Choose Us?</h3>
-            <p>Our platform combines user-friendly visuals, expert analysis, and reliable data to help businesses, policymakers, and travelers plan effectively.</p>
-        </div>
-
-        <div class="info-item">
-            <h3>Where Are We?</h3>
-            <p>We are based in the Philippines, serving clients across the country with valuable insights into the tourism industry.</p>
-        </div>
-    </div>
-</section>
-
-
-<div class="section-divider"></div>
+            const barChartCtx = document.getElementById('barChart').getContext('2d');
+            const barChart = new Chart(barChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Agriculture', 'Services', 'Industry', 'Domestic Work'],
+                    datasets: [{
+                        data: [70, 15, 10, 5],
+                        backgroundColor: [
+                            '#FF3E3E',
+                            '#FF7A7A',
+                            '#FFAEAE',
+                            '#FFD1D1'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#888888',
+                                padding: 20
+                            }
+                        }
+                    },
+                    cutout: '70%',
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true
+                    }
+                }
+            });
+        }
+  </script>
 {% endblock %}

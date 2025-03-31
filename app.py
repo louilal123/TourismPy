@@ -28,17 +28,6 @@ class DataLoader:
 
         return df[column_name].sum()
 
-    @classmethod
-    def get_pie_chart_data(cls):
-        """Retrieves summed child labor estimates for Luzon, Visayas, and Mindanao."""
-        luzon_total = cls.load_dataset("luzon_dataset.csv", "Estimate ('000)")
-        visayas_total = cls.load_dataset("visayas_dataset.csv", "Estimate ('000)")
-        mindanao_total = cls.load_dataset("mindanao_dataset.csv", "Estimate ('000)")
-
-        return {
-            "labels": ["Luzon", "Visayas", "Mindanao"],
-            "values": [luzon_total, visayas_total, mindanao_total]
-        }
 
 # ===========================
 # 🔹 FLASK APP & ROUTES
@@ -50,12 +39,6 @@ app = Flask(__name__)
 def home():
     """Render the home page with the pie chart."""
     return render_template("home.html")
-
-@app.route('/get_pie_chart_data')
-def get_pie_chart_data():
-    """API route to serve pie chart data."""
-    data = DataLoader.get_pie_chart_data()
-    return jsonify(data)
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -1,61 +1,57 @@
-
+<!-- THIS FILE IS THE MAIN HTL FILE THAT GETS REUSED IN EVERY PAGES OF THE WEBSITE  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Child Labor: Data Analytics Perspective (2020-2022)</title>
+    <title>Tourism Insights PH: Destination, Arrivals & Hotels - Home</title>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
  
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 
     <!-- logo here -->
     <link rel="icon" href="{{ url_for('static', filename='images/trylogo-removebg-preview.png') }}" type="image/png">
-  
-       
-        <script src="../static/npm/tailwind.css"></script>
-       
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            dark: '#0a0a0a',
-                            light: '#f8f8f8',
-                            accent: '#FF3E3E',
-                            muted: '#888888'
-                        },
-                        fontFamily: {
-                            sans: ['Inter', 'sans-serif']
-                        }
-                    }
-                }
-            }
-        </script>
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-   
-</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load Google Charts -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="../static/js/search.js"></script>
+
+    <script src="../static/js/icons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-dark text-light overflow-x-hidden min-h-screen">
+
+
+<body>
    
+     <!-- Loading Screen -->
+<!-- Loading Screen -->
+<div class="loading-screen">
+    <div class="loading-content">
+      <h1 class="loading-title">Tourism Insights PH</h1>
+      <div class="loading-bar">
+       <h6> <span>Loading..</span></h6>
+        <div class="loading-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="floating-circle circle1"></div>
+    <div class="floating-circle circle2"></div>
+    <div class="floating-circle circle3"></div>
     
- <!-- Custom Cursor -->
- <div class="cursor"></div>
- <div class="cursor-follower"></div>
- 
- <!-- Preloader -->
- <div id="preloader" class="fixed inset-0 bg-dark flex flex-col items-center justify-center z-50">
-     <h1 class="text-3xl md:text-3xl font-bold text-light tracking-tighter">
-         <span id="preloader-counter">0</span><span>%</span>
-     </h1>
-     <p class="mt-4 text-muted text-lg">Loading</p>
-     <div class="w-48 h-0.5 bg-muted/30 mt-6 overflow-hidden">
-         <div id="preloader-bar" class="h-full bg-accent" style="width: 0%"></div>
-     </div>
- </div>
 
     {% include 'navbar.html' %}
 
@@ -66,168 +62,101 @@
     {% include 'footer.html' %}
 
     {% block scripts %}
-   
-    <!-- Scripts -->
-    <script src="../static/npm/chart.js"></script>
-
     <script>
-        // Preloader
- const preloader = document.getElementById('preloader');
- const preloaderCounter = document.getElementById('preloader-counter');
- const preloaderBar = document.getElementById('preloader-bar');
- 
- let preloaderCount = 0;
- const preloaderInterval = setInterval(() => {
-     preloaderCount++;
-     preloaderCounter.textContent = preloaderCount;
-     preloaderBar.style.width = `${preloaderCount}%`;
-     
-     if (preloaderCount >= 100) {
-         clearInterval(preloaderInterval);
-         setTimeout(() => {
-             preloader.style.opacity = 0;
-             setTimeout(() => {
-                 preloader.style.display = 'none';
-                 animateRevealElements();
-                 animateChartBars();
-                 animateCounters();
-                 initCharts();
-             }, 500);
-         }, 500);
-     }
- }, 20);
- 
- // Custom cursor
- const cursor = document.querySelector('.cursor');
- const cursorFollower = document.querySelector('.cursor-follower');
- 
- document.addEventListener('mousemove', (e) => {
-     cursor.style.left = e.clientX + 'px';
-     cursor.style.top = e.clientY + 'px';
-     
-     setTimeout(() => {
-         cursorFollower.style.left = e.clientX + 'px';
-         cursorFollower.style.top = e.clientY + 'px';
-     }, 100);
- });
- 
- // Magnetic hover effect
- const magneticElements = document.querySelectorAll('.magnetic-hover');
- 
- magneticElements.forEach(elem => {
-     elem.addEventListener('mousemove', (e) => {
-         const rect = elem.getBoundingClientRect();
-         const x = e.clientX - rect.left - rect.width / 2;
-         const y = e.clientY - rect.top - rect.height / 2;
-         elem.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-     });
-     
-     elem.addEventListener('mouseleave', () => {
-         elem.style.transform = 'translate(0px, 0px)';
-     });
- });
- 
- // Reveal on scroll
- function animateRevealElements() {
-     const reveals = document.querySelectorAll('.reveal');
-     reveals.forEach((el, index) => {
-         setTimeout(() => {
-             el.classList.add('active');
-         }, 200 * index);
-     });
-     
-     // Also set up intersection observer for elements that come into view later
-     const observer = new IntersectionObserver((entries) => {
-         entries.forEach(entry => {
-             if (entry.isIntersecting) {
-                 entry.target.classList.add('active');
-                 observer.unobserve(entry.target);
-             }
-         });
-     }, { threshold: 0.1 });
-     
-     reveals.forEach(reveal => {
-         observer.observe(reveal);
-     });
- }
- 
- // Animate chart bars
- function animateChartBars() {
-     const chartBars = document.querySelectorAll('.chart-bar');
-     setTimeout(() => {
-         chartBars.forEach(bar => {
-             const height = bar.getAttribute('data-height');
-             bar.style.height = height;
-         });
-     }, 500);
- }
- 
- // Counter animations
- function animateCounters() {
-     animateCounter('counter-1', 160, 2000);
-     animateCounter('counter-2', 16, 2000);
-     animateCounter('counter-3', 79, 2000);
- }
- 
- function animateCounter(id, targetValue, duration) {
-     const counter = document.getElementById(id);
-     const startTime = Date.now();
-     const startValue = 0;
-     
-     function updateCounter() {
-         const currentTime = Date.now();
-         const elapsedTime = currentTime - startTime;
-         
-         if (elapsedTime < duration) {
-             const progress = elapsedTime / duration;
-             const currentValue = Math.floor(progress * targetValue);
-             counter.textContent = currentValue;
-             requestAnimationFrame(updateCounter);
-         } else {
-             counter.textContent = targetValue;
-         }
-     }
-     
-     updateCounter();
- }
- 
- document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const closeMenuButton = document.getElementById('close-menu-button');
+        // Loading Screen Animation
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const loadingScreen = document.querySelector('.loading-screen');
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 500);
+      }, 2500);
+    });
+
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+    
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      
+      setTimeout(() => {
+        cursorFollower.style.left = e.clientX + 'px';
+        cursorFollower.style.top = e.clientY + 'px';
+      }, 100);
+    });
+
+    document.addEventListener('mousedown', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(0.7)';
+      cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.7)';
+    });
+
+    document.addEventListener('mouseup', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+
+    // Button hover effects
+    const buttons = document.querySelectorAll('a');
+    
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        cursorFollower.style.transform = 'translate(-50%, -50%) scale(3)';
+        cursorFollower.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorFollower.style.backgroundColor = 'white';
+      });
+    });
+
+    // Parallax Effect
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      document.querySelector('.hero-section').style.backgroundPositionY = scrollY * 0.5 + 'px';
+    });
+    </script>
+    <script>
+       // Mobile Menu Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
     
-    // Toggle menu visibility when hamburger is clicked
-    mobileMenuButton.addEventListener('click', function() {
+    menuToggle.addEventListener('click', function() {
+        // Toggle mobile menu visibility
         mobileMenu.classList.toggle('hidden');
-    });
-    
-    // Close menu when close button is clicked
-    closeMenuButton.addEventListener('click', function() {
-        mobileMenu.classList.add('hidden');
-    });
-    
-    // Close menu when clicking a link (for better UX)
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (window.innerWidth < 640) { // sm breakpoint in Tailwind
-                mobileMenu.classList.add('hidden');
-            }
-        });
-    });
-    
-    // Handle window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth >= 640) { // sm breakpoint in Tailwind
-            mobileMenu.classList.remove('hidden');
-        } else {
-            mobileMenu.classList.add('hidden');
-        }
+        mobileMenu.classList.toggle('active');
+        
+        // Toggle icons
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+        
+        // Update aria-expanded state
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', !isExpanded);
     });
 });
-        // Charts
-       
-    </script>
+        </script>
+        <script>
+            window.addEventListener("load", function () {
+                const preloader = document.getElementById('preloader');
+                const content = document.getElementById('content');
+          
+                setTimeout(() => {
+                    preloader.style.display = 'none'; // Hide loader
+                    content.classList.remove('hidden'); // Show main content
+                }, 1000); // Delay to ensure smooth transition
+            });
+          </script>
+          
+        
     {% endblock %}
     
 </body>

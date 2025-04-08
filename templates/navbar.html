@@ -1,31 +1,155 @@
-    
-<!-- Header -->
-<header class="fixed top-0 left-0 w-full px-2 sm:px-6 md:px-12 py-4 sm:py-6 md:py-8 flex justify-between items-center z-40 backdrop-blur-sm">
-    <div class="font-bold tracking-tight text-xl md:text-2xl hover-target magnetic-hover">
-        Child <span class="text-accent">Labor</span>
+
+<!-- Main Navigation -->
+<nav class="main-navigation" aria-label="Main Navigation">
+    <div class="container">
+        <div class="nav-content">
+            <!-- Logo and Brand Section -->
+            <div class="logo-section">
+                <a 
+                    href="/" 
+                    class="logo-link" 
+                    aria-label="Tourism Insight PH Home"
+                >
+                    <img src="../static/images/trylogo-removebg-preview.png" alt="Tourism Insight PH Logo">
+                    <span class="brand-name">Tourism Insights PH</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div 
+                class="desktop-menu" 
+                role="navigation" 
+                aria-label="Desktop Main Menu"
+            >
+                <a 
+                    href="/" 
+                    class="nav-item {% if request.path == '/' %}active{% endif %}" 
+                    aria-current="page"
+                >
+                    <span class="nav-text">Home</span>
+                    <span class="underline active-underline"></span>
+                </a>
+                
+                <a 
+                    href="/destinations" 
+                    class="nav-item {% if request.path == '/destinations' %}active{% endif %}"
+                    aria-label="Explore Philippine Destinations"
+                >
+                    <span class="nav-text">Destinations</span>
+                    <span class="underline"></span>
+                </a>
+                
+                <a 
+                    href="/hotel_occupancy" 
+                    class="nav-item {% if request.path == '/hotel_occupancy' %}active{% endif %}"
+                    aria-label="View Hotel Rates in Philippines"
+                >
+                    <span class="nav-text">Occupancy Rates</span>
+                    <span class="underline"></span>
+                </a>
+                
+                <a 
+                    href="/arrivals" 
+                    class="nav-item {% if request.path == '/arrivals' %}active{% endif %}"
+                    aria-label="Check Tourism Arrivals Statistics"
+                >
+                    <span class="nav-text">Arrivals</span>
+                    <span class="underline"></span>
+                </a>
+
+              <!-- Desktop Search Form -->
+<form action="/search" method="GET" class="desktop-search-form">
+    <div style="position: relative; display: inline-block; margin-left: 20px;">
+        <input 
+            type="text" 
+            name="query" 
+            placeholder="Search..." 
+            aria-label="Search for content"
+
+            required
+            style="
+                width: 200px; 
+                padding: 10px 40px 10px 15px; 
+                border-radius: 20px; 
+                border: 1px solid rgba(255, 255, 255, 0.5); 
+                background: rgba(255, 255, 255, 0.15); 
+                color: white; 
+                font-size: 14px;
+                outline: none;"
+        >
+        <button 
+            type="submit" 
+            aria-label="Submit Search"
+            style="
+                position: absolute; 
+                right: 5px; 
+                top: 50%; 
+                transform: translateY(-50%); 
+                background: rgba(255, 255, 255, 0.2); 
+                border: none; 
+                border-radius: 50%; 
+                width: 30px; 
+                height: 30px; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                cursor: pointer;"
+        >
+            <span class="fas fa-magnifying-glass" style="color: white;"></span>
+        </button>
     </div>
     
-    <!-- Mobile Menu Button (Hamburger) -->
-    <button id="mobile-menu-button" class="block sm:hidden focus:outline-none">
-        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
     
-    <!-- Navigation Menu -->
-    <nav id="mobile-menu" class="hidden sm:block absolute sm:relative top-full left-0 w-full sm:w-auto bg-black sm:bg-transparent py-6 sm:py-0 mt-0 sm:mt-0">
-        <!-- Close Button (Mobile Only) -->
-        <button id="close-menu-button" class="absolute top-2 right-4 block sm:hidden focus:outline-none">
-            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        
-        <ul class="flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-y-0 sm:space-x-6 mt-4 sm:mt-0">
-            <li><a href="#home" class="nav-link text-gray-400 hover:text-accent block px-4 sm:px-0 py-2 sm:py-0 text-center">Home</a></li>
-            <li><a href="#analytics" class="nav-link text-gray-400 hover:text-accent block px-4 sm:px-0 py-2 sm:py-0 text-center">Analytics</a></li>
-            <li><a href="#about" class="nav-link text-gray-400 hover:text-accent block px-4 sm:px-0 py-2 sm:py-0 text-center">About Us</a></li>
-            <li><a href="#contact" class="nav-link text-gray-400 hover:text-accent block px-4 sm:px-0 py-2 sm:py-0 text-center">Contact</a></li>
-        </ul>
-    </nav>
-</header>
+</form>
+            </div>
+            
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle">
+            <button
+                id="menu-toggle"
+                aria-label="Toggle Mobile Menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                style="
+                    background-color: transparent;
+                    color: #fff;
+                    border: none;
+                    border-radius: 8px;
+                   margin: 0px;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                "
+                onmouseover="this.style.backgroundColor='transparent'"
+                onmouseout="this.style.backgroundColor='transparent'"
+            >
+                <span id="menu-icon" class="fas fa-bars"></span>
+                <span id="close-icon" class="fas fa-times hidden"></span>
+            </button>
+        </div>
+
+
+            <!-- Mobile Menu for Small Screens -->
+            <div id="mobile-menu" class="mobile-menu hidden">
+                    <!-- Mobile Search Form -->
+                    <form action="/search" method="GET" class="mobile-search-form">
+                        <input 
+                            type="text" 
+                            name="query" 
+                            placeholder="Search..." 
+                            aria-label="Search for content"
+                            required
+                            class="mobile-search-input"
+                        >
+                        <button type="submit" class="desktop-search-btn" aria-label="Submit Search">
+                            <span class="fas fa-magnifying-glass"></span>
+                        </button>
+                    </form>
+                <a href="/" class="mobile-nav-item {% if request.path == '/' %}active{% endif %}">Home</a>
+                <a href="/destinations" class="mobile-nav-item {% if request.path == '/destinations' %}active{% endif %}">Destinations</a>
+                <a href="/hotel_occupancy" class="mobile-nav-item {% if request.path == '/hotel_occupancy' %}active{% endif %}">Occupancy Rates</a>
+                <a href="/arrivals" class="mobile-nav-item {% if request.path == '/arrivals' %}active{% endif %}">Arrivals</a>
+            </div>
+        </div>
+    </div>
+</nav>

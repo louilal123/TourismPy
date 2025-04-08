@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+
+
+</style>
+
+<main class="main-container">
+    <section class="chart-section">
+        <h2 class="section-title">HOTEL OCCUPANCY RATES </h2>
+        <p class="section-description">Hotel Occupancy rates and estimated revenue in the last 10 years.</p>
+        
+       <!-- Region Filter -->
+<!-- Region Filter -->
+<div class="filter-container" style="
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;">
+    
+    <form method="GET" action="{{ url_for('hotel_occupancy') }}" style="
+        display: flex;
+        align-items: center;
+        gap: 10px;">
+        
+        <label for="region">Select Region:</label>
+        <select name="region" id="region" onchange="this.form.submit()" style="
+            padding: 10px 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            width: 200px;
+            font-size: 16px;
+            cursor: pointer;">
+            {% for region in occupancy_data.regions %}
+                <option value="{{ region }}" {% if region == selected_region %} selected {% endif %}>
+                    {{ region }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+    
+
+
+        <!-- Highcharts Visualization -->
+        <div id="occupancyChart" class="chart-container"></div>
+        <p class="section-description">Explore hotel occupancy trends across regions.</p>
+
+    </section>
+</main>
+
+
+<!-- Include Highcharts -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<script>
+    const occupancyData = JSON.parse('{{ occupancy_data | tojson | safe }}');
+
+    const years = occupancyData.years;
+    const occupancyRates = occupancyData.occupancy_rates;
+    const revenue = occupancyData.revenue;
+
+    Highcharts.chart('occupancyChart', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Hotel Occupancy Trends (2015-2024)'
+        },
+        xAxis: {
+            categories: years,
+            title: { text: 'Year' }
+        },
+        yAxis: [
+            {
+                title: { text: 'Occupancy Rate (%)' },
+                labels: {
+                    format: '{value} %'
+                }
+            },
+            {
+                title: { text: 'Revenue (PHP)' },
+                labels: {
+                    formatter: function () {
+                        return this.value ? '₱ ' + Highcharts.numberFormat(this.value, 0, '.', ',') : ''; 
+                    }
+                },
+                opposite: true
+            }
+        ],
+        tooltip: {
+    shared: true,
+    formatter: function () {
+        const year = this.points[0].point.category;  // Correctly references the year
+        return `<b>${year}</b><br>
+                🏨 Occupancy Rate: <b>${this.points[0].y}%</b><br>
+                💰 Revenue: <b>₱${this.points[1].y.toLocaleString()}</b>`;
+    }
+}
+,
+        series: [
+            { name: 'Occupancy Rate (%)', data: occupancyRates, color: '#2c63bb' },
+            { name: 'Revenue (PHP)', data: revenue, color: '#FF9800', yAxis: 1 }
+        ],
+        credits: { enabled: false }
+    });
+</script>
+{% endblock %}

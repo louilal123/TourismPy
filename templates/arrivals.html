@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="main-container">
+    <section class="chart-section">
+        <div class="chart-wrapper">
+            <h2 class="section-title">Tourist Arrivals by Country</h2>
+<!-- Region Filter -->
+<div class="filter-container" style="
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;">
+    
+    <form method="GET" action="{{ url_for('arrivals') }}" style="
+        display: flex;
+        align-items: center;
+        gap: 10px;">
+        
+        <label for="region">Select Region:</label>
+        <select name="region" id="region" onchange="this.form.submit()" style="
+            padding: 10px 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            width: 200px;
+            font-size: 16px;
+            cursor: pointer;">
+            
+            {% for region in regions %}
+                <option value="{{ region }}" {% if region == selected_region %} selected {% endif %}>
+                    {{ region }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+
+<article class="chart-card">
+    <div id="touristChart" style="background: transparent; padding: 10px;"></div>  <!-- ✅ Ensure full transparency -->
+    <p>
+        This chart represents the <strong>distribution of international tourists</strong> visiting the Philippines.
+        The data highlights the top countries that contribute to foreign tourist arrivals.
+        Understanding these trends helps in shaping tourism strategies and improving visitor experiences.
+    </p>
+</article>
+
+
+        </div>
+       
+    </section>
+  
+</main>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+    // Get data from Flask
+    const touristsByCountry = JSON.parse('{{ tourists_by_country | tojson | safe }}');
+
+    // Convert dictionary to Highcharts pie chart format
+    let pieData = Object.keys(touristsByCountry).map(country => ({
+        name: country,
+        y: touristsByCountry[country]
+    }));
+
+    // Initialize Highcharts Pie Chart
+    Highcharts.chart('touristChart', {
+        chart: { type: 'pie' },
+        title: { text: 'Tourist Arrivals by Country' },
+        tooltip: { 
+            pointFormat: '<b>{point.y} tourists</b> ({point.percentage:.1f}%)' 
+        },
+        accessibility: {
+            point: { valueSuffix: '%' }
+        },
+        legend: {
+            enabled: true, 
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                showInLegend: true,  // ✅ Enable color-coded legend
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b><br>{point.percentage:.1f}%',  // ✅ Show only percentage inside
+                    distance: -30,  // ✅ Move text inside slices
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        color: '#fff',
+                        textOutline: '0px contrast'  // ✅ Improve readability
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Tourists',
+            colorByPoint: true,
+            data: pieData
+        }]
+    });
+</script>
+
+{% endblock %}

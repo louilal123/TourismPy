@@ -1,155 +1,75 @@
 
-<!-- Main Navigation -->
-<nav class="main-navigation" aria-label="Main Navigation">
-    <div class="container">
-        <div class="nav-content">
-            <!-- Logo and Brand Section -->
-            <div class="logo-section">
-                <a 
-                    href="/" 
-                    class="logo-link" 
-                    aria-label="Tourism Insight PH Home"
-                >
-                    <img src="../static/images/trylogo-removebg-preview.png" alt="Tourism Insight PH Logo">
-                    <span class="brand-name">Tourism Insights PH</span>
-                </a>
-            </div>
-
-            <!-- Desktop Navigation -->
-            <div 
-                class="desktop-menu" 
-                role="navigation" 
-                aria-label="Desktop Main Menu"
-            >
-                <a 
-                    href="/" 
-                    class="nav-item {% if request.path == '/' %}active{% endif %}" 
-                    aria-current="page"
-                >
-                    <span class="nav-text">Home</span>
-                    <span class="underline active-underline"></span>
-                </a>
+<header class="fixed w-full bg-transparent z-50 backdrop-blur-none" id="main-header">
+    <div class="px-6 md:px-24 py-4">
+        <div class="flex items-center justify-between">
+            <!-- Branding on the left -->
+            <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2">
+                    <img src="{{ url_for('static', filename='images/image.png') }}" alt="Logo" class="w-8 h-8 rounded-full object-cover">
+                    <span class="text-xl font-bold font-display">Child<span class="text-accent">Labor</span>PH</span>
+                </div>
                 
-                <a 
-                    href="/destinations" 
-                    class="nav-item {% if request.path == '/destinations' %}active{% endif %}"
-                    aria-label="Explore Philippine Destinations"
-                >
-                    <span class="nav-text">Destinations</span>
-                    <span class="underline"></span>
-                </a>
-                
-                <a 
-                    href="/hotel_occupancy" 
-                    class="nav-item {% if request.path == '/hotel_occupancy' %}active{% endif %}"
-                    aria-label="View Hotel Rates in Philippines"
-                >
-                    <span class="nav-text">Occupancy Rates</span>
-                    <span class="underline"></span>
-                </a>
-                
-                <a 
-                    href="/arrivals" 
-                    class="nav-item {% if request.path == '/arrivals' %}active{% endif %}"
-                    aria-label="Check Tourism Arrivals Statistics"
-                >
-                    <span class="nav-text">Arrivals</span>
-                    <span class="underline"></span>
-                </a>
-
-              <!-- Desktop Search Form -->
-<form action="/search" method="GET" class="desktop-search-form">
-    <div style="position: relative; display: inline-block; margin-left: 20px;">
-        <input 
-            type="text" 
-            name="query" 
-            placeholder="Search..." 
-            aria-label="Search for content"
-
-            required
-            style="
-                width: 200px; 
-                padding: 10px 40px 10px 15px; 
-                border-radius: 20px; 
-                border: 1px solid rgba(255, 255, 255, 0.5); 
-                background: rgba(255, 255, 255, 0.15); 
-                color: white; 
-                font-size: 14px;
-                outline: none;"
-        >
-        <button 
-            type="submit" 
-            aria-label="Submit Search"
-            style="
-                position: absolute; 
-                right: 5px; 
-                top: 50%; 
-                transform: translateY(-50%); 
-                background: rgba(255, 255, 255, 0.2); 
-                border: none; 
-                border-radius: 50%; 
-                width: 30px; 
-                height: 30px; 
-                display: flex; 
-                align-items: center; 
-                justify-content: center; 
-                cursor: pointer;"
-        >
-            <span class="fas fa-magnifying-glass" style="color: white;"></span>
-        </button>
-    </div>
-    
-    
-</form>
+               
             </div>
             
-        <!-- Mobile Menu Toggle -->
-        <div class="mobile-menu-toggle">
-            <button
-                id="menu-toggle"
-                aria-label="Toggle Mobile Menu"
-                aria-expanded="false"
-                aria-controls="mobile-menu"
-                style="
-                    background-color: transparent;
-                    color: #fff;
-                    border: none;
-                    border-radius: 8px;
-                   margin: 0px;
-                    font-size: 16px;
-                    cursor: pointer;
-                    transition: background-color 0.3s ease;
-                "
-                onmouseover="this.style.backgroundColor='transparent'"
-                onmouseout="this.style.backgroundColor='transparent'"
-            >
-                <span id="menu-icon" class="fas fa-bars"></span>
-                <span id="close-icon" class="fas fa-times hidden"></span>
-            </button>
-        </div>
+            <!-- Navigation and toggle button on the right -->
+            <div class="flex items-center space-x-8 ml-auto">
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link font-medium hover:underline transition-all duration-300">Home</a>
+                    <a href="#data" class="nav-link font-medium hover:underline transition-all duration-300">Data Insights</a>
+                    <a href="#charts" class="nav-link font-medium hover:underline transition-all duration-300">Visualizations</a>
+                    <a href="#about" class="nav-link font-medium hover:underline transition-all duration-300">About</a>
+                </nav>
+                
 
-
-            <!-- Mobile Menu for Small Screens -->
-            <div id="mobile-menu" class="mobile-menu hidden">
-                    <!-- Mobile Search Form -->
-                    <form action="/search" method="GET" class="mobile-search-form">
-                        <input 
-                            type="text" 
-                            name="query" 
-                            placeholder="Search..." 
-                            aria-label="Search for content"
-                            required
-                            class="mobile-search-input"
-                        >
-                        <button type="submit" class="desktop-search-btn" aria-label="Submit Search">
-                            <span class="fas fa-magnifying-glass"></span>
-                        </button>
-                    </form>
-                <a href="/" class="mobile-nav-item {% if request.path == '/' %}active{% endif %}">Home</a>
-                <a href="/destinations" class="mobile-nav-item {% if request.path == '/destinations' %}active{% endif %}">Destinations</a>
-                <a href="/hotel_occupancy" class="mobile-nav-item {% if request.path == '/hotel_occupancy' %}active{% endif %}">Occupancy Rates</a>
-                <a href="/arrivals" class="mobile-nav-item {% if request.path == '/arrivals' %}active{% endif %}">Arrivals</a>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2  hover:bg-light-200 dark:hover:bg-dark-700 transition">
+                        <svg id="theme-icon-dark" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="theme-icon-light" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</nav>
+</header>
+
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-50 w-full h-screen ">
+        <div class="flex justify-between items-center mb-12">
+            <div class="flex items-center space-x-2">
+                <img src="{{ url_for('static', filename='images/image.png') }}" alt="Logo" class="w-8 h-8 object-cover">
+                <span class="text-xl font-bold font-display dark:text-gray-50">Child<span class="text-accent">Labor</span>PH</span>
+            </div>
+            
+            <button id="close-menu-button" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="flex flex-col space-y-6">
+            <a href="#home" class="text-2xl font-medium py-2 border-b border-dark-800 dark:border-light-200/10  dark:text-gray-50 ">Home</a>
+            <a href="#data" class="text-2xl font-medium py-2 border-b border-dark-800 dark:border-light-200/10  dark:text-gray-50 ">Data Insights</a>
+            <a href="#charts" class="text-2xl font-medium py-2 border-b border-dark-800 dark:border-light-200/10  dark:text-gray-50 ">Visualizations</a>
+            <a href="#about" class="text-2xl font-medium py-2 border-b border-dark-800 dark:border-light-200/10  dark:text-gray-50 ">About</a>
+        </nav>
+        
+        <div class="mt-auto pt-8">
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-muted">Copyright 2025</span>
+                <span id="view-count" class="text-accent font-bold">MCC-BSIT-1STYEAR</span>
+            </div>
+        </div>
+    </div>
+

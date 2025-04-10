@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Labor Analytics | Data Visualization</title>
+   
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/test.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#FF3E3E',
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#1a1a1a',
+                            700: '#2c2c2c',
+                            600: '#3d3d3d'
+                        },
+                        light: {
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            300: '#d4d4d4',
+                            400: '#a3a3a3'
+                        },
+                        muted: '#a3a3a3'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        body.preloader-active > *:not(#preloader) {
+    opacity: 0;
+    visibility: hidden;
+}
+
+body.preloader-active {
+    overflow: hidden;
+}
+    </style>
+</head>
+<body class="bg-light-100 text-dark-900 dark:bg-dark-900 dark:text-light-100 transition-colors">
+   
+   <!-- ============ -->
+         <!-- Preloader -->
+ <!-- Custom Cursor -->
+ <div class="cursor"></div>
+ <div class="cursor-follower"></div>
+ 
+ <!-- Preloader -->
+ <div id="preloader" class="fixed inset-0 bg-dark flex flex-col items-center justify-center z-50">
+     <h1 class="text-3xl md:text-3xl font-bold text-light tracking-tighter">
+         <span id="preloader-counter">0</span><span>%</span>
+     </h1>
+     <p class="mt-4 text-muted text-lg">Loading</p>
+     <div class="w-48 h-0.5 bg-muted/30 mt-6 overflow-hidden">
+         <div id="preloader-bar" class="h-full bg-accent" style="width: 0%"></div>
+     </div>
+ </div>
+
+    <!-- Hero Section-->
+    <section class="min-h-screen  flex flex-col justify-center px-6 md:px-24 pt-24 relative overflow-hidden" id="home">
+        <div class="absolute inset-0 z-1">
+            <div style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDUwMCI+CiAgPHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMGEwYTBhIi8+CiAgPGNpcmNsZSBjeD0iNzUwIiBjeT0iMjUwIiByPSIyMDAiIGZpbGw9IiMxYTFhMWEiLz4KICA8cGF0aCBkPSJNNTAwIDI1MEw2NTAgMTUwTDgwMCAzNTBMOTUwIDI1MCIgc3Ryb2tlPSIjRkYzRTNFIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KICA8Y2lyY2xlIGN4PSI4MDAiIGN5PSIzNTAiIHI9IjQiIGZpbGw9IiNGRjNFM0UiLz4KICA8Y2lyY2xlIGN4PSI5NTAiIGN5PSIyNTAiIHI9IjQiIGZpbGw9IiNGRjNFM0UiLz4KPC9zdmc+');" class="w-full h-full bg-no-repeat bg-cover bg-center dark:opacity-100 opacity-5"></div>
+        </div>
+        
+        <!-- Animated bubbles -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <div class="bubble bubble-1"></div>
+            <div class="bubble bubble-2"></div>
+            <div class="bubble bubble-3"></div>
+            <div class="bubble bubble-4"></div>
+            <div class="bubble bubble-5"></div>
+            <div class="bubble bubble-6"></div>
+            <div class="bubble bubble-7"></div>
+            <div class="bubble bubble-8"></div>
+            <div class="bubble bubble-9"></div>
+        </div>
+        
+        <div class="relative z-10"> 
+            <div class="overflow-hidden">
+                <h1 class="text-5xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none mb-2 reveal">
+                    <span class="block">CHILD LABOR:</span>
+                    <span class="block text-accent">DATA ANALYTICS</span>
+                </h1>
+            </div>
+            
+            <p class="text-muted max-w-lg my-8 reveal" >
+                Exploring the child labor crisis through data analytics, visualizing patterns and trends from 2020 to 2022 that shape our understanding of this critical issue.
+            </p>
+            
+            <div class="flex gap-6 mt-4 reveal" >
+                <div id="data" 
+                class="hover-target magnetic-hover border  border-accent/20 px-6 py-3 text-accent hover:bg-accent hover:text-white
+                 transition-colors">
+                   <a href="#charts"> Explore Data</a>
+                </div>
+                <div class="text-muted self-center hover-target magnetic-hover hover:border-accent/20 ">
+                    Scroll to discover
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Scrolling Text -->
+    <div class="py-8 border-y border-dark-900/10 dark:border-light-100/10 overflow-hidden">
+        <div class="scroll-container">
+            <div class="scroll-text text-7xl md:text-9xl font-bold text-dark-900/5 dark:text-light-100/5">
+                DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION · 
+                DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION
+            </div>
+            <div class="scroll-text">
+                DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION · 
+                DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION
+            </div>
+        </div>
+    </div>
+    <section id="data" class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+        <div class="text-center mb-16">
+            <span class="inline-block px-4 py-1  bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium mb-4">
+                Data Insights
+            </span>
+           
+            <h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">
+                DATA <span class="text-accent">OVERVIEW</span>
+            </h2>
+            
+            <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+                Visualizing the distribution of child labor cases across different dimensions in the Philippines.
+            </p>
+        </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- By Region Card -->
+            <div class="bg-white dark:bg-dark-700  shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-lg bg-gradient-to-r from-red-500 to-red-300 dark:from-red-600 dark:to-red-400 flex items-center justify-center mb-4 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">By Region</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Comparative analysis of child labor prevalence across 16 regions in Luzon, Visayas, and Mindanao.
+                </p>
+                <div class="h-2 bg-gray-200 ">
+                    <div class="h-2 bg-gradient-to-r from-red-500 to-red-300 " style="width: 75%"></div>
+                </div>
+            </div>
+    
+            <!-- By Industry Card -->
+            <div class="bg-white dark:bg-dark-700  shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-lg bg-gradient-to-r from-red-500 to-red-300 dark:from-red-600 dark:to-red-400 flex items-center justify-center mb-4 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">By Industry</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Breakdown of child labor distribution across different economic sectors and industries.
+                </p>
+                <div class="flex space-x-2">
+                    <div class="h-2 bg-red-500 " style="width: 60%"></div>
+                    <div class="h-2 bg-yellow-500 " style="width: 25%"></div>
+                    <div class="h-2 bg-red-500 " style="width: 15%"></div>
+                </div>
+            </div>
+    
+            <!-- By Age Group Card -->
+            <div class="bg-white dark:bg-dark-700  shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-lg bg-gradient-to-r from-red-500 to-red-300 dark:from-red-600 dark:to-red-400 flex items-center justify-center mb-4 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">By Age Group</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Distribution of child labor cases across different age brackets and developmental stages.
+                </p>
+                <div class="flex space-x-1">
+                    <div class="h-2 bg-red-400 " style="width: 20%"></div>
+                    <div class="h-2 bg-red-500 " style="width: 35%"></div>
+                    <div class="h-2 bg-red-600 " style="width: 45%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    
+<!-- Charts Section (Updated Titles) -->
+
+
+<section id="charts" class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+    
+        <div class="text-center mb-16">
+            <span class="inline-block px-4 py-1  bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium mb-4">
+                Data Visualization
+            </span>
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 reveal">
+               DATA <span class="text-accent">ANALYTICS</span>
+            </h2>
+            <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+                Explore regional and sectoral trends in child labor across the Philippines.
+            </p>
+        </div>
+        <div class="flex items-center gap-3 mb-8 pt-6">
+            <h4 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">📅 Select a Year:</h4>
+            <select id="yearFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="all" selected>All Years</option>
+                <!-- Dynamic options -->
+            </select>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+         
+            
+        <!-- Bar Chart -->
+        <div class="bg-white dark:bg-dark-700  shadow-lg p-6">
+            <h3 class="text-xl text-center font-bold mb-4">Child Labor by AGE GROUPS (2022)</h3>
+            <div class="chart-container" style="height: 500px;">
+                <canvas id="ageChart"></canvas>
+            </div>
+        </div>
+            <!-- Pie Chart -->
+            <div class="bg-white dark:bg-dark-700  shadow-lg p-6">
+                <h3 class="text-xl text-center font-bold mb-4">Child Labor by INDUSTRY/SECTOR</h3>
+                <div class="chart-container" style="height: 500px;">
+                    <canvas id="industryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-dark-700  shadow-lg p-6">
+            <h3 class="text-xl text-center font-bold mb-4">Philippine Child Labor Trends by REGION</h3>
+            <div class="chart-container" style="height: 500px;">
+                <canvas id="regionChart"></canvas>
+            </div>
+        </div>
+      
+
+</section>
+<section id="about"  class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+   
+        <h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">
+            WHO WE <span class="text-accent">ARE</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- About Us -->
+            <div class="p-6 border border-light/10 hover:border-accent transition-colors dark:border-dark-600 dark:hover:border-accent  bg-white dark:bg-dark-700">
+                <h3 class="text-2xl font-semibold mb-4">About Us</h3>
+                <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                <p class="text-muted dark:text-light">
+                    We are a dedicated team committed to uncovering the realities of child labor through data analytics and research.
+                </p>
+            </div>
+
+            <!-- What We Do -->
+            <div class="p-6 border border-light/10 hover:border-accent transition-colors dark:border-dark-600 dark:hover:border-accent  bg-white dark:bg-dark-700">
+                <h3 class="text-2xl font-semibold mb-4">What We Do</h3>
+                <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                <p class="text-muted dark:text-light">
+                    We collect, analyze, and visualize child labor statistics to raise awareness and support advocacy efforts worldwide.
+                </p>
+            </div>
+
+            <!-- Our Mission -->
+            <div class="p-6 border border-light/10 hover:border-accent transition-colors dark:border-dark-600 dark:hover:border-accent  bg-white dark:bg-dark-700">
+                <h3 class="text-2xl font-semibold mb-4">Our Mission</h3>
+                <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                <p class="text-muted dark:text-light">
+                    To provide accurate and insightful data that empowers organizations and policymakers in the fight against child labor.
+                </p>
+            </div>
+
+            <!-- Our Vision -->
+            <div class="p-6 border border-light/10 hover:border-accent transition-colors dark:border-dark-600 dark:hover:border-accent  bg-white dark:bg-dark-700">
+                <h3 class="text-2xl font-semibold mb-4">Our Vision</h3>
+                <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                <p class="text-muted dark:text-light">
+                    We envision a world where no child is subjected to labor, and every child can thrive in a safe and nurturing environment.
+                </p>
+            </div>
+        </div>
+    
+</section>
+
+    <!-- About Section -->
+    <section id="about"  class="py-11 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+           <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <span class="inline-block px-4 py-1  bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium mb-4">
+                        About This Project
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold font-display mb-6">
+                        Understanding <span class="gradient-text">Child Labor</span>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        Child labor remains a persistent problem worldwide, with millions of children engaged in work that deprives them of their childhood, their potential, and their dignity.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-8">
+                        This data visualization project aims to shed light on the scale and distribution of child labor globally, helping policymakers, researchers, and the public understand where interventions are most needed.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="0 px-6 py-2 bg-red-500 to-secondary-light dark:from-primary-dark dark:to-secondary-dark text-white hover:bg-gray-300 hover:text-accent font-medium shadow hover:shadow-md transition">
+                            Download Report
+                        </a>
+                        <a href="#" class="px-6  py-2 border-2 border-gray-300 dark:border-dark-600  font-medium hover:bg-gray-200 dark:hover:bg-dark-700 transition">
+                            Methodology
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-white dark:bg-dark-700   p-8">
+                        <h3 class="text-xl font-bold mb-6">Data Sources</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8  bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">PSA</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">Local estimates on child labor and forced labor.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8  bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">DSWD</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">Data on children's rights and well-being.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8  bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">DATA.GOV</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">Economic indicators and country-level data.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24dark:bg-dark-800 border-t border-gray-200 dark:border-dark-700">
+   
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-6 md:mb-0">
+                    <div class="w-8 h-8  bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark"></div>
+                    <span class="text-xl font-bold font-display">ChildLabor<span class="gradient-text">Analytics</span></span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0">
+                    <a href="#home" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">Home</a>
+                    <a href="#data" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">Data Insights</a>
+                    <a href="#charts" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">Visualizations</a>
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">About</a>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10  bg-gray-100 dark:bg-dark-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-dark-600 transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-10 h-10  bg-gray-100 dark:bg-dark-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-dark-600 transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-10 h-10  bg-gray-100 dark:bg-dark-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-dark-600 transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-dark-700 text-center text-gray-500 dark:text-gray-400 text-sm">
+                <p>© 2025 Child Labor Analytics. All rights reserved. MCC-BSIT</p>
+            </div>
+    
+    </footer>
+   <!-- Add this script at the end of your body -->
+    <script src="../static/js/script.js"></script>
+<script>
+    // Initialize reveal animations
+    document.addEventListener('DOMContentLoaded', () => {
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Animate split characters
+        const splitTextElements = document.querySelectorAll('.split-char');
+        splitTextElements.forEach((char, index) => {
+            setTimeout(() => {
+                char.style.transform = 'translateY(0)';
+                char.style.opacity = '1';
+            }, index * 50);
+        });
+    });
+</script>
+    <script>
+          // Mobile menu functionality
+          const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        menuOverlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+    </script>
+    <script>
+        let regionChart, ageChart, industryChart;
+    
+        async function fetchAgeData(yearFilter = 'all') {
+            const response = await fetch(`/api/age-cases?year=${yearFilter}`);
+            return await response.json();
+        }
+    
+        async function fetchIndustryData(yearFilter = 'all') {
+            const response = await fetch(`/api/industry-cases?year=${yearFilter}`);
+            return await response.json();
+        }
+    
+        async function fetchRegionData(yearFilter = 'all') {
+            const response = await fetch(`/api/region-cases?year=${yearFilter}`);
+            return await response.json();
+        }
+    
+        async function initCharts() {
+            const regionData = await fetchRegionData();
+            const ageData = await fetchAgeData();
+            const industryData = await fetchIndustryData();
+    
+            const yearFilterElement = document.getElementById('yearFilter');
+            const allYears = [...new Set([
+                ...(regionData.years || []),
+                ...(ageData.years || []),
+                ...(industryData.years || [])
+            ])].sort();
+    
+            yearFilterElement.innerHTML = '';
+            const allOption = document.createElement('option');
+            allOption.value = 'all';
+            allOption.textContent = 'All Years';
+            yearFilterElement.appendChild(allOption);
+    
+            if (allYears.length > 0) {
+                allYears.forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearFilterElement.appendChild(option);
+                });
+            }
+    
+            createRegionChart(regionData);
+            createAgeChart(ageData);
+            createIndustryChart(industryData);
+    
+            yearFilterElement.addEventListener('change', async function () {
+                const selectedYear = this.value;
+                const filteredRegionData = await fetchRegionData(selectedYear);
+                const filteredAgeData = await fetchAgeData(selectedYear);
+                const filteredIndustryData = await fetchIndustryData(selectedYear);
+    
+                updateRegionChart(filteredRegionData);
+                updateAgeChart(filteredAgeData);
+                updateIndustryChart(filteredIndustryData);
+            });
+        }
+    
+        function createRegionChart(data) {
+            const regionChartCtx = document.getElementById('regionChart').getContext('2d');
+    
+            regionChart = new Chart(regionChartCtx, {
+                type: 'line',
+                data: {
+                    labels: data.regions,
+                    datasets: [{
+                        label: 'Child Labor Cases by Region',
+                        data: data.cases,
+                        borderColor: '#FF3E3E',
+                        backgroundColor: 'rgba(255, 62, 62, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#FF3E3E',
+                        pointBorderColor: '#fff',
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#FF3E3E'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `Child Labor Cases: ${context.raw.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#888888',
+                                callback: value => value.toLocaleString()
+                            },
+                            min: 0
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#888888'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        function updateRegionChart(data) {
+            if (regionChart) {
+                regionChart.data.labels = data.regions;
+                regionChart.data.datasets[0].data = data.cases;
+                regionChart.update();
+            }
+        }
+    
+        function createAgeChart(data) {
+            const ageChartCtx = document.getElementById('ageChart').getContext('2d');
+    
+            ageChart = new Chart(ageChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: data.age_groups,
+                    datasets: [
+                        {
+                            label: 'Male',
+                            data: data.male,
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Female',
+                            data: data.female,
+                            backgroundColor: 'rgba(255, 59, 59, 0.7)',
+                            borderColor: '#ff3b3b',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: context => `${context.dataset.label}: ${context.raw.toLocaleString()}`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#888888',
+                                callback: value => value.toLocaleString()
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#888888'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        function updateAgeChart(data) {
+            if (ageChart) {
+                ageChart.data.labels = data.age_groups;
+                ageChart.data.datasets[0].data = data.male;
+                ageChart.data.datasets[1].data = data.female;
+                ageChart.update();
+            }
+        }
+    
+        function createIndustryChart(data) {
+            const industryChartCtx = document.getElementById('industryChart').getContext('2d');
+    
+            const backgroundColors = [
+                '#ff3b3b', '#ff7e7e', '#b30000',
+                'rgba(255, 59, 59, 0.6)', 'rgba(255, 59, 59, 0.4)',
+                'rgba(255, 59, 59, 0.2)', '#8B0000', '#FF6B6B'
+            ];
+    
+            industryChart = new Chart(industryChartCtx, {
+                type: 'pie',
+                data: {
+                    labels: data.industries,
+                    datasets: [{
+                        data: data.percentiles,
+                        backgroundColor: backgroundColors,
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: context => `${context.label}: ${context.raw}%`
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        function updateIndustryChart(data) {
+            if (industryChart) {
+                industryChart.data.labels = data.industries;
+                industryChart.data.datasets[0].data = data.percentiles;
+                industryChart.update();
+            }
+        }
+    
+        // Init on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+    
+            // THEME TOGGLE
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIconDark = document.getElementById('theme-icon-dark');
+            const themeIconLight = document.getElementById('theme-icon-light');
+    
+            if (localStorage.getItem('theme') === 'dark' || 
+                (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                themeIconDark.classList.add('hidden');
+                themeIconLight.classList.remove('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIconDark.classList.remove('hidden');
+                themeIconLight.classList.add('hidden');
+            }
+    
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                        themeIconDark.classList.remove('hidden');
+                        themeIconLight.classList.add('hidden');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                        themeIconDark.classList.add('hidden');
+                        themeIconLight.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+    
+<script>
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('main-header');
+        const homeSection = document.getElementById('home');
+        const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
+        
+        if (window.scrollY > homeSectionBottom) {
+            header.classList.remove('backdrop-blur-none');
+            header.classList.add('backdrop-blur-sm', 'bg-white/80', 'dark:bg-dark-800/80');
+        } else {
+            header.classList.add('backdrop-blur-none');
+            header.classList.remove('backdrop-blur-sm', 'bg-white/80', 'dark:bg-dark-800/80');
+        }
+    });
+    </script>
+</body>
+</html>

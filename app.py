@@ -1,10 +1,9 @@
-
-from flask import Flask, render_template,  request
+from flask import Flask, render_template, jsonify, request
 import pandas as pd
 import os
 
 # ===========================
-# 🔹 PARENT function
+# 🔹 DataLoader CLASS
 # ===========================
 class DataLoader:
     """Handles data loading and processing for various datasets."""
@@ -12,181 +11,201 @@ class DataLoader:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     DATA_FOLDER = os.path.join(BASE_DIR, "templates", "data")
 
-# ===========================
-# 🔹  CLASS methods
-# ===========================
     @classmethod
-    def load_csv(cls, filename, required_columns):
-        """Generic method to load CSV data and validate required columns."""
+    def load_dataset(cls, filename, column_name):
+        """Loads a CSV file and returns the sum of the given column."""
         file_path = os.path.join(cls.DATA_FOLDER, filename)
         if not os.path.exists(file_path):
-            print(f"❌ ERROR: Dataset '{filename}' not found.")
-            return pd.DataFrame()
-        
+            print(f"❌ ERROR: {filename} not found.")
+            return 0
+
         df = pd.read_csv(file_path)
-        for col in required_columns:
-            if col not in df.columns:
-                print(f"❌ ERROR: Missing column '{col}' in dataset!")
-                return pd.DataFrame()
-        return df
+
+        if column_name not in df.columns:
+            print(f"❌ ERROR: Column '{column_name}' not found in {filename}")
+            return 0
+
+        return df[column_name].sum()
 
     @classmethod
-    def load_arrivals(cls, selected_region=None):
-        df = cls.load_csv("Tourist_Arrivals_Philippines.csv", [
-            "Year", "Region", "Foreign Tourists", "Domestic Tourists", "Total Visitors", 
-            "Revenue (PHP Billion)", "Top Visitor Country", "Purpose of Visit"
-        ])
+    def get_grouped_data(cls, filename, group_by, sum_column, year_filter=None):
+        """Returns grouped data from a CSV, summing the specified column by a group, sorted logically."""
+        file_path = os.path.join(cls.DATA_FOLDER, filename)
+        if not os.path.exists(file_path):
+            print(f"❌ ERROR: {filename} not found.")
+            return {"regions": [], "cases": [], "years": []}
+
+        try:
+            df = pd.read_csv(file_path)
+        except Exception as e:
+            print(f"❌ ERROR reading {filename}: {str(e)}")
+            return {"regions": [], "cases": [], "years": []}
+
+        if group_by not in df.columns or sum_column not in df.columns:
+            print(f"❌ ERROR: Missing columns in {filename}")
+            return {"regions": [], "cases": [], "years": []}
+
+        # Get all available years from the dataset for the filter
+        available_years = []
+        if "Year" in df.columns:
+            available_years = sorted(df["Year"].unique().tolist())
+
+        # Apply year filter if specified
+        if year_filter and year_filter != "all" and "Year" in df.columns:
+            try:
+                year_filter = int(year_filter)
+                df = df[df["Year"] == year_filter]
+            except (ValueError, TypeError):
+                # If year_filter is invalid, don't filter
+                pass
+
+        # Define the desired order (NCR first, BARMM last)
+        desired_order = [
+            "NCR",
+            "REGION I (ILOCOS REGION)",
+            "REGION II (CAGAYAN VALLEY)",
+            "REGION III (CENTRAL LUZON)",
+            "REGION IV-A (CALABARZON)",
+            "REGION IV-B (MIMAROPA)",
+            "REGION V (BICOL REGION)",
+            "REGION VI (WESTERN VISAYAS)",
+            "REGION VII (CENTRAL VISAYAS)",
+            "REGION VIII (EASTERN VISAYAS)",
+            "REGION IX (ZAMBOANGA PENINSULA)",
+            "REGION X (NORTHERN MINDANAO)",
+            "REGION XI (DAVAO REGION)",
+            "REGION XII (SOCCSKSARGEN)",
+            "REGION XIII (CARAGA)",
+            "BARMM"
+        ]
+
+        # Group and sum the data
+        grouped = df.groupby(group_by)[sum_column].sum().reset_index()
+
+        # Get all unique regions from data (case-sensitive)
+        all_regions = grouped[group_by].unique().tolist()
+
+        # Create full order: desired regions first, then any others in alphabetical order
+        missing_regions = sorted([r for r in all_regions if r not in desired_order])
+        full_order = desired_order + missing_regions
+
+        # Convert to categorical with our custom order
+        grouped[group_by] = pd.Categorical(
+            grouped[group_by], 
+            categories=full_order, 
+            ordered=True
+        )
         
-        if df.empty:
-            return {"years": [], "regions": [], "tourists_by_country": {}}
-
-        # Extract and sort unique regions
-        regions = sorted(df["Region"].dropna().unique().tolist(), 
-                        key=lambda x: int(x.split()[-1]) if x.split()[-1].isdigit() else float('inf'))
-
-        # Filter by selected region
-        if selected_region and selected_region != "All Regions":
-            df = df[df["Region"] == selected_region]
-
-        # Ensure 'Top Visitor Country' and 'Foreign Tourists' columns have valid data
-        df = df.dropna(subset=["Top Visitor Country", "Foreign Tourists"])
-        df["Foreign Tourists"] = pd.to_numeric(df["Foreign Tourists"], errors="coerce").fillna(0)
-
-        # Aggregate correctly
-        tourists_by_country = df.groupby("Top Visitor Country", as_index=False)["Foreign Tourists"].sum()
-        tourists_by_country = tourists_by_country.sort_values(by="Foreign Tourists", ascending=False)
-        
-        # Convert to dictionary format expected by Highcharts
-        tourists_by_country_dict = dict(zip(tourists_by_country["Top Visitor Country"], tourists_by_country["Foreign Tourists"]))
+        # Sort by our custom order
+        grouped = grouped.sort_values(group_by)
 
         return {
-            "years": df["Year"].unique().tolist(),
-            "regions": ["All Regions"] + regions,
-            "tourists_by_country": tourists_by_country_dict
+            "regions": grouped[group_by].tolist(),
+            "cases": [int(x) for x in grouped[sum_column].tolist()],  # Remove decimal places
+            "years": available_years
         }
 
 
-    @classmethod
-    def load_destinations(cls, selected_year=None):
-            df = cls.load_csv("Tourist_Destinations_Philippines.csv", ["City/Province", "Tourist Arrivals", "Year"])
-            if df.empty:
-                return {"cities": [], "tourist_count": [], "years": []}
-
-            # Extract unique years for the dropdown
-            years = sorted(df["Year"].dropna().unique().tolist())
-
-            # Convert year data to string to ensure consistent comparison
-            df["Year"] = df["Year"].astype(str)
-
-            # Filter data only if a valid year is selected
-            if selected_year and selected_year != "All Time":
-                df = df[df["Year"] == selected_year]
-
-            df["Tourist Arrivals"] = pd.to_numeric(df["Tourist Arrivals"], errors="coerce").fillna(0)
-            df_grouped = df.groupby("City/Province")["Tourist Arrivals"].sum().reset_index()
-            df_sorted = df_grouped.sort_values(by="Tourist Arrivals", ascending=False).head(10)
-
-            return {
-                "cities": df_sorted["City/Province"].tolist(),
-                "tourist_count": df_sorted["Tourist Arrivals"].tolist(),
-                "years": ["All Time"] + years  # Add 'All Time' as the default option
-            }
-
-
-
-    @classmethod
-    def load_occupancy_data(cls, selected_region=None):
-            df = cls.load_csv("Hotel_Occupancy_Rates.csv", [
-                "Year", "Month", "Region", "Occupancy Rate (%)", "Revenue (PHP)"
-            ])
-            if df.empty: 
-                return {"years": [], "regions": [], "occupancy_rates": [], "revenue": []}
-
-            # Extract unique regions for the dropdown
-            regions = sorted(df["Region"].dropna().unique().tolist())
-
-            # Filter data by region if selected
-            if selected_region and selected_region != "All ":
-                df = df[df["Region"] == selected_region]
-
-            # Group by Year instead of Month for the x-axis
-            df_grouped = df.groupby("Year", as_index=False).agg({
-                "Occupancy Rate (%)": "mean",
-                "Revenue (PHP)": "sum"
-            })
-
-            return {
-                "years": df_grouped["Year"].astype(str).tolist(),  # Ensure years are strings for Highcharts
-                "regions": ["All "] + regions,
-                "occupancy_rates": df_grouped["Occupancy Rate (%)"].round(1).tolist(),
-                "revenue": df_grouped["Revenue (PHP)"].astype(int).tolist()
-            }
-
-
-
 # ===========================
-# 🔹 FLASK APP & ROUTES 
+# 🔹 FLASK APP & ROUTES
 # ===========================
-
 app = Flask(__name__)
 
 @app.route('/')
 def home():
+    """Render the home page with the chart."""
+    return render_template("home.html")
 
-    # this line is when u want to display the data in the home.html 
-    data = {
-        "destinations": DataLoader.load_destinations(),
-        "arrivals": DataLoader.load_arrivals(),
-        "occupancy": DataLoader.load_occupancy_data()
+@app.route('/api/region-cases')
+def region_cases():
+    """API route that returns JSON data for the Chart.js graph."""
+    year_filter = request.args.get('year', 'all')
+    
+    grouped_data = DataLoader.get_grouped_data(
+        filename="cleaned_casesbyregion.csv",
+        group_by="Region",
+        sum_column="Estimated Cases",
+        year_filter=year_filter
+    )
+    return jsonify(grouped_data)# Add these new endpoints to your Flask app
+@app.route('/api/age-cases')
+def age_cases():
+    """API route that returns JSON data for age group distribution."""
+    year_filter = request.args.get('year', 'all')
+    grouped_data = DataLoader.get_grouped_data(
+        filename="cleaned_casesbyagegroup.csv",
+        group_by="Age Group",
+        sum_column="Total",
+        year_filter=year_filter
+    )
+    
+    # Get male/female breakdown
+    file_path = os.path.join(DataLoader.DATA_FOLDER, "cleaned_casesbyagegroup.csv")
+    df = pd.read_csv(file_path)
+    
+    if year_filter and year_filter != "all":
+        df = df[df["Year"] == int(year_filter)]
+    
+    age_data = {
+        "age_groups": df["Age Group"].unique().tolist(),
+        "male": df.groupby("Age Group")["Male"].sum().tolist(),
+        "female": df.groupby("Age Group")["Female"].sum().tolist(),
+        "years": sorted(df["Year"].unique().tolist())
     }
-    return render_template("home.html", **data)
+    return jsonify(age_data)
 
-@app.route('/destinations')
-def destinations():
-    selected_year = request.args.get('year', "All Time")  # Default to 'All Time'
-
-    # Load destination data with selected year
-    data = DataLoader.load_destinations(selected_year)
-
-    # Ensure selected_year is treated as a string for consistency
-    if selected_year != "All Time" and selected_year not in map(str, data["years"]):
-        return render_template("404.html"), 404  # Redirect invalid year to 404 page
-
-    return render_template("destinations.html", **data, selected_year=selected_year)
-
-@app.route('/arrivals')
-def arrivals():
-    selected_region = request.args.get('region', "All Regions")
-
-    # Load data and get valid regions
-    data = DataLoader.load_arrivals(selected_region)
-    valid_regions = data.get("regions", [])  # Assuming 'regions' is part of the data
-
-    # Error handling for invalid regions
-    if selected_region != "All Regions" and selected_region not in valid_regions:
-        return render_template("404.html"), 404  # Invalid region -> 404
-
-    return render_template("arrivals.html", **data, selected_region=selected_region)
-
-
-@app.route('/hotel_occupancy')
-def hotel_occupancy():
-    selected_region = request.args.get('region', "All ")
-
-    # Load data and get valid regions
-    data = DataLoader.load_occupancy_data(selected_region)
-    valid_regions = data.get("regions", [])  # Assuming 'regions' is part of the data
-
-    # Error handling for invalid regions
-    if selected_region != "All " and selected_region not in valid_regions:
-        return render_template("404.html"), 404  # Invalid region -> 404
-
-    return render_template("hotel_occupancy.html", occupancy_data=data, selected_region=selected_region)
-
+@app.route('/api/industry-cases')
+def industry_cases():
+    """API route that returns JSON data for industry distribution."""
+    year_filter = request.args.get('year', 'all')
+    file_path = os.path.join(DataLoader.DATA_FOLDER, "cleaned_casesbyindustry.csv")
+    df = pd.read_csv(file_path)
+    
+    # Get all available years for the filter
+    available_years = sorted(df["Year"].unique().tolist())
+    
+    # Apply year filter if specified
+    if year_filter and year_filter != "all":
+        try:
+            year_filter = int(year_filter)
+            df = df[df["Year"] == year_filter]
+        except (ValueError, TypeError):
+            # If year_filter is invalid, don't filter
+            pass
+    
+    # Group by Industry and sum percentiles when "All Years" is selected
+    if year_filter == "all":
+        # Group by Industry and calculate mean of percentiles
+        grouped_df = df.groupby("Industry")["Percentile"].mean().reset_index()
+        
+        # Normalize percentiles to ensure they sum to 100%
+        total = grouped_df["Percentile"].sum()
+        if total > 0:  # Avoid division by zero
+            grouped_df["Percentile"] = (grouped_df["Percentile"] / total) * 100
+            
+        # Round to 1 decimal place for display
+        grouped_df["Percentile"] = grouped_df["Percentile"].round(1)
+        
+        industry_data = {
+            "industries": grouped_df["Industry"].tolist(),
+            "percentiles": grouped_df["Percentile"].tolist(),
+            "years": available_years
+        }
+    else:
+        # Single year, just return the data as is
+        industry_data = {
+            "industries": df["Industry"].tolist(),
+            "percentiles": df["Percentile"].tolist(),
+            "years": available_years
+        }
+    
+    return jsonify(industry_data)
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
 
-
+# ===========================
+# 🔹 APP START
+# ===========================
 if __name__ == "__main__":
     app.run(debug=True)

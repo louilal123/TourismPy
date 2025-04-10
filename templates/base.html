@@ -1,57 +1,68 @@
-<!-- THIS FILE IS THE MAIN HTL FILE THAT GETS REUSED IN EVERY PAGES OF THE WEBSITE  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tourism Insights PH: Destination, Arrivals & Hotels - Home</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
- 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-
-    <!-- logo here -->
-    <link rel="icon" href="{{ url_for('static', filename='images/trylogo-removebg-preview.png') }}" type="image/png">
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Load Google Charts -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="../static/js/search.js"></script>
-
-    <script src="../static/js/icons.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    {% block extra_head %}{% endblock %}
-</head>
-
-
-<body>
+    <title>Child Labor PH | Data Analytics</title>
    
-     <!-- Loading Screen -->
-<!-- Loading Screen -->
-<div class="loading-screen">
-    <div class="loading-content">
-      <h1 class="loading-title">Tourism Insights PH</h1>
-      <div class="loading-bar">
-       <h6> <span>Loading..</span></h6>
-        <div class="loading-progress"></div>
-      </div>
-    </div>
-  </div>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/image.png') }}">
 
-  <!-- Custom Cursor -->
-  <div class="cursor"></div>
-  <div class="cursor-follower"></div>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="floating-circle circle1"></div>
-    <div class="floating-circle circle2"></div>
-    <div class="floating-circle circle3"></div>
-    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#FF3E3E',
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#1a1a1a',
+                            700: '#2c2c2c',
+                            600: '#3d3d3d'
+                        },
+                        light: {
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            300: '#d4d4d4',
+                            400: '#a3a3a3'
+                        },
+                        muted: '#a3a3a3'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+    </style>
+</head>
+<body class="bg-light-100 text-dark-900 dark:bg-dark-900 dark:text-light-100 transition-colors">
+   
+   <!-- ============ -->
+ <!-- Custom Cursor -->
+ <div class="cursor"></div>
+ <div class="cursor-follower"></div>
+ 
+ <!-- Preloader -->
+ <div id="preloader" class="fixed inset-0 bg-dark flex flex-col items-center justify-center z-50">
+     <h1 class="text-3xl md:text-3xl font-bold text-light tracking-tighter">
+         <span id="preloader-counter">0</span><span>%</span>
+     </h1>
+     <p class="mt-4 text-muted text-lg">Loading</p>
+     <div class="w-48 h-0.5 bg-muted/30 mt-6 overflow-hidden">
+         <div id="preloader-bar" class="h-full bg-accent" style="width: 0%"></div>
+     </div>
+ </div>
 
     {% include 'navbar.html' %}
 
@@ -62,101 +73,368 @@
     {% include 'footer.html' %}
 
     {% block scripts %}
-    <script>
-        // Loading Screen Animation
+   <!-- Add this script at the end of your body -->
+   <script src="../static/js/script.js"></script>
+
+       <script>
+           let regionChart, ageChart, industryChart;
+       
+           async function fetchAgeData(yearFilter = 'all') {
+               const response = await fetch(`/api/age-cases?year=${yearFilter}`);
+               return await response.json();
+           }
+       
+           async function fetchIndustryData(yearFilter = 'all') {
+               const response = await fetch(`/api/industry-cases?year=${yearFilter}`);
+               return await response.json();
+           }
+       
+           async function fetchRegionData(yearFilter = 'all') {
+               const response = await fetch(`/api/region-cases?year=${yearFilter}`);
+               return await response.json();
+           }
+       
+           async function initCharts() {
+               const regionData = await fetchRegionData();
+               const ageData = await fetchAgeData();
+               const industryData = await fetchIndustryData();
+       
+               const yearFilterElement = document.getElementById('yearFilter');
+               const allYears = [...new Set([
+                   ...(regionData.years || []),
+                   ...(ageData.years || []),
+                   ...(industryData.years || [])
+               ])].sort();
+       
+               yearFilterElement.innerHTML = '';
+               const allOption = document.createElement('option');
+               allOption.value = 'all';
+               allOption.textContent = 'All Years';
+               yearFilterElement.appendChild(allOption);
+       
+               if (allYears.length > 0) {
+                   allYears.forEach(year => {
+                       const option = document.createElement('option');
+                       option.value = year;
+                       option.textContent = year;
+                       yearFilterElement.appendChild(option);
+                   });
+               }
+       
+               createRegionChart(regionData);
+               createAgeChart(ageData);
+               createIndustryChart(industryData);
+       
+               yearFilterElement.addEventListener('change', async function () {
+                   const selectedYear = this.value;
+                   const filteredRegionData = await fetchRegionData(selectedYear);
+                   const filteredAgeData = await fetchAgeData(selectedYear);
+                   const filteredIndustryData = await fetchIndustryData(selectedYear);
+       
+                   updateRegionChart(filteredRegionData);
+                   updateAgeChart(filteredAgeData);
+                   updateIndustryChart(filteredIndustryData);
+               });
+           }
+       
+           function createRegionChart(data) {
+               const regionChartCtx = document.getElementById('regionChart').getContext('2d');
+       
+               regionChart = new Chart(regionChartCtx, {
+                   type: 'line',
+                   data: {
+                       labels: data.regions,
+                       datasets: [{
+                           label: 'Child Labor Cases by Region',
+                           data: data.cases,
+                           borderColor: '#FF3E3E',
+                           backgroundColor: 'rgba(255, 62, 62, 0.1)',
+                           tension: 0.4,
+                           fill: true,
+                           pointRadius: 3,
+                           pointBackgroundColor: '#FF3E3E',
+                           pointBorderColor: '#fff',
+                           pointHoverRadius: 5,
+                           pointHoverBackgroundColor: '#FF3E3E'
+                       }]
+                   },
+                   options: {
+                       responsive: true,
+                       maintainAspectRatio: false,
+                       plugins: {
+                           legend: {
+                               display: false
+                           },
+                           tooltip: {
+                               callbacks: {
+                                   label: function (context) {
+                                       return `Child Labor Cases: ${context.raw.toLocaleString()}`;
+                                   }
+                               }
+                           }
+                       },
+                       scales: {
+                           y: {
+                               grid: {
+                                   color: 'rgba(255, 255, 255, 0.05)'
+                               },
+                               ticks: {
+                                   color: '#888888',
+                                   callback: value => value.toLocaleString()
+                               },
+                               min: 0
+                           },
+                           x: {
+                               grid: {
+                                   color: 'rgba(255, 255, 255, 0.05)'
+                               },
+                               ticks: {
+                                   color: '#888888'
+                               }
+                           }
+                       }
+                   }
+               });
+           }
+       
+           function updateRegionChart(data) {
+               if (regionChart) {
+                   regionChart.data.labels = data.regions;
+                   regionChart.data.datasets[0].data = data.cases;
+                   regionChart.update();
+               }
+           }
+       
+           function createAgeChart(data) {
+               const ageChartCtx = document.getElementById('ageChart').getContext('2d');
+       
+               ageChart = new Chart(ageChartCtx, {
+                   type: 'bar',
+                   data: {
+                       labels: data.age_groups,
+                       datasets: [
+                           {
+                               label: 'Male',
+                               data: data.male,
+                               backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                               borderColor: 'rgba(54, 162, 235, 1)',
+                               borderWidth: 1
+                           },
+                           {
+                               label: 'Female',
+                               data: data.female,
+                               backgroundColor: 'rgba(255, 59, 59, 0.7)',
+                               borderColor: '#ff3b3b',
+                               borderWidth: 1
+                           }
+                       ]
+                   },
+                   options: {
+                       responsive: true,
+                       maintainAspectRatio: false,
+                       plugins: {
+                           legend: {
+                               position: 'top',
+                           },
+                           tooltip: {
+                               callbacks: {
+                                   label: context => `${context.dataset.label}: ${context.raw.toLocaleString()}`
+                               }
+                           }
+                       },
+                       scales: {
+                           y: {
+                               beginAtZero: true,
+                               grid: {
+                                   color: 'rgba(255, 255, 255, 0.05)'
+                               },
+                               ticks: {
+                                   color: '#888888',
+                                   callback: value => value.toLocaleString()
+                               }
+                           },
+                           x: {
+                               grid: {
+                                   color: 'rgba(255, 255, 255, 0.05)'
+                               },
+                               ticks: {
+                                   color: '#888888'
+                               }
+                           }
+                       }
+                   }
+               });
+           }
+       
+           function updateAgeChart(data) {
+               if (ageChart) {
+                   ageChart.data.labels = data.age_groups;
+                   ageChart.data.datasets[0].data = data.male;
+                   ageChart.data.datasets[1].data = data.female;
+                   ageChart.update();
+               }
+           }
+       
+           function createIndustryChart(data) {
+               const industryChartCtx = document.getElementById('industryChart').getContext('2d');
+       
+               const backgroundColors = [
+                   '#ff3b3b', '#ff7e7e', '#b30000',
+                   'rgba(255, 59, 59, 0.6)', 'rgba(255, 59, 59, 0.4)',
+                   'rgba(255, 59, 59, 0.2)', '#8B0000', '#FF6B6B'
+               ];
+       
+               industryChart = new Chart(industryChartCtx, {
+                   type: 'pie',
+                   data: {
+                       labels: data.industries,
+                       datasets: [{
+                           data: data.percentiles,
+                           backgroundColor: backgroundColors,
+                           borderColor: 'rgba(255, 255, 255, 0.1)',
+                           borderWidth: 1
+                       }]
+                   },
+                   options: {
+                       responsive: true,
+                       maintainAspectRatio: false,
+                       plugins: {
+                           legend: {
+                               position: 'right',
+                           },
+                           tooltip: {
+                               callbacks: {
+                                   label: context => `${context.label}: ${context.raw}%`
+                               }
+                           }
+                       }
+                   }
+               });
+           }
+       
+           function updateIndustryChart(data) {
+               if (industryChart) {
+                   industryChart.data.labels = data.industries;
+                   industryChart.data.datasets[0].data = data.percentiles;
+                   industryChart.update();
+               }
+           }
+       
+           // Init on DOM load
+           document.addEventListener('DOMContentLoaded', () => {
+               initCharts();
+       
+               // THEME TOGGLE
+               const themeToggle = document.getElementById('theme-toggle');
+               const themeIconDark = document.getElementById('theme-icon-dark');
+               const themeIconLight = document.getElementById('theme-icon-light');
+       
+               if (localStorage.getItem('theme') === 'dark' || 
+                   (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                   document.documentElement.classList.add('dark');
+                   themeIconDark.classList.add('hidden');
+                   themeIconLight.classList.remove('hidden');
+               } else {
+                   document.documentElement.classList.remove('dark');
+                   themeIconDark.classList.remove('hidden');
+                   themeIconLight.classList.add('hidden');
+               }
+       
+               if (themeToggle) {
+                   themeToggle.addEventListener('click', () => {
+                       if (document.documentElement.classList.contains('dark')) {
+                           document.documentElement.classList.remove('dark');
+                           localStorage.setItem('theme', 'light');
+                           themeIconDark.classList.remove('hidden');
+                           themeIconLight.classList.add('hidden');
+                       } else {
+                           document.documentElement.classList.add('dark');
+                           localStorage.setItem('theme', 'dark');
+                           themeIconDark.classList.add('hidden');
+                           themeIconLight.classList.remove('hidden');
+                       }
+                   });
+               }
+           });
+       </script>
+       
+   <script>
+       window.addEventListener('scroll', function() {
+           const header = document.getElementById('main-header');
+           const homeSection = document.getElementById('home');
+           const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
+           
+           if (window.scrollY > homeSectionBottom) {
+               header.classList.remove('backdrop-blur-none');
+               header.classList.add('backdrop-blur-sm', 'bg-white/80', 'dark:bg-dark-800/80');
+           } else {
+               header.classList.add('backdrop-blur-none');
+               header.classList.remove('backdrop-blur-sm', 'bg-white/80', 'dark:bg-dark-800/80');
+           }
+       });
+       </script>
+   <script>
+    // Initialize reveal animations
     document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        const loadingScreen = document.querySelector('.loading-screen');
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => {
-          loadingScreen.style.display = 'none';
-        }, 500);
-      }, 2500);
-    });
-
-    // Custom Cursor
-    const cursor = document.querySelector('.cursor');
-    const cursorFollower = document.querySelector('.cursor-follower');
-    
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      
-      setTimeout(() => {
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
-      }, 100);
-    });
-
-    document.addEventListener('mousedown', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(0.7)';
-      cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.7)';
-    });
-
-    document.addEventListener('mouseup', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-    });
-
-    // Button hover effects
-    const buttons = document.querySelectorAll('a');
-    
-    buttons.forEach(button => {
-      button.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorFollower.style.transform = 'translate(-50%, -50%) scale(3)';
-        cursorFollower.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
-      });
-      
-      button.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorFollower.style.backgroundColor = 'white';
-      });
-    });
-
-    // Parallax Effect
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      document.querySelector('.hero-section').style.backgroundPositionY = scrollY * 0.5 + 'px';
-    });
-    </script>
-    <script>
-       // Mobile Menu Toggle Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
-    
-    menuToggle.addEventListener('click', function() {
-        // Toggle mobile menu visibility
-        mobileMenu.classList.toggle('hidden');
-        mobileMenu.classList.toggle('active');
+        const revealElements = document.querySelectorAll('.reveal');
         
-        // Toggle icons
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-        
-        // Update aria-expanded state
-        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-        menuToggle.setAttribute('aria-expanded', !isExpanded);
-    });
-});
-        </script>
-        <script>
-            window.addEventListener("load", function () {
-                const preloader = document.getElementById('preloader');
-                const content = document.getElementById('content');
-          
-                setTimeout(() => {
-                    preloader.style.display = 'none'; // Hide loader
-                    content.classList.remove('hidden'); // Show main content
-                }, 1000); // Delay to ensure smooth transition
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
             });
-          </script>
-          
+        }, { threshold: 0.1 });
         
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Animate split characters
+        const splitTextElements = document.querySelectorAll('.split-char');
+        splitTextElements.forEach((char, index) => {
+            setTimeout(() => {
+                char.style.transform = 'translateY(0)';
+                char.style.opacity = '1';
+            }, index * 50);
+        });
+    });
+</script>
+    <script>
+          // Mobile menu functionality
+          const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        menuOverlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+    </script>
     {% endblock %}
     
 </body>

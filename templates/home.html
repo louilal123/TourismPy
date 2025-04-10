@@ -1,100 +1,306 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="floating-circle circle1"></div>
-    <div class="floating-circle circle2"></div>
-    <div class="floating-circle circle3"></div>
+    <!-- Hero Section-->
+    <section class="min-h-screen  flex flex-col justify-center px-6 md:px-24 pt-24 relative overflow-hidden" id="home">
+        <div class="absolute inset-0 z-1">
+            <div style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDUwMCI+CiAgPHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMGEwYTBhIi8+CiAgPGNpcmNsZSBjeD0iNzUwIiBjeT0iMjUwIiByPSIyMDAiIGZpbGw9IiMxYTFhMWEiLz4KICA8cGF0aCBkPSJNNTAwIDI1MEw2NTAgMTUwTDgwMCAzNTBMOTUwIDI1MCIgc3Ryb2tlPSIjRkYzRTNFIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KICA8Y2lyY2xlIGN4PSI4MDAiIGN5PSIzNTAiIHI9IjQiIGZpbGw9IiNGRjNFM0UiLz4KICA8Y2lyY2xlIGN4PSI5NTAiIGN5PSIyNTAiIHI9IjQiIGZpbGw9IiNGRjNFM0UiLz4KPC9zdmc+');" class="w-full h-full bg-no-repeat bg-cover bg-center dark:opacity-100 opacity-5"></div>
+        </div>
+        
+        <!-- Animated bubbles -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <div class="bubble bubble-1"></div>
+            <div class="bubble bubble-2"></div>
+            <div class="bubble bubble-3"></div>
+            <div class="bubble bubble-4"></div>
+            <div class="bubble bubble-5"></div>
+            <div class="bubble bubble-6"></div>
+            <div class="bubble bubble-7"></div>
+            <div class="bubble bubble-8"></div>
+            <div class="bubble bubble-9"></div>
+        </div>
+        
+        <div class="relative z-10"> 
+            <div class="overflow-hidden">
+                <h1 class="text-5xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none mb-2 reveal">
+                    <span class="block">CHILD LABOR:</span>
+                    <span class="block text-accent">DATA ANALYTICS</span>
+                </h1>
+            </div>
+            
+            <p class="text-muted max-w-lg my-8 reveal" >
+                Exploring the child labor crisis through data analytics, visualizing patterns and trends from 2020 to 2022 that shape our understanding of this critical issue.
+            </p>
+            
+            <div class="flex gap-6 mt-4 reveal" >
+                <div id="data" 
+                class="hover-target magnetic-hover border  border-accent/20 px-6 py-3 text-accent hover:bg-accent hover:text-white
+                 transition-colors">
+                   <a href="#charts"> Explore Data</a>
+                </div>
+                <div class="text-muted self-center hover-target magnetic-hover hover:border-accent/20 ">
+                    Scroll to discover
+                </div>
+            </div>
+        </div>
+    </section>
     
-    <div class="hero-overlay">
-      <div class="hero-content">
-        <h2 class="hero-title">Welcome to Tourism Insights PH!</h2>
-        <p class="hero-subtitle">
-          Explore the diverse beauty of the Philippines, one of the most sought-after travel destinations in Southeast Asia.
-        </p>
-        <div class="hero-buttons">
-          <a href="/destinations" class="button-primary">Explore Now</a>
-          <a href="#learnmore" class="button-secondary">Learn More</a>
+    <!-- Scrolling Text -->
+    <div class="py-8 border-y border-dark-900/10 dark:border-light-100/10 overflow-hidden">
+        <div class="scroll-container">
+            <div class="scroll-text text-7xl md:text-9xl font-bold text-dark-900/5 dark:text-light-100/5">
+                DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION · 
+                DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION
+            </div>
+            <div class="scroll-text">
+                DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION · 
+                DATA ANALYTICS · CHILD LABOR · PHILIPPINES · INSIGHTS · VISUALIZATION
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-
-
-  <section class="welcome-section"id="learnmore" >
-    <div class="container">
-      <div class="welcome-content">
-        <h1>Welcome to Tourism Insights PH!</h1>
-        <p class="tagline">Discover top destinations, hotel occupation rate , and tourism data accross the country.</p>
-        <p class="description">Empowering travelers and businesses with the latest tourism insights for informed decision-making.</p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-map-marked-alt"></i>
-          </div>
-          <h3>Top Destinations</h3>
-          <p>Explore the most visited tourist spots in the Philippines.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-plane-arrival"></i>
-          </div>
-          <h3>Tourist Arrivals</h3>
-          <p>Find out about the Tourist arrivals in the last decade.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>Tourism Data</h3>
-          <p>Get insights into tourist arrivals, revenue, and more.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<!-- Mission Section -->
-<section class="mission-section">
-    <div class="mission-overlay">
-        <div class="mission-container">
-            <h2 class="mission-title">Our Mission</h2>
-            <p class="mission-text">Empowering travelers, businesses, and researchers with reliable tourism insights.</p>
-            <p class="mission-description">
-                We aim to bridge the gap between tourism data and real-world travel experiences, helping you discover
-                the best of the Philippines with confidence.
+    <section id="data" class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+        <div class="text-center mb-16">
+            <span class="inline-block px-4 py-1  bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium mb-4">
+                Data Insights
+            </span>
+           
+            <h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">
+                DATA <span class="text-accent">OVERVIEW</span>
+            </h2>
+            
+            <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+                Visualizing the distribution of child labor cases across different dimensions in the Philippines.
             </p>
         </div>
-    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- By Region Card -->
+            <div class="bg-white dark:bg-dark-700  shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-lg bg-gradient-to-r from-red-500 to-red-300 dark:from-red-600 dark:to-red-400 flex items-center justify-center mb-4 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">By Region</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Comparative analysis of child labor prevalence across 16 regions in Luzon, Visayas, and Mindanao.
+                </p>
+                <div class="h-2 bg-gray-200 ">
+                    <div class="h-2 bg-gradient-to-r from-red-500 to-red-300 " style="width: 75%"></div>
+                </div>
+            </div>
+    
+            <!-- By Industry Card -->
+            <div class="bg-white dark:bg-dark-700  shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-lg bg-gradient-to-r from-red-500 to-red-300 dark:from-red-600 dark:to-red-400 flex items-center justify-center mb-4 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">By Industry</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Breakdown of child labor distribution across different economic sectors and industries.
+                </p>
+                <div class="flex space-x-2">
+                    <div class="h-2 bg-red-500 " style="width: 60%"></div>
+                    <div class="h-2 bg-yellow-500 " style="width: 25%"></div>
+                    <div class="h-2 bg-red-500 " style="width: 15%"></div>
+                </div>
+            </div>
+    
+            <!-- By Age Group Card -->
+            <div class="bg-white dark:bg-dark-700  shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-lg bg-gradient-to-r from-red-500 to-red-300 dark:from-red-600 dark:to-red-400 flex items-center justify-center mb-4 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">By Age Group</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Distribution of child labor cases across different age brackets and developmental stages.
+                </p>
+                <div class="flex space-x-1">
+                    <div class="h-2 bg-red-400 " style="width: 20%"></div>
+                    <div class="h-2 bg-red-500 " style="width: 35%"></div>
+                    <div class="h-2 bg-red-600 " style="width: 45%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    
+<!-- Charts Section (Updated Titles) -->
+
+
+<section id="charts" class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+    
+        <div class="text-center mb-16">
+            <span class="inline-block px-4 py-1  bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium mb-4">
+                Data Visualization
+            </span>
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 reveal">
+               DATA <span class="text-accent">ANALYTICS</span>
+            </h2>
+            <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+                Explore regional and sectoral trends in child labor across the Philippines.
+            </p>
+        </div>
+        <div class="flex items-center gap-3 mb-8 pt-6">
+            <h4 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">📅 Select a Year:</h4>
+            <select id="yearFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="all" selected>All Years</option>
+                <!-- Dynamic options -->
+            </select>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+         
+            
+        <!-- Bar Chart -->
+        <div class="bg-white dark:bg-dark-700  shadow-lg p-6">
+            <h3 class="text-xl text-center font-bold mb-4">Child Labor by AGE GROUPS (2022)</h3>
+            <div class="chart-container" style="height: 500px;">
+                <canvas id="ageChart"></canvas>
+            </div>
+        </div>
+            <!-- Pie Chart -->
+            <div class="bg-white dark:bg-dark-700  shadow-lg p-6">
+                <h3 class="text-xl text-center font-bold mb-4">Child Labor by INDUSTRY/SECTOR</h3>
+                <div class="chart-container" style="height: 500px;">
+                    <canvas id="industryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-dark-700  shadow-lg p-6">
+            <h3 class="text-xl text-center font-bold mb-4">Philippine Child Labor Trends by REGION</h3>
+            <div class="chart-container" style="height: 500px;">
+                <canvas id="regionChart"></canvas>
+            </div>
+        </div>
+      
+
 </section>
-<!-- Features Section -->
-<section class="info-section">
-    <div class="info-container">
-        <div class="info-item">
-            <h3>About Us</h3>
-            <p>Tourism Insights PH offers a comprehensive platform for exploring data on Philippine tourism. Our mission is to provide insightful information that empowers businesses, policymakers, and travelers alike.</p>
-        </div>
+<section id="about"  class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+   
+        <h2 class="text-3xl md:text-5xl font-bold mb-16 reveal">
+            WHO WE <span class="text-accent">ARE</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- About Us -->
+            <div class="p-6 border border-light/10 hover:border-accent transition-colors dark:border-dark-600 dark:hover:border-accent  bg-white dark:bg-dark-700">
+                <h3 class="text-2xl font-semibold mb-4">About Us</h3>
+                <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                <p class="text-muted dark:text-light">
+                    We are a dedicated team committed to uncovering the realities of child labor through data analytics and research.
+                </p>
+            </div>
 
-        <div class="info-item">
-            <h3>What We Do</h3>
-            <p>We specialize in visualizing tourism data, providing insights, and ensuring businesses can make informed decisions based on reliable statistics and trends.</p>
-        </div>
+            <!-- What We Do -->
+            <div class="p-6 border border-light/10 hover:border-accent transition-colors dark:border-dark-600 dark:hover:border-accent  bg-white dark:bg-dark-700">
+                <h3 class="text-2xl font-semibold mb-4">What We Do</h3>
+                <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                <p class="text-muted dark:text-light">
+                    We collect, analyze, and visualize child labor statistics to raise awareness and support advocacy efforts worldwide.
+                </p>
+            </div>
 
-        <div class="info-item">
-            <h3>Why Choose Us?</h3>
-            <p>Our platform combines user-friendly visuals, expert analysis, and reliable data to help businesses, policymakers, and travelers plan effectively.</p>
-        </div>
+            <!-- Our Mission -->
+            <div class="p-6 border border-light/10 hover:border-accent transition-colors dark:border-dark-600 dark:hover:border-accent  bg-white dark:bg-dark-700">
+                <h3 class="text-2xl font-semibold mb-4">Our Mission</h3>
+                <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                <p class="text-muted dark:text-light">
+                    To provide accurate and insightful data that empowers organizations and policymakers in the fight against child labor.
+                </p>
+            </div>
 
-        <div class="info-item">
-            <h3>Where Are We?</h3>
-            <p>We are based in the Philippines, serving clients across the country with valuable insights into the tourism industry.</p>
+            <!-- Our Vision -->
+            <div class="p-6 border border-light/10 hover:border-accent transition-colors dark:border-dark-600 dark:hover:border-accent  bg-white dark:bg-dark-700">
+                <h3 class="text-2xl font-semibold mb-4">Our Vision</h3>
+                <div class="h-0.5 w-16 bg-accent mb-6"></div>
+                <p class="text-muted dark:text-light">
+                    We envision a world where no child is subjected to labor, and every child can thrive in a safe and nurturing environment.
+                </p>
+            </div>
         </div>
-    </div>
+    
 </section>
 
-
-<div class="section-divider"></div>
+    <!-- About Section -->
+    <section id="about"  class="py-11 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+           <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <span class="inline-block px-4 py-1  bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium mb-4">
+                        About This Project
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold font-display mb-6">
+                        Understanding <span class="gradient-text">Child Labor</span>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        Child labor remains a persistent problem worldwide, with millions of children engaged in work that deprives them of their childhood, their potential, and their dignity.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-8">
+                        This data visualization project aims to shed light on the scale and distribution of child labor globally, helping policymakers, researchers, and the public understand where interventions are most needed.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="0 px-6 py-2 bg-red-500 to-secondary-light dark:from-primary-dark dark:to-secondary-dark text-white hover:bg-gray-300 hover:text-accent font-medium shadow hover:shadow-md transition">
+                            Download Report
+                        </a>
+                        <a href="#" class="px-6  py-2 border-2 border-gray-300 dark:border-dark-600  font-medium hover:bg-gray-200 dark:hover:bg-dark-700 transition">
+                            Methodology
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-white dark:bg-dark-700   p-8">
+                        <h3 class="text-xl font-bold mb-6">Data Sources</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8  bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">PSA</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">Local estimates on child labor and forced labor.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8  bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">DSWD</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">Data on children's rights and well-being.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8  bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold">DATA.GOV</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">Economic indicators and country-level data.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+    </section>
 {% endblock %}

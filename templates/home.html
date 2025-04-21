@@ -157,15 +157,25 @@
         </select>
     </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-         
-            
-        <!-- Bar Chart -->
-        <div class="bg-white dark:bg-dark-700  shadow-lg p-6">
-            <h3 class="text-xl text-center font-bold mb-4">Child Labor by AGE GROUPS (2022)</h3>
-            <div class="chart-container" style="height: 500px;">
-                <canvas id="ageChart"></canvas>
-            </div>
+    <!-- Island Group Filter -->
+    <div class="flex items-center gap-3">
+        <h4 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">Filter By Island Group:</h4>
+        <select id="islandGroupYearFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <option value="all" selected>All Island Groups</option>
+            <option value="Luzon">Luzon</option>
+            <option value="Visayas">Visayas</option>
+            <option value="Mindanao">Mindanao</option>
+        </select>
+    </div>
+</div>
+
+<!-- Region Line Chart and Industry Chart (Side by Side) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+    <!-- Region Line Chart -->
+    <div class="bg-white dark:bg-dark-700 shadow-lg p-6">
+        <h3 class="text-xl text-center font-bold mb-4">Philippine Child Labor Trends by ISLAND REGION</h3>
+        <div class="relative h-[500px]">
+            <canvas id="islandChart"></canvas>
         </div>
     </div>
 

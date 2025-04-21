@@ -95,7 +95,7 @@ color: #1a1a1a;
 }
 /* ====================  */
 /* Animated bubbles */
-.bubble {
+/* .bubble {
     position: absolute;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, rgba(255, 62, 62, 0.2), rgba(255, 62, 62, 0.4));
@@ -173,7 +173,7 @@ color: #1a1a1a;
     top: 20%;
     left: 30%;
     animation-delay: 16s;
-}
+} */
 
 @keyframes float {
     0% {

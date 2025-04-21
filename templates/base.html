@@ -75,290 +75,369 @@
     {% block scripts %}
    <!-- Add this script at the end of your body -->
    <script src="../static/js/script.js"></script>
-
-       <script>
-           let regionChart, ageChart, industryChart;
-       
-           async function fetchAgeData(yearFilter = 'all') {
-               const response = await fetch(`/api/age-cases?year=${yearFilter}`);
-               return await response.json();
-           }
-       
-           async function fetchIndustryData(yearFilter = 'all') {
-               const response = await fetch(`/api/industry-cases?year=${yearFilter}`);
-               return await response.json();
-           }
-       
-           async function fetchRegionData(yearFilter = 'all') {
-               const response = await fetch(`/api/region-cases?year=${yearFilter}`);
-               return await response.json();
-           }
-       
-           async function initCharts() {
-               const regionData = await fetchRegionData();
-               const ageData = await fetchAgeData();
-               const industryData = await fetchIndustryData();
-       
-               const yearFilterElement = document.getElementById('yearFilter');
-               const allYears = [...new Set([
-                   ...(regionData.years || []),
-                   ...(ageData.years || []),
-                   ...(industryData.years || [])
-               ])].sort();
-       
-               yearFilterElement.innerHTML = '';
-               const allOption = document.createElement('option');
-               allOption.value = 'all';
-               allOption.textContent = 'All Years';
-               yearFilterElement.appendChild(allOption);
-       
-               if (allYears.length > 0) {
-                   allYears.forEach(year => {
-                       const option = document.createElement('option');
-                       option.value = year;
-                       option.textContent = year;
-                       yearFilterElement.appendChild(option);
-                   });
-               }
-       
-               createRegionChart(regionData);
-               createAgeChart(ageData);
-               createIndustryChart(industryData);
-       
-               yearFilterElement.addEventListener('change', async function () {
-                   const selectedYear = this.value;
-                   const filteredRegionData = await fetchRegionData(selectedYear);
-                   const filteredAgeData = await fetchAgeData(selectedYear);
-                   const filteredIndustryData = await fetchIndustryData(selectedYear);
-       
-                   updateRegionChart(filteredRegionData);
-                   updateAgeChart(filteredAgeData);
-                   updateIndustryChart(filteredIndustryData);
-               });
-           }
-       
-           function createRegionChart(data) {
-               const regionChartCtx = document.getElementById('regionChart').getContext('2d');
-       
-               regionChart = new Chart(regionChartCtx, {
-                   type: 'line',
-                   data: {
-                       labels: data.regions,
-                       datasets: [{
-                           label: 'Child Labor Cases by Region',
-                           data: data.cases,
-                           borderColor: '#FF3E3E',
-                           backgroundColor: 'rgba(255, 62, 62, 0.1)',
-                           tension: 0.4,
-                           fill: true,
-                           pointRadius: 3,
-                           pointBackgroundColor: '#FF3E3E',
-                           pointBorderColor: '#fff',
-                           pointHoverRadius: 5,
-                           pointHoverBackgroundColor: '#FF3E3E'
-                       }]
-                   },
-                   options: {
-                       responsive: true,
-                       maintainAspectRatio: false,
-                       plugins: {
-                           legend: {
-                               display: false
-                           },
-                           tooltip: {
-                               callbacks: {
-                                   label: function (context) {
-                                       return `Child Labor Cases: ${context.raw.toLocaleString()}`;
-                                   }
-                               }
-                           }
-                       },
-                       scales: {
-                           y: {
-                               grid: {
-                                   color: 'rgba(255, 255, 255, 0.05)'
-                               },
-                               ticks: {
-                                   color: '#888888',
-                                   callback: value => value.toLocaleString()
-                               },
-                               min: 0
-                           },
-                           x: {
-                               grid: {
-                                   color: 'rgba(255, 255, 255, 0.05)'
-                               },
-                               ticks: {
-                                   color: '#888888'
-                               }
-                           }
-                       }
-                   }
-               });
-           }
-       
-           function updateRegionChart(data) {
-               if (regionChart) {
-                   regionChart.data.labels = data.regions;
-                   regionChart.data.datasets[0].data = data.cases;
-                   regionChart.update();
-               }
-           }
-       
-           function createAgeChart(data) {
-               const ageChartCtx = document.getElementById('ageChart').getContext('2d');
-       
-               ageChart = new Chart(ageChartCtx, {
-                   type: 'bar',
-                   data: {
-                       labels: data.age_groups,
-                       datasets: [
-                           {
-                               label: 'Male',
-                               data: data.male,
-                               backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                               borderColor: 'rgba(54, 162, 235, 1)',
-                               borderWidth: 1
-                           },
-                           {
-                               label: 'Female',
-                               data: data.female,
-                               backgroundColor: 'rgba(255, 59, 59, 0.7)',
-                               borderColor: '#ff3b3b',
-                               borderWidth: 1
-                           }
-                       ]
-                   },
-                   options: {
-                       responsive: true,
-                       maintainAspectRatio: false,
-                       plugins: {
-                           legend: {
-                               position: 'top',
-                           },
-                           tooltip: {
-                               callbacks: {
-                                   label: context => `${context.dataset.label}: ${context.raw.toLocaleString()}`
-                               }
-                           }
-                       },
-                       scales: {
-                           y: {
-                               beginAtZero: true,
-                               grid: {
-                                   color: 'rgba(255, 255, 255, 0.05)'
-                               },
-                               ticks: {
-                                   color: '#888888',
-                                   callback: value => value.toLocaleString()
-                               }
-                           },
-                           x: {
-                               grid: {
-                                   color: 'rgba(255, 255, 255, 0.05)'
-                               },
-                               ticks: {
-                                   color: '#888888'
-                               }
-                           }
-                       }
-                   }
-               });
-           }
-       
-           function updateAgeChart(data) {
-               if (ageChart) {
-                   ageChart.data.labels = data.age_groups;
-                   ageChart.data.datasets[0].data = data.male;
-                   ageChart.data.datasets[1].data = data.female;
-                   ageChart.update();
-               }
-           }
-       
-           function createIndustryChart(data) {
-               const industryChartCtx = document.getElementById('industryChart').getContext('2d');
-       
-               const backgroundColors = [
-                   '#ff3b3b', '#ff7e7e', '#b30000',
-                   'rgba(255, 59, 59, 0.6)', 'rgba(255, 59, 59, 0.4)',
-                   'rgba(255, 59, 59, 0.2)', '#8B0000', '#FF6B6B'
-               ];
-       
-               industryChart = new Chart(industryChartCtx, {
-                   type: 'pie',
-                   data: {
-                       labels: data.industries,
-                       datasets: [{
-                           data: data.percentiles,
-                           backgroundColor: backgroundColors,
-                           borderColor: 'rgba(255, 255, 255, 0.1)',
-                           borderWidth: 1
-                       }]
-                   },
-                   options: {
-                       responsive: true,
-                       maintainAspectRatio: false,
-                       plugins: {
-                           legend: {
-                               position: 'right',
-                           },
-                           tooltip: {
-                               callbacks: {
-                                   label: context => `${context.label}: ${context.raw}%`
-                               }
-                           }
-                       }
-                   }
-               });
-           }
-       
-           function updateIndustryChart(data) {
-               if (industryChart) {
-                   industryChart.data.labels = data.industries;
-                   industryChart.data.datasets[0].data = data.percentiles;
-                   industryChart.update();
-               }
-           }
-       
-           // Init on DOM load
-           document.addEventListener('DOMContentLoaded', () => {
-               initCharts();
-       
-               // THEME TOGGLE
-               const themeToggle = document.getElementById('theme-toggle');
-               const themeIconDark = document.getElementById('theme-icon-dark');
-               const themeIconLight = document.getElementById('theme-icon-light');
-       
-               if (localStorage.getItem('theme') === 'dark' || 
-                   (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                   document.documentElement.classList.add('dark');
-                   themeIconDark.classList.add('hidden');
-                   themeIconLight.classList.remove('hidden');
-               } else {
-                   document.documentElement.classList.remove('dark');
-                   themeIconDark.classList.remove('hidden');
-                   themeIconLight.classList.add('hidden');
-               }
-       
-               if (themeToggle) {
-                   themeToggle.addEventListener('click', () => {
-                       if (document.documentElement.classList.contains('dark')) {
-                           document.documentElement.classList.remove('dark');
-                           localStorage.setItem('theme', 'light');
-                           themeIconDark.classList.remove('hidden');
-                           themeIconLight.classList.add('hidden');
-                       } else {
-                           document.documentElement.classList.add('dark');
-                           localStorage.setItem('theme', 'dark');
-                           themeIconDark.classList.add('hidden');
-                           themeIconLight.classList.remove('hidden');
-                       }
-                   });
-               }
-           });
-       </script>
-       
    <script>
+    let islandChart, regionChart;
+
+    async function fetchIslandData(year = 'all') {
+        const response = await fetch(`/api/island-cases?year=${year}`);
+        return await response.json();
+    }
+
+    async function fetchRegionData(island, region, year) {
+        const response = await fetch(`/api/region-data?island=${island}&region=${region}&year=${year}`);
+        return await response.json();
+    }
+
+    async function fetchRegionsByIsland(island) {
+        const response = await fetch(`/api/regions?island=${island}`);
+        return await response.json();
+    }
+
+    async function initChart() {
+        const islandData = await fetchIslandData();
+        createIslandChart(islandData);
+
+        const yearFilter = document.getElementById('yearFilter');
+        islandData.years.forEach(year => {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearFilter.appendChild(option);
+        });
+
+        yearFilter.addEventListener('change', async () => {
+            const filteredData = await fetchIslandData(yearFilter.value);
+            updateIslandChart(filteredData);
+        });
+    }
+
+    function createIslandChart(data) {
+    const ctx = document.getElementById('islandChart').getContext('2d');
+    islandChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: data.island_groups,
+            datasets: [{
+                data: data.cases,
+                backgroundColor: ['#FF6384', '#36A2EB', '#4BC0C0'],
+                borderColor: ['#FF6384', '#36A2EB', '#4BC0C0'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { 
+                    position: 'top',  // Adjust legend position as needed
+                    display: true
+                },
+                tooltip: {
+                    callbacks: {
+                        label: context => `${context.label}: ${context.raw.toLocaleString()} cases`
+                    }
+                }
+            },
+            cutoutPercentage: 60, // Adjust this to control the size of the center hole
+        }
+    });
+}
+
+    function updateIslandChart(data) {
+        islandChart.data.labels = data.island_groups;
+        islandChart.data.datasets[0].data = data.cases;
+        islandChart.update();
+    }
+
+    function createRegionChart(groupedData) {
+        const ctx = document.getElementById('regionChart').getContext('2d');
+
+        const provinces = Object.keys(groupedData);
+        const allYears = [...new Set(provinces.flatMap(p => Object.keys(groupedData[p])))].sort();
+
+        const yearColors = {
+            2020: '#FF6384',
+            2021: '#36A2EB',
+            2022: '#4BC0C0',
+            2023: '#FFCD56',
+        };
+
+        // Handle the edge case for one entry (like NCR)
+        const datasets = allYears.map(year => ({
+            label: year,
+            data: provinces.map(p => groupedData[p][year] || 0),
+            borderColor: yearColors[year] || '#CCCCCC',
+            backgroundColor: 'transparent',
+            fill: false,
+            tension: 0.1
+        }));
+
+        if (provinces.length === 1) {
+            datasets[0].backgroundColor = '#36A2EB'; // Set a color for single entry
+        }
+
+        regionChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: provinces,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: context => `${context.raw.toLocaleString()} cases`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => value.toLocaleString()
+                        }
+                    },
+                    x: {
+                        stacked: false
+                    }
+                }
+            }
+        });
+    }
+
+    function updateRegionChart(groupedData) {
+        const provinces = Object.keys(groupedData);
+        const allYears = [...new Set(provinces.flatMap(p => Object.keys(groupedData[p])))].sort();
+
+        const yearColors = {
+            2020: '#FF6384',
+            2021: '#36A2EB',
+            2022: '#4BC0C0',
+            2023: '#FFCD56',
+        };
+
+        const datasets = allYears.map(year => ({
+            label: year,
+            data: provinces.map(p => groupedData[p][year] || 0),
+            borderColor: yearColors[year] || '#CCCCCC',
+            backgroundColor: 'transparent',
+            fill: false,
+            tension: 0.1
+        }));
+
+        if (provinces.length === 1) {
+            datasets[0].backgroundColor = '#36A2EB'; 
+        }
+
+        regionChart.data.labels = provinces;
+        regionChart.data.datasets = datasets;
+        regionChart.update();
+    }
+
+    async function loadRegionChart() {
+        const island = document.getElementById('islandFilter').value;
+        const region = document.getElementById('regionFilter').value;
+        const year = document.querySelectorAll('#yearFilter')[1].value;
+        const data = await fetchRegionData(island, region, year);
+
+        if (!regionChart) {
+            createRegionChart(data);
+        } else {
+            updateRegionChart(data);
+        }
+    }
+
+    async function initRegionChartFilters() {
+        const islandFilter = document.getElementById('islandFilter');
+        const regionFilter = document.getElementById('regionFilter');
+        const yearFilter = document.querySelectorAll('#yearFilter')[1];
+
+        ['Luzon', 'Visayas', 'Mindanao'].forEach(island => {
+            const option = document.createElement('option');
+            option.value = island;
+            option.textContent = island;
+            islandFilter.appendChild(option);
+        });
+
+        islandFilter.addEventListener('change', async () => {
+            const selectedIsland = islandFilter.value;
+            const { regions } = await fetchRegionsByIsland(selectedIsland);
+
+            regionFilter.innerHTML = '';
+            regions.forEach((region, index) => {
+                const opt = document.createElement('option');
+                opt.value = region;
+                opt.textContent = region;
+                if (index === 0) opt.selected = true;
+                regionFilter.appendChild(opt);
+            });
+
+            loadRegionChart();
+        });
+
+        regionFilter.addEventListener('change', loadRegionChart);
+        yearFilter.addEventListener('change', loadRegionChart);
+
+        islandFilter.value = 'Luzon';
+        const { regions } = await fetchRegionsByIsland('Luzon');
+        regions.forEach(region => {
+            const opt = document.createElement('option');
+            opt.value = region;
+            opt.textContent = region;
+            regionFilter.appendChild(opt);
+        });
+
+        const allYears = await fetchIslandData();
+        allYears.years.forEach(year => {
+            const opt = document.createElement('option');
+            opt.value = year;
+            opt.textContent = year;
+            yearFilter.appendChild(opt);
+        });
+
+        loadRegionChart();
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await initChart();
+        await initRegionChartFilters();
+    });
+</script>
+<script>
+    let islandGroupYearChart;
+
+async function fetchIslandGroupData(islandGroup = 'all', year = 'all') {
+    const response = await fetch(`/api/estimated-cases-by-island-group?island_group=${islandGroup}&year=${year}`);
+    return await response.json();
+}
+
+async function initIslandGroupYearChart() {
+    const islandGroupData = await fetchIslandGroupData();
+    createIslandGroupYearChart(islandGroupData);
+
+    const yearFilter = document.getElementById('yearFilter');
+    const islandGroupFilter = document.getElementById('islandGroupYearFilter');
+
+    islandGroupFilter.addEventListener('change', async () => {
+        const filteredData = await fetchIslandGroupData(islandGroupFilter.value, yearFilter.value);
+        updateIslandGroupYearChart(filteredData);
+    });
+
+    yearFilter.addEventListener('change', async () => {
+        const filteredData = await fetchIslandGroupData(islandGroupFilter.value, yearFilter.value);
+        updateIslandGroupYearChart(filteredData);
+    });
+}
+
+function createIslandGroupYearChart(data) {
+    const ctx = document.getElementById('islandGroupYearChart').getContext('2d');
+
+    const years = data.data.map(item => item.Year);
+    const cases = data.data.map(item => item['Estimated Cases']);
+
+    const colors = [
+        '#FF6384', '#36A2EB', '#4BC0C0'
+    ];
+    // #FF6384', '#FF6384', '#4BC0C0
+    // 2020: '#FF6384',
+    //         2021: '#36A2EB',
+    //         2022: '#4BC0C0',
+    islandGroupYearChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: years,
+            datasets: [{
+                label: 'Estimated Cases',
+                data: cases,
+                backgroundColor: colors.slice(0, cases.length),
+                borderColor: colors.slice(0, cases.length),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: value => value.toLocaleString()
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: context => `${context.raw.toLocaleString()} cases`,
+                        title: context => `Year: ${context[0].label}`
+                    },
+                    backgroundColor: '#000',
+                    titleFont: {
+                        size: 16,
+                        weight: 'bold'
+                    },
+                    bodyFont: {
+                        size: 14,
+                    },
+                    displayColors: false
+                }
+            }
+        }
+    });
+}
+
+function updateIslandGroupYearChart(data) {
+    islandGroupYearChart.data.labels = data.data.map(item => item.Year);
+    islandGroupYearChart.data.datasets[0].data = data.data.map(item => item['Estimated Cases']);
+    islandGroupYearChart.update();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await initIslandGroupYearChart();
+});
+
+</script>
+
+    <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const iconDark = document.getElementById('theme-icon-dark');
+    const iconLight = document.getElementById('theme-icon-light');
+    const root = document.documentElement;
+
+    function loadTheme() {
+    const storedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        root.classList.add('dark');
+        iconDark.classList.remove('hidden');
+        iconLight.classList.add('hidden');
+    } else {
+        root.classList.remove('dark');
+        iconDark.classList.add('hidden');
+        iconLight.classList.remove('hidden');
+    }
+}
+
+
+    // Toggle dark/light theme
+    function toggleTheme() {
+        const isDark = root.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        iconDark.classList.toggle('hidden', !isDark);
+        iconLight.classList.toggle('hidden', isDark);
+    }
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Initialize theme
+    loadTheme();
+</script>
+
+      // Init on DOM load
+ 
        window.addEventListener('scroll', function() {
            const header = document.getElementById('main-header');
            const homeSection = document.getElementById('home');

@@ -126,102 +126,82 @@
             </div>
         </div>
     </section>
-    
 
-    
-<!-- Charts Section (Updated Titles) -->
-
-
-<section id="charts" class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
-<!-- Header -->
-<div class="text-center mb-16">
-    <span class="inline-block px-4 py-1 bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium mb-4">
-        Data Visualization
-    </span>
-    <h2 class="text-3xl md:text-5xl font-bold mb-4 reveal">
-        DATA <span class="text-accent">ANALYTICS</span>
-    </h2>
-    <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
-        Explore regional and sectoral trends in child labor across the Philippines.
-    </p>
-</div>
-
-<!-- Filters (Year Filter and Island Group Filter) aligned horizontally -->
-<div class="flex items-center gap-6 mb-6">
-    <!-- Year Filter for Island Region Chart -->
-    <div class="flex items-center gap-3">
-        <h4 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">Filter By Year:</h4>
-        <select id="yearFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            <option value="all" selected>All Years</option>
-            <!-- Additional options will be populated by JS -->
-        </select>
-    </div>
-
-    <!-- Island Group Filter aligned to the right -->
-    <div class="flex items-center gap-3 ml-auto">
-        <h4 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">Filter By Island Group:</h4>
-        <select id="islandGroupYearFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            <option value="all" selected>All Island Groups</option>
-            <option value="Luzon">Luzon</option>
-            <option value="Visayas">Visayas</option>
-            <option value="Mindanao">Mindanao</option>
-        </select>
-    </div>
-</div>
-
-<!-- Region Line Chart and Industry Chart (Side by Side) -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-    <!-- Region Line Chart -->
-    <div class="bg-white dark:bg-dark-700 shadow-lg p-6">
-        <h3 class="text-xl text-center font-bold mb-4">Philippine Child Labor Trends by ISLAND REGION</h3>
-        <div class="relative h-[500px]">
-            <canvas id="islandChart"></canvas>
+    <section id="charts" class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-1 bg-primary-light/10 dark:bg-primary-dark/10 text-primary-light dark:text-primary-dark font-medium mb-4">
+            Data Visualization
+          </span>
+          <h2 class="text-3xl md:text-5xl font-bold mb-4 reveal">
+            DATA <span class="text-accent">ANALYTICS</span>
+          </h2>
+          <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+            Explore regional and sectoral trends in child labor across the Philippines.
+          </p>
         </div>
-    </div>
+      
+        
+      
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div class="bg-white dark:bg-dark-700 shadow-lg p-6">
+            <h3 class="text-xl text-center font-bold mb-4">Philippine Child Labor Trends by ISLAND REGION</h3>
+            <div class="relative h-[500px]">
+              <canvas id="islandChart"></canvas>
+            </div>
+          </div>
+      
+          <div class="bg-white dark:bg-dark-700 shadow-lg p-6">
+            <h3 class="text-xl text-center font-bold mb-4">Child Labor By Year</h3>
+          
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
+              <div class="flex items-center gap-2">
+                <h6 class="text-sm md:text-base font-semibold text-gray-800 dark:text-white">Year:</h6>
+                <select id="yearPieFilter" class="text-sm px-3 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                  <option value="all" selected>All Years</option>
+                </select>
 
-    <!-- Industry Pie Chart (Second Chart) -->
-    <div class="bg-white dark:bg-dark-700 shadow-lg p-6">
-        <h3 class="text-xl text-center font-bold mb-4">Child Labor By Year</h3>
-        <div class="relative h-[500px]">
-            <canvas id="islandGroupYearChart"></canvas>
+                <h6 class="text-sm md:text-base font-semibold text-gray-800 dark:text-white">Island Group:</h6>
+                <select id="islandGroupYearFilter" class="text-sm px-3 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                  <option value="all" selected>All Island Groups</option>
+                </select>
+              </div>
+          
+              
+            </div>
+          
+            <div class="relative h-[500px]">
+              <canvas id="islandGroupYearChart"></canvas>
+            </div>
+          </div>
+          
+          
         </div>
-    </div>
-</div>
-
-
-    <!-- Region Filters -->
-    <div class="flex flex-wrap gap-4 mb-6">
-        <div class="flex items-center gap-3">
+      
+        <div class="flex flex-wrap gap-4 mb-6">
+          <div class="flex items-center gap-3">
             <h4 class="font-semibold">Island Group:</h4>
-            <select id="islandFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <!-- Options added by JS -->
-            </select>
-        </div>
-        <div class="flex items-center gap-3">
+            <select id="islandFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400"></select>
+          </div>
+          <div class="flex items-center gap-3">
             <h4 class="font-semibold">Region:</h4>
-            <select id="regionFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <!-- Options added by JS -->
-            </select>
-        </div>
-        <div class="flex items-center gap-3">
+            <select id="regionFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400"></select>
+          </div>
+          <div class="flex items-center gap-3">
             <h4 class="font-semibold">Year:</h4>
             <select id="yearFilter" class="text-base px-6 py-2 rounded-lg bg-white dark:bg-zinc-800 text-gray-800 dark:text-white border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="all">All Years</option>
-                <!-- Options added by JS -->
+              <option value="all">All Years</option>
             </select>
+          </div>
         </div>
-    </div>
-
-    <!-- Region Line Chart -->
-    <div class="bg-white dark:bg-dark-700 shadow-lg p-6 mb-12">
-        <h3 class="text-xl text-center font-bold mb-4">Child Labor Cases by Province</h3>
-        <div class="relative h-[500px]">
+      
+        <div class="bg-white dark:bg-dark-700 shadow-lg p-6 mb-12">
+          <h3 class="text-xl text-center font-bold mb-4">Child Labor Cases by Province</h3>
+          <div class="relative h-[500px]">
             <canvas id="regionChart"></canvas>
+          </div>
         </div>
-    </div>
-</section>
-
-
+      </section>
+      
 
 <section id="about"  class="py-16 bg-gray-100 dark:bg-dark-800 px-6 md:px-24">
    
@@ -345,4 +325,364 @@
             </div>
        
     </section>
+    <script>
+        let islandChart, regionChart, islandGroupYearChart;
+        
+        async function fetchIslandData(year = 'all') {
+            const response = await fetch(`/api/island-cases?year=${year}`);
+            return await response.json();
+        }
+        
+        async function fetchRegionData(island, region, year) {
+            const response = await fetch(`/api/region-data?island=${island}&region=${region}&year=${year}`);
+            return await response.json();
+        }
+        
+        async function fetchRegionsByIsland(island) {
+            const response = await fetch(`/api/regions?island=${island}`);
+            return await response.json();
+        }
+        
+        async function fetchIslandGroupData(islandGroup = 'all', year = 'all') {
+            const response = await fetch(`/api/estimated-cases-by-island-group?island_group=${islandGroup}&year=${year}`);
+            return await response.json();
+        }
+        
+        async function initializeAllFilters() {
+            const yearFilter = document.getElementById('yearFilter');
+            const islandFilter = document.getElementById('islandFilter');
+            const regionFilter = document.getElementById('regionFilter');
+        
+            const islandData = await fetchIslandData();
+            const uniqueYears = [...new Set(islandData.years)];
+        
+            // Year Filter — keep 'All Years'
+            yearFilter.innerHTML = '<option value="all" selected>All Years</option>';
+            uniqueYears.forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearFilter.appendChild(option);
+            });
+        
+            // Island Filter — no 'All Island Groups'
+            islandFilter.innerHTML = '';
+            ['Luzon', 'Visayas', 'Mindanao'].forEach((island, index) => {
+                const option = document.createElement('option');
+                option.value = island;
+                option.textContent = island;
+                if (index === 0) option.selected = true;  // select first by default
+                islandFilter.appendChild(option);
+            });
+        
+            // Populate Region Filter for the first island by default
+            const firstIsland = islandFilter.value;
+            const { regions } = await fetchRegionsByIsland(firstIsland);
+            regionFilter.innerHTML = '';
+            regions.forEach((region, index) => {
+                const opt = document.createElement('option');
+                opt.value = region;
+                opt.textContent = region;
+                if (index === 0) opt.selected = true;  // select first by default
+                regionFilter.appendChild(opt);
+            });
+        
+            // Event Listeners
+            islandFilter.addEventListener('change', async () => {
+                const selectedIsland = islandFilter.value;
+                const { regions } = await fetchRegionsByIsland(selectedIsland);
+                regionFilter.innerHTML = '';
+                regions.forEach((region, index) => {
+                    const opt = document.createElement('option');
+                    opt.value = region;
+                    opt.textContent = region;
+                    if (index === 0) opt.selected = true;
+                    regionFilter.appendChild(opt);
+                });
+                loadRegionChart();
+            });
+        
+            regionFilter.addEventListener('change', loadRegionChart);
+            yearFilter.addEventListener('change', loadRegionChart);
+        }
+        
+        function createIslandChart(data) {
+    const ctx = document.getElementById('islandChart').getContext('2d');
+    islandChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: data.island_groups,
+            datasets: [{
+                data: data.cases,
+                backgroundColor: ['#FF6384', '#36A2EB', '#4BC0C0'],
+                borderColor: ['#FF6384', '#36A2EB', '#4BC0C0'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    display: true
+                },
+                tooltip: {
+                    callbacks: {
+                        label: context => {
+                            const total = context.raw;
+                            const label = context.label;
+                            const percentage = ((total / data.cases.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
+                            return `${label}: ${total.toLocaleString()} cases (${percentage}%)`;
+                        }
+                    }
+                },
+                doughnutlabel: {
+                    labels: [
+                        {
+                            text: function (chart) {
+                                // Calculate total
+                                const total = chart.config.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                return `Total: ${total.toLocaleString()}`;
+                            },
+                            font: {
+                                size: 20
+                            }
+                        },
+                        {
+                            text: function (chart) {
+                                const total = chart.config.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = (chart.config.data.datasets[0].data[0] / total * 100).toFixed(2);  // Update this logic if needed
+                                return `${percentage}%`;
+                            },
+                            font: {
+                                size: 14
+                            }
+                        }
+                    ]
+                }
+            },
+            cutoutPercentage: 60, // Adjust this to control the size of the center hole
+        }
+    });
+}
+
+        function updateIslandChart(data) {
+            islandChart.data.labels = data.island_groups;
+            islandChart.data.datasets[0].data = data.cases;
+            islandChart.update();
+        }
+        
+        async function loadRegionChart() {
+            const island = document.getElementById('islandFilter').value;
+            const region = document.getElementById('regionFilter').value;
+            const year = document.getElementById('yearFilter').value;
+        
+            const data = await fetchRegionData(island, region, year);
+        
+            if (!regionChart) {
+                createRegionChart(data);
+            } else {
+                updateRegionChart(data);
+            }
+        }
+        
+        function createRegionChart(groupedData) {
+            const ctx = document.getElementById('regionChart').getContext('2d');
+        
+            const provinces = Object.keys(groupedData);
+            const allYears = [...new Set(provinces.flatMap(p => Object.keys(groupedData[p])))].sort();
+        
+            const yearColors = {
+                2020: '#FF6384',
+                2021: '#36A2EB',
+                2022: '#4BC0C0',
+                2023: '#FFCD56',
+            };
+        
+            const datasets = allYears.map(year => ({
+                label: year,
+                data: provinces.map(p => groupedData[p][year] || 0),
+                borderColor: yearColors[year] || '#CCCCCC',
+                backgroundColor: 'transparent',
+                fill: false,
+                tension: 0.1
+            }));
+        
+            regionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: provinces,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: context => `${context.raw.toLocaleString()} cases`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => value.toLocaleString()
+                            }
+                        },
+                        x: {
+                            stacked: false
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateRegionChart(groupedData) {
+            const provinces = Object.keys(groupedData);
+            const allYears = [...new Set(provinces.flatMap(p => Object.keys(groupedData[p])))].sort();
+        
+            const yearColors = {
+                2020: '#FF6384',
+                2021: '#36A2EB',
+                2022: '#4BC0C0',
+                2023: '#FFCD56',
+            };
+        
+            const datasets = allYears.map(year => ({
+                label: year,
+                data: provinces.map(p => groupedData[p][year] || 0),
+                borderColor: yearColors[year] || '#CCCCCC',
+                backgroundColor: 'transparent',
+                fill: false,
+                tension: 0.1
+            }));
+        
+            regionChart.data.labels = provinces;
+            regionChart.data.datasets = datasets;
+            regionChart.update();
+        }
+        
+        function createIslandGroupYearChart(data) {
+            const ctx = document.getElementById('islandGroupYearChart').getContext('2d');
+        
+            const years = data.data.map(item => item.Year);
+            const cases = data.data.map(item => item['Estimated Cases']);
+        
+            const colors = ['#FF6384', '#36A2EB', '#4BC0C0'];
+        
+            islandGroupYearChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: years,
+                    datasets: [{
+                        label: 'Estimated Cases',
+                        data: cases,
+                        backgroundColor: colors.slice(0, cases.length),
+                        borderColor: colors.slice(0, cases.length),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => value.toLocaleString()
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: context => `${context.raw.toLocaleString()} cases`,
+                                title: context => `Year: ${context[0].label}`
+                            },
+                            backgroundColor: '#000',
+                            titleFont: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 14
+                            },
+                            displayColors: false
+                        }
+                    }
+                }
+            });
+        }
+        document.getElementById('yearPieFilter').addEventListener('change', loadIslandGroupYearChart);
+        document.getElementById('islandGroupYearFilter').addEventListener('change', loadIslandGroupYearChart);
+        async function loadIslandGroupYearChart() {
+          const year = document.getElementById('yearPieFilter').value;
+          const islandGroup = document.getElementById('islandGroupYearFilter').value;
+        
+          const data = await fetchIslandGroupData(islandGroup, year);
+        
+          if (!islandGroupYearChart) {
+            createIslandGroupYearChart(data);
+          } else {
+            updateIslandGroupYearChart(data);
+          }
+        }
+        
+        function updateIslandGroupYearChart(data) {
+            islandGroupYearChart.data.labels = data.data.map(item => item.Year);
+            islandGroupYearChart.data.datasets[0].data = data.data.map(item => item['Estimated Cases']);
+            islandGroupYearChart.update();
+        }
+        async function initializeIslandGroupFilters() {
+          const yearPieFilter = document.getElementById('yearPieFilter');
+          const islandGroupYearFilter = document.getElementById('islandGroupYearFilter');
+        
+          // Fetch island data for year options
+          const islandData = await fetchIslandData();
+          const uniqueYears = [...new Set(islandData.years)];
+        
+          // Populate yearPieFilter
+          yearPieFilter.innerHTML = '<option value="all" selected>All Years</option>';
+          uniqueYears.forEach(year => {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearPieFilter.appendChild(option);
+          });
+        
+          // Populate islandGroupYearFilter (you had these already hardcoded in another dropdown — replicate here)
+          islandGroupYearFilter.innerHTML = '';
+          ['Luzon', 'Visayas', 'Mindanao'].forEach((islandGroup, index) => {
+            const option = document.createElement('option');
+            option.value = islandGroup;
+            option.textContent = islandGroup;
+            if (index === 0) option.selected = true;
+            islandGroupYearFilter.appendChild(option);
+          });
+        }
+        
+        async function initializeAllCharts() {
+            const islandData = await fetchIslandData();
+            createIslandChart(islandData);
+        
+            const islandGroupData = await fetchIslandGroupData();
+            createIslandGroupYearChart(islandGroupData);
+        
+            await initializeAllFilters();
+            loadRegionChart();
+            await initializeIslandGroupFilters();
+        
+        }
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initializeAllCharts();
+            await initializeIslandGroupFilters();
+        
+        });
+        </script>
+        
+        
 {% endblock %}
